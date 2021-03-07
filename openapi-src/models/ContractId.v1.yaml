@@ -1,0 +1,10 @@
+type: string
+title: ContractId
+format: uuid
+minLength: 36
+maxLength: 36
+example: 'a043809a-032d-4c1a-8792-de2460b52cd6'
+x-examples:
+  example-1: 'a043809a-032d-4c1a-8792-de2460b52cd6'
+  example-2: '98475a50-fd5c-45bc-8e03-55bf883a73e8'
+description: Идентификтор договора

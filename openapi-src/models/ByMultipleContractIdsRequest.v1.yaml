@@ -1,0 +1,19 @@
+type: object
+title: ByMultipleContractIdsRequest
+description: Запрос по индентификаторам Договоров аренды
+x-examples:
+  example-1:
+    contractIds:
+      - $ref: '../models/ContractId.v1.yaml#/x-examples/example-1'
+      - $ref: '../models/ContractId.v1.yaml#/x-examples/example-2'
+additionalProperties: false
+properties:
+  contractIds:
+    type: array
+    minItems: 1
+    maxItems: 100
+    description: Идентификаторы договоров
+    items:
+      $ref: ./ContractId.v1.yaml
+required:
+  - contractIds

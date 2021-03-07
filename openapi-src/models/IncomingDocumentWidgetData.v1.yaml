@@ -1,0 +1,38 @@
+type: object
+title: IncomingDocumentWidgetData
+description: Входящий документ для отображения в виджете
+additionalProperties: false
+properties:
+  attachment:
+    $ref: ../models/Attachment.v1.yaml
+  date:
+    type: string
+    format: date-time
+    description: Дата и время получения документа
+  title:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: Наименование документа
+  appealId:
+    $ref: ../models/AppealId.v1.yaml
+required:
+  - attachment
+  - date
+  - title
+  - appealId
+example:
+  attachment:
+    $ref: '../models/Attachment.v1.yaml#/x-examples/example-1'
+  appealId:
+    $ref: '../models/AppealId.v1.yaml#/x-examples/example-1'
+  date: '2019-08-24T14:15:22Z'
+  title: 'Уведомление об изменении арендной платы'
+x-examples:
+  example-1:
+    attachment:
+      $ref: '../models/Attachment.v1.yaml#/x-examples/example-1'
+    date: '2019-08-24T14:15:22Z'
+    title: 'Уведомление об изменении арендной платы'
+    appealId:
+      $ref: '../models/AppealId.v1.yaml#/x-examples/example-1'

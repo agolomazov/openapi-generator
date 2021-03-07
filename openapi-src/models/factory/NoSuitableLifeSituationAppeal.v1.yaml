@@ -1,0 +1,49 @@
+type: object
+title: NoSuitableLifeSituationAppeal
+additionalProperties: false
+description: 'Обращение "Нет подходящей ЖС"'
+x-examples:
+  example-1:
+    commonData:
+      $ref: './CommonAppealData.v1.yaml#/x-examples/example-no-suitable-life-situation'
+    additionalData:
+      attachments:
+        - $ref: '../Attachment.v1.yaml#/x-examples/example-1'
+      landlord:
+        $ref: '../LandlordItem.v1.yaml#/x-examples/example-1'
+      appealSubject: Тема обращения
+      appealText: Текст обращения
+properties:
+  commonData:
+    $ref: ./CommonAppealData.v1.yaml
+  additionalData:
+    type: object
+    additionalProperties: false
+    required:
+      - landlord
+      - appealSubject
+      - appealText
+      - attachments
+    properties:
+      landlord:
+        $ref: ../LandlordItem.v1.yaml
+      appealSubject:
+        type: string
+        minLength: 1
+        maxLength: 255
+        description: Тема обращения
+      appealText:
+        type: string
+        minLength: 1
+        maxLength: 255
+        description: Текст обращения
+      attachments:
+        type: array
+        minItems: 1
+        maxItems: 100
+        description: Вложения
+        items:
+          $ref: ../Attachment.v1.yaml
+required:
+  - commonData
+  - additionalData

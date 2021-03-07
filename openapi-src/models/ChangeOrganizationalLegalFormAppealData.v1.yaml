@@ -1,0 +1,26 @@
+title: ChangeOrganizationalLegalFormAppealData
+type: object
+description: 'Данные обращения "Смена организационно-правовой формы/ИНН" ЖС "Изменить реквизиты Арендатора"'
+x-examples:
+  example-1:
+    comment:
+      $ref: './AppealCommentText.v1.yaml#/x-examples/example-1'
+    id:
+      $ref: './AppealId.v1.yaml#/x-examples/example-1'
+    fileIdList:
+      - $ref: './FileId.v1.yaml#/x-examples/example-1'
+properties:
+  comment:
+    $ref: ./AppealCommentText.v1.yaml
+  id:
+    $ref: ./AppealId.v1.yaml
+  fileIdList:
+    type: array
+    description: Идентификаторы вложенных файлов
+    minItems: 1
+    maxItems: 5
+    items:
+      $ref: ./FileId.v1.yaml
+required:
+  - id
+  - fileIdList

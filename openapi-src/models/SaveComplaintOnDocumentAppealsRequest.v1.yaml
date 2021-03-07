@@ -1,0 +1,18 @@
+type: object
+title: SaveComplaintOnDocumentAppealsRequest
+description: 'Запрос на сохранение данных обращений "Жалоба на акт (документ)"'
+additionalProperties: false
+properties:
+  appeals:
+    type: array
+    minItems: 1
+    maxItems: 100
+    description: Обращения
+    items:
+      $ref: ./ComplaintOnDocumentAppealData.v1.yaml
+required:
+  - appeals
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './ComplaintOnDocumentAppealData.v1.yaml#/x-examples/example-1'

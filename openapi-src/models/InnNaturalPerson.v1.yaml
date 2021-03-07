@@ -1,0 +1,7 @@
+title: InnNaturalPerson
+type: string
+pattern: "^(\\d{12})$"
+minLength: 12
+maxLength: 12
+x-examples:
+  example-1: '639913054760'

@@ -1,0 +1,10 @@
+title: EmptyResponse
+additionalProperties: false
+description: Пустой ответ
+x-examples:
+  example-1: {}
+type: object
+anyOf:
+  - {}
+allOf:
+  - {}

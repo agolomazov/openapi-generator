@@ -1,0 +1,41 @@
+type: object
+title: NoSuitableLifeSituationAppealData
+additionalProperties: false
+description: Данные по обращению "Нет подходящей ЖС"
+x-examples:
+  example-1:
+    id:
+      $ref: ./AppealId.v1.yaml#/x-examples/example-1
+    landlordId:
+      $ref: ./LandlordId.v1.yaml#/x-examples/example-1
+    appealSubject: Тема обращения
+    appealText: Текст обращения
+    fileIdList:
+      - $ref: ./FileId.v1.yaml#/x-examples/example-1
+properties:
+  id:
+    $ref: ./AppealId.v1.yaml
+  landlordId:
+    $ref: ./LandlordId.v1.yaml
+  appealSubject:
+    type: string
+    description: Тема обращения
+    minLength: 1
+    maxLength: 255
+  appealText:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: Обращение
+  fileIdList:
+    type: array
+    description: Идентификаторы вложенных файлов
+    minItems: 0
+    maxItems: 5
+    items:
+      $ref: ./FileId.v1.yaml
+required:
+  - id
+  - landlordId
+  - appealSubject
+  - appealText

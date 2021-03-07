@@ -1,0 +1,17 @@
+type: object
+title: SaveChangeJuridicalAddressAppealsRequest
+description: 'Запрос на сохранение данных обращений "Смена юридического адреса/КПП" ЖС "Изменить реквизиты Арендатора"'
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './ChangeJuridicalAddressAppealData.v1.yaml#/x-examples/example-1'
+additionalProperties: false
+properties:
+  appeals:
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./ChangeJuridicalAddressAppealData.v1.yaml
+required:
+  - appeals

@@ -1,0 +1,10 @@
+title: EmptyRequest
+additionalProperties: false
+description: Пустой запрос
+x-examples:
+  example-1: {}
+type: object
+anyOf:
+  - {}
+allOf:
+  - {}

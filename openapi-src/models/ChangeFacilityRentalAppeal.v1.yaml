@@ -1,0 +1,73 @@
+type: object
+title: ChangeFacilityRentalAppeal
+description: 'Обращение "Внести изменения в характеристики арендованных объектов"'
+additionalProperties: false
+x-examples:
+  example-1:
+    commonData:
+      $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-facility-rental'
+    additionalData:
+      contract:
+        $ref: './ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+      facilityAddress:
+        $ref: './Address.v1.yaml#/x-examples/example-1'
+      cadastralNumber:
+        $ref: './CadastralNumber.v1.yaml#/x-examples/example-1'
+      facilityType:
+        $ref: './FacilityRentalType.v1.yaml#/x-examples/example-1'
+      facilityArea: 250 кв. м.
+      permittedUse: разрешенное использование
+      facilityCategory:
+        $ref: './FacilityRentalCategory.v1.yaml#/x-examples/example-1'
+      facilityPurpose: назначение
+      comment:
+        $ref: './AppealCommentText.v1.yaml#/x-examples/example-1'
+      attachment:
+        $ref: './Attachment.v1.yaml#/x-examples/example-1'
+      newCadastralNumber:
+        $ref: './CadastralNumber.v1.yaml#/x-examples/example-2'
+      newFacilityAddress:
+        $ref: './Address.v1.yaml#/x-examples/example-2'
+properties:
+  commonData:
+    $ref: ./CommonAppealData.v1.yaml
+  additionalData:
+    type: object
+    additionalProperties: false
+    properties:
+      attachment:
+        $ref: ./Attachment.v1.yaml
+      contract:
+        $ref: ./ContractIdNumberDate.v1.yaml
+      facilityAddress:
+        $ref: ./Address.v1.yaml
+      cadastralNumber:
+        $ref: ./CadastralNumber.v1.yaml
+      facilityType:
+        $ref: ./FacilityRentalType.v1.yaml
+      facilityArea:
+        type: string
+        description: Площадь объекта
+        minLength: 0
+        maxLength: 255
+      permittedUse:
+        type: string
+        minLength: 0
+        maxLength: 255
+        description: Вид разрешенного использования
+      facilityCategory:
+        $ref: ./FacilityRentalCategory.v1.yaml
+      facilityPurpose:
+        type: string
+        description: Назначение объекта
+        minLength: 0
+        maxLength: 255
+      comment:
+        $ref: ./AppealCommentText.v1.yaml
+      newCadastralNumber:
+        $ref: ./CadastralNumber.v1.yaml
+      newFacilityAddress:
+        $ref: ./Address.v1.yaml
+required:
+  - commonData
+  - additionalData

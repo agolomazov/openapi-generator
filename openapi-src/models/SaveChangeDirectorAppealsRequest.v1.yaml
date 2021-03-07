@@ -1,0 +1,17 @@
+type: object
+title: SaveChangeDirectorAppealsRequest
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './ChangeDirectorAppealData.v1.yaml#/x-examples/example-1'
+description: 'Запрос на сохранение данных обращений "Смена руководителя" ЖС "Изменить реквизиты Арендатора"'
+additionalProperties: false
+properties:
+  appeals:
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./ChangeDirectorAppealData.v1.yaml
+required:
+  - appeals

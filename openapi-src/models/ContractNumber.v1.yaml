@@ -1,0 +1,8 @@
+title: ContractNumber
+type: string
+minLength: 0
+maxLength: 20
+description: Номер Договора аренды
+example: 33/16-К
+x-examples:
+  example-1: 33/16-К

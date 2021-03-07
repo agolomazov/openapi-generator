@@ -1,0 +1,42 @@
+type: object
+title: facilityRental
+description: Объект аренды
+additionalProperties: false
+x-examples:
+  example-1:
+    id: 0d02ff48-8fd7-479a-8a50-9a10a567810a
+    contract:
+      $ref: '../models/ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+    typeId:
+      $ref: '../models/FacilityRentalType.v1.yaml#/x-examples/example-1'
+    address: 'обл. Архангельская, р-н. Приморский, МО Катунинское, дер.  Лахта, ул. Геологов, д. 12, к. 2'
+    cadastralNumber:
+      $ref: '../models/CadastralNumber.v1.yaml#/x-examples/example-1'
+    area:
+      $ref: '../models/Area.v1.yaml#/x-examples/example-1'
+properties:
+  id:
+    $ref: ../models/FacilityRentalId.v1.yaml
+  contract:
+    $ref: ../models/ContractIdNumberDate.v1.yaml
+  typeId:
+    $ref: ../models/FacilityRentalType.v1.yaml
+  address:
+    type: string
+    description: Адрес
+    minLength: 3
+    maxLength: 1000
+  cadastralNumber:
+    $ref: ../models/CadastralNumber.v1.yaml
+  area:
+    $ref: ../models/Area.v1.yaml
+  count:
+    type: integer
+    maximum: 2147483647
+    minimum: 0
+    example: 1
+    description: Количество
+required:
+  - id
+  - contract
+  - typeId

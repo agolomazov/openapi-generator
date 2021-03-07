@@ -1,0 +1,30 @@
+title: ReconciliationActGetActAppealData
+type: object
+description: 'Данные обращения "Получить акт сверки" ЖС "Получить акт сверки взаимных расчетов"'
+additionalProperties: false
+x-examples:
+  example-1:
+    commonData:
+      $ref: './CommonAppealRequestData.v1.yaml#/x-examples/example-1'
+    contract:
+      $ref: '../ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+    reconciliationActBeginDate: '2019-05-14'
+    reconciliationActEndDate: '2019-07-14'
+properties:
+  commonData:
+    $ref: ./CommonAppealRequestData.v1.yaml
+  contract:
+    $ref: ../ContractIdNumberDate.v1.yaml
+  reconciliationActBeginDate:
+    type: string
+    format: date
+    description: Дата начала периода формирования акта сверки
+  reconciliationActEndDate:
+    type: string
+    format: date
+    description: Дата окончания периода формирования акта сверки
+required:
+  - commonData
+  - contract
+  - reconciliationActBeginDate
+  - reconciliationActEndDate

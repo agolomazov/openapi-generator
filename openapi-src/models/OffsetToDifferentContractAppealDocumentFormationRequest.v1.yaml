@@ -1,0 +1,38 @@
+type: object
+title: OffsetToDifferentContractAppealDocumentFormationRequest
+additionalProperties: false
+description: 'Запрос на формирование и скачивание заявления по обращению "Зачет денежных средств на другой договор"'
+x-examples:
+  example-1:
+    contract:
+      $ref: './ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+    overpaymentCause:
+      $ref: './OverpaymentCause.v1.yaml#/x-examples/example-1'
+    obligationType:
+      $ref: './ObligationType.v1.yaml#/x-examples/example-1'
+    paymentOrders:
+      - $ref: './PaymentOrder.v1.yaml#/x-examples/example-1'
+    overpaymentRecalculation:
+      $ref: './OverpaymentRecalculation.v1.yaml#/x-examples/example-1'
+properties:
+  overpaymentCause:
+    $ref: ./OverpaymentCause.v1.yaml
+  obligationType:
+    $ref: ./ObligationType.v1.yaml
+  contract:
+    $ref: ./ContractIdNumberDate.v1.yaml
+  paymentOrders:
+    type: array
+    minItems: 1
+    maxItems: 100
+    description: Платежные поручения
+    items:
+      $ref: ./PaymentOrder.v1.yaml
+  overpaymentRecalculation:
+    $ref: ./OverpaymentRecalculation.v1.yaml
+required:
+  - overpaymentCause
+  - obligationType
+  - contract
+  - paymentOrders
+  - overpaymentRecalculation

@@ -1,0 +1,44 @@
+type: object
+title: OverpaymentRefundAppealDocumentFormationRequest
+description: 'Запрос на формирование и скачивание заявления по обращению "Заявление на возврат денежных средств"'
+additionalProperties: false
+x-examples:
+  example-1:
+    contract:
+      $ref: './ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+    refundAmount: '111.01'
+    overpaymentCause:
+      $ref: './OverpaymentCause.v1.yaml#/x-examples/example-1'
+    paymentOrders:
+      - $ref: './PaymentOrder.v1.yaml#/x-examples/example-1'
+    payeeNaturalPerson:
+      $ref: './OverpaymentRefundPayeeNaturalPerson.v1.yaml#/x-examples/example-1'
+properties:
+  refundAmount:
+    type: string
+    minLength: 1
+    maxLength: 255
+    pattern: "^(?:0|[1-9]\\d*)(?:\\.\\d{1,2})?$"
+    description: Сумма переплаты
+  overpaymentCause:
+    $ref: ./OverpaymentCause.v1.yaml
+  paymentOrders:
+    type: array
+    minItems: 1
+    maxItems: 100
+    description: Платежные поручения
+    items:
+      $ref: ./PaymentOrder.v1.yaml
+  payeeNaturalPerson:
+    $ref: ./OverpaymentRefundPayeeNaturalPerson.v1.yaml
+  payeeJuridicalPerson:
+    $ref: ./OverpaymentRefundPayeeJuridicalPerson.v1.yaml
+  payeePublicSectorCompany:
+    $ref: ./OverpaymentRefundPayeePublicSectorCompany.v1.yaml
+  contract:
+    $ref: ./ContractIdNumberDate.v1.yaml
+required:
+  - refundAmount
+  - overpaymentCause
+  - paymentOrders
+  - contract

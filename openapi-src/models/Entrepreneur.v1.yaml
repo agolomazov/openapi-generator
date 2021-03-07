@@ -1,0 +1,38 @@
+title: Entrepreneur
+type: object
+description: Индивидуальный предприниматель
+x-examples:
+  example-1:
+    name:
+      lastName: Д.
+      firstName: Фёдор
+      middleName: Сергеевич
+    ogrnip: '103384949661400'
+    inn: '856863994200'
+    snils: '3**-***-**4 *0'
+    passport:
+      series: '4***'
+      number: '*****4'
+    email: d*@*l.com
+    mobilePhone: '+790*******4'
+additionalProperties: false
+properties:
+  name:
+    type: string
+  ogrnip:
+    $ref: ./Ogrnip.v1.yaml
+  inn:
+    $ref: ./InnNaturalPerson.v1.yaml
+  snils:
+    $ref: ./MaskedSnils.v1.yaml
+  passport:
+    $ref: ./MaskedPassport.v1.yaml
+  email:
+    $ref: ./MaskedEmail.v1.yaml
+  mobilePhone:
+    $ref: ./MaskedRussianMobilePhoneNumber.v1.yaml
+required:
+  - name
+  - ogrnip
+  - inn
+  - snils

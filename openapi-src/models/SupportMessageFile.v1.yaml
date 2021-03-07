@@ -1,0 +1,21 @@
+title: SupportMessageFile
+type: object
+description: Файл к сообщению в Службу поддержки
+x-examples:
+  example-1:
+    file: dGVzdA==
+    fileName: Test-file.pdf
+additionalProperties: false
+properties:
+  file:
+    type: string
+    description: Файл (в base64)
+    format: byte
+  fileName:
+    type: string
+    description: Название файла
+    minLength: 1
+    maxLength: 255
+required:
+  - file
+  - fileName

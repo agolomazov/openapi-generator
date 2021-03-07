@@ -1,0 +1,9 @@
+type: string
+minLength: 36
+maxLength: 36
+format: uuid
+title: LifeSituationId
+description: Идентификатор ЖС
+example: '375294a8-1e88-11eb-adc1-0242ac120002'
+x-examples:
+  example-1: '375294a8-1e88-11eb-adc1-0242ac120002'

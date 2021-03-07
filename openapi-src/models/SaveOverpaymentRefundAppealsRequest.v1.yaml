@@ -1,0 +1,18 @@
+type: object
+title: SaveOverpaymentRefundAppealsRequest
+description: 'Запрос на сохранение данных по обращениям "Возврат денежных средств"'
+additionalProperties: false
+properties:
+  appeals:
+    type: array
+    maxItems: 100
+    minItems: 1
+    description: Обращения
+    items:
+      $ref: ./OverpaymentRefundAppealData.v1.yaml
+required:
+  - appeals
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './OverpaymentRefundAppealData.v1.yaml#/x-examples/example-1'

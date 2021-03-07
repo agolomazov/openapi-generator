@@ -1,0 +1,17 @@
+type: object
+title: AppealFeedback
+description: Оценка удовлетворенности ответом
+additionalProperties: false
+x-examples:
+  example-excellent:
+    rate:
+      $ref: ./AppealFeedbackRate.v1.yaml#/x-examples/example-1
+    comment: Отлично!
+properties:
+  rate:
+    $ref: ./AppealFeedbackRate.v1.yaml
+  comment:
+    type: string
+    description: Текст
+required:
+  - rate

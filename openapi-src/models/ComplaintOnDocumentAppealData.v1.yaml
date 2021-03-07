@@ -1,0 +1,50 @@
+type: object
+title: ComplaintOnDocumentAppealData
+description: 'Данные обращения "Жалоба на акт (документ)"'
+additionalProperties: false
+x-examples:
+  example-1:
+    id:
+      $ref: './AppealId.v1.yaml#/x-examples/example-1'
+    documentNumber: 17/ЗД-0500
+    documentDate: '2020-03-09'
+    complaintCause: Основание для подачи жалобы
+    demands: 'Требования лица, подающего жалобу'
+    landlordId:
+      $ref: './LandlordId.v1.yaml#/x-examples/example-1'
+    fileIdList:
+      - $ref: './FileId.v1.yaml#/x-examples/example-1'
+properties:
+  id:
+    $ref: ./AppealId.v1.yaml
+  complaintCause:
+    type: string
+    maxLength: 4000
+    minLength: 0
+    description: Основание для подачи жалобы
+  demands:
+    type: string
+    minLength: 0
+    description: 'Требования лица, подающего жалобу'
+  landlordId:
+    $ref: ./LandlordId.v1.yaml
+  documentNumber:
+    $ref: ./DocumentNumber.v1.yaml
+  documentDate:
+    type: string
+    format: date
+    description: Дата документа
+  fileIdList:
+    type: array
+    description: Идентификаторы вложенных файлов
+    minItems: 0
+    maxItems: 5
+    items:
+      $ref: ./FileId.v1.yaml
+required:
+  - id
+  - complaintCause
+  - demands
+  - landlordId
+  - documentNumber
+  - documentDate

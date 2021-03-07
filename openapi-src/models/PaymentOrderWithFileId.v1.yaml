@@ -1,0 +1,18 @@
+type: object
+title: PaymentOrderWithFileId
+additionalProperties: false
+description: Платежное поручение с идентификатором вложения (подтверждающего документа)
+x-examples:
+  example-1:
+    paymentOrder:
+      $ref: './PaymentOrder.v1.yaml#/x-examples/example-1'
+    fileId:
+      $ref: './FileId.v1.yaml#/x-examples/example-1'
+properties:
+  paymentOrder:
+    $ref: ./PaymentOrder.v1.yaml
+  fileId:
+    $ref: ./FileId.v1.yaml
+required:
+  - paymentOrder
+  - fileId

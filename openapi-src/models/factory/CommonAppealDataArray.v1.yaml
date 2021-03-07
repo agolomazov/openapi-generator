@@ -1,0 +1,30 @@
+title: CommonAppealDataArray
+type: array
+items:
+  $ref: ./CommonAppealData.v1.yaml
+description: Массив обращений
+x-examples:
+  example-1:
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-scanned-act-finished'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-request-act-sent-1'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-request-act-sent-2'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-scanned-act-sent-1'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-scanned-act-sent-2'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-missing-contract-in-lk-1'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-company-name'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-contact-details'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-director'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-juridical-address'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-organizational-legal-form'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-missing-payment'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-no-suitable-life-situation'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-complaint-on-document'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-complaint-on-action'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-sublease-notice'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-offset-to-different-contract'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-facility-rental'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-missing-data-in-facility'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-incoming-document-signature-required'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-incoming-document-signature-not-required'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-reject-paper-documents'
+    - $ref: './CommonAppealData.v1.yaml#/x-examples/example-receive-paper-documents'

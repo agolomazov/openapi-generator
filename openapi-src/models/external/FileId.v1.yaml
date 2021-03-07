@@ -1,0 +1,9 @@
+title: FileId
+example: 0d02ff48-8fd7-479a-8a50-9a10a567810a
+type: string
+format: uuid
+minLength: 36
+maxLength: 36
+description: Идентификатор файла
+x-examples:
+  example-1: 0d02ff48-8fd7-479a-8a50-9a10a567810a

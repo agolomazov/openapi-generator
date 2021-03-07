@@ -1,0 +1,6 @@
+type: string
+title: AccrualType
+description: Тип начисления (Услуги аренды/Пени по услугам аренды)
+x-examples:
+  example-1: RENTAL
+  example-2: RENTAL_PENALTY

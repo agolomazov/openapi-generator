@@ -1,0 +1,9 @@
+type: string
+title: OverpaymentCause
+description: Причина переплаты
+enum:
+  - WRONG_TRANSFER
+  - EXCESSIVE_TRANSFER
+example: EXCESSIVE_TRANSFER
+x-examples:
+  example-1: EXCESSIVE_TRANSFER

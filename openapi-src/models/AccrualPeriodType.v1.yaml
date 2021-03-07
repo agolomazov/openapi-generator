@@ -1,0 +1,12 @@
+type: string
+title: accrualPeriodType
+description: Период начисления арендной платы
+example: MONTH
+minLength: 0
+maxLength: 255
+x-examples:
+  example-1: YEAR
+  example-2: QUARTER
+  example-3: HALF_YEAR
+  example-4: MONTH
+  example-5: ARBITRARY

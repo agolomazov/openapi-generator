@@ -1,0 +1,61 @@
+type: object
+title: SignatureFileInfo
+description: Информация о файле подписи
+additionalProperties: false
+properties:
+  id:
+    $ref: ./FileId.v1.yaml
+  size:
+    type: integer
+    description: Размер в байтах
+    maximum: 2147483647
+    minimum: 0
+  name:
+    type: string
+    minLength: 0
+    maxLength: 255
+    description: Название файла
+  signerName:
+    type: string
+    minLength: 0
+    maxLength: 255
+    description: Имя подписанта
+  date:
+    type: string
+    format: date
+    description: Дата
+  organization:
+    type: string
+    minLength: 0
+    maxLength: 255
+    description: Организация
+required:
+  - id
+  - size
+  - name
+  - signerName
+  - date
+example:
+  id:
+    $ref: '../models/FileId.v1.yaml#/x-examples/example-2'
+  size: 10
+  name: file.pdf.p7s
+  signerName: 'Иванов Иван Иванович'
+  date: '2020-06-10'
+  organization: 'ТУ Росимуществом по Ленинградской области'
+x-examples:
+  landlord-signature:
+    id:
+      $ref: '../models/FileId.v1.yaml#/x-examples/example-2'
+    size: 10
+    name: file.pdf.p7s
+    signerName: 'Иванов Иван Иванович'
+    date: '2020-06-10'
+    organization: 'ТУ Росимуществом по Ленинградской области'
+  tenant-signature:
+    id:
+      $ref: '../models/FileId.v1.yaml#/x-examples/example-3'
+    size: 10
+    name: file.pdf.p7s
+    signerName: 'Цветкова Иванка Константиновна'
+    date: '2020-06-10'

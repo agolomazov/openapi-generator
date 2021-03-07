@@ -1,0 +1,48 @@
+type: object
+title: OffsetToDifferentContractAppealData
+additionalProperties: false
+description: 'Данные по обращению "Зачет денежных средств на другой договор"'
+x-examples:
+  example-1:
+    commonData:
+      $ref: './CommonAppealRequestData.v1.yaml#/x-examples/example-1'
+    contract:
+      $ref: '../ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+    overpaymentCause:
+      $ref: '../OverpaymentCause.v1.yaml#/x-examples/example-1'
+    obligationType:
+      $ref: '../ObligationType.v1.yaml#/x-examples/example-1'
+    paymentOrders:
+      - $ref: '../PaymentOrderWithFileId.v1.yaml#/x-examples/example-1'
+    overpaymentRecalculation:
+      $ref: '../OverpaymentRecalculation.v1.yaml#/x-examples/example-1'
+    scannedAppealFileId:
+      $ref: '../FileId.v1.yaml#/x-examples/example-1'
+properties:
+  commonData:
+    $ref: ./CommonAppealRequestData.v1.yaml
+  contract:
+    $ref: ../ContractIdNumberDate.v1.yaml
+  overpaymentCause:
+    $ref: ../OverpaymentCause.v1.yaml
+  obligationType:
+    $ref: ../ObligationType.v1.yaml
+  paymentOrders:
+    type: array
+    minItems: 1
+    maxItems: 100
+    description: Платежные поручения
+    items:
+      $ref: ../PaymentOrderWithFileId.v1.yaml
+  overpaymentRecalculation:
+    $ref: ../OverpaymentRecalculation.v1.yaml
+  scannedAppealFileId:
+    $ref: ../FileId.v1.yaml
+required:
+  - commonData
+  - contract
+  - overpaymentCause
+  - obligationType
+  - paymentOrders
+  - overpaymentRecalculation
+  - scannedAppealFileId

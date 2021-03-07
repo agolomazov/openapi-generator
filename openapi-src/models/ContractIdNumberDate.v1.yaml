@@ -1,0 +1,19 @@
+type: object
+title: ContractIdNumberDate
+description: 'Договор аренды (id, номер, дата)'
+additionalProperties: false
+properties:
+  id:
+    $ref: ./ContractId.v1.yaml
+  number:
+    $ref: ./ContractNumber.v1.yaml
+  date:
+    type: string
+    format: date
+    description: Дата договора
+x-examples:
+  example-1:
+    id:
+      $ref: '../models/ContractId.v1.yaml#/x-examples/example-1'
+    number: '17/3Д-0500'
+    date: '2019-05-14'

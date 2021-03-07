@@ -1,0 +1,8 @@
+title: DocumentNumber
+type: string
+minLength: 0
+maxLength: 20
+description: Номер документа
+example: 33/16-К
+x-examples:
+  example-1: 33/16-К

@@ -1,0 +1,7 @@
+title: Email
+description: email
+type: string
+minLength: 0
+maxLength: 255
+x-examples:
+  landlord-email-1: 't*@*l.ru'

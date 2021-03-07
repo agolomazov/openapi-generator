@@ -1,0 +1,23 @@
+type: object
+title: BccPaymentData
+description: Данные оплаты для КБК
+additionalProperties: false
+properties:
+  bcc:
+    $ref: ../models/Bcc.v1.yaml
+  payments:
+    type: array
+    minItems: 0
+    maxItems: 100
+    description: Данные оплаты
+    items:
+      $ref: ./PaymentData.v1.yaml
+required:
+  - bcc
+  - payments
+x-examples:
+  example-1:
+    bcc:
+      $ref: ../models/Bcc.v1.yaml#/x-examples/example-1
+    payments:
+      - $ref: ./PaymentData.v1.yaml#/x-examples/example-1

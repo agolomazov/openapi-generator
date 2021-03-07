@@ -1,0 +1,44 @@
+title: TenantProfileResponse
+type: object
+description: Профиль Арендатора
+x-examples:
+  example-juridicalPerson:
+    id:
+      $ref: '../TenantId.v1.yaml#/x-examples/example-2'
+    type: JURIDICAL_PERSON
+    edoConsent: true
+    email:
+      $ref: '../MaskedEmail.v1.yaml#/x-examples/landlord-email-1'
+    phoneNumber:
+      $ref: '../MaskedRussianMobilePhoneNumber.v1.yaml#/x-examples/example-1'
+  example-naturalPerson:
+    id:
+      $ref: '../TenantId.v1.yaml#/x-examples/example-1'
+    type: NATURAL_PERSON
+    edoConsent: true
+  example-entrepreneur:
+    id:
+      $ref: '../TenantId.v1.yaml#/x-examples/example-3'
+    type: ENTREPRENEUR
+    edoConsent: true
+    email:
+      $ref: '../MaskedEmail.v1.yaml#/x-examples/landlord-email-1'
+    phoneNumber:
+      $ref: '../MaskedRussianMobilePhoneNumber.v1.yaml#/x-examples/example-1'
+additionalProperties: false
+properties:
+  id:
+    $ref: ../TenantId.v1.yaml
+  type:
+    $ref: ../TenantType.v1.yaml
+  email:
+    $ref: ../MaskedEmail.v1.yaml
+  phoneNumber:
+    $ref: ../MaskedRussianMobilePhoneNumber.v1.yaml
+  edoConsent:
+    type: boolean
+    description: Признак согласия на ЭДО
+required:
+  - id
+  - type
+  - edoConsent

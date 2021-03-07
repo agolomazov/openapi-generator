@@ -1,0 +1,53 @@
+title: MissingPaymentAppealData
+type: object
+description: 'Данные по обращению "Отсутствует платеж по договору аренды"'
+x-examples:
+  example-1:
+    contract:
+      $ref: './ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+    payerName: Иванов Иван Иванович
+    paymentOrder:
+      $ref: './PaymentOrder.v1.yaml#/x-examples/example-1'
+    paymentPeriod: 'Март, июнь 2019'
+    paymentAmount: '15574.53'
+    comment:
+      $ref: './AppealCommentText.v1.yaml#/x-examples/example-1'
+    id:
+      $ref: './AppealId.v1.yaml#/x-examples/example-1'
+    fileId:
+      $ref: './FileId.v1.yaml#/x-examples/example-1'
+properties:
+  payerName:
+    type: string
+    description: Плательщик (ФИО или наименование ЮЛ)
+    minLength: 1
+    maxLength: 255
+  paymentOrder:
+    $ref: ./PaymentOrder.v1.yaml
+  paymentAmount:
+    type: string
+    description: Сумма платежа
+    pattern: "^(?:0|[1-9]\\d*)(?:\\.\\d{1,2})?$"
+    minLength: 1
+    maxLength: 255
+  paymentPeriod:
+    type: string
+    description: Период платежа
+    minLength: 1
+    maxLength: 255
+  comment:
+    $ref: ./AppealCommentText.v1.yaml
+  id:
+    $ref: ./AppealId.v1.yaml
+  contract:
+    $ref: ./ContractIdNumberDate.v1.yaml
+  fileId:
+    $ref: ./FileId.v1.yaml
+required:
+  - payerName
+  - paymentOrder
+  - paymentAmount
+  - paymentPeriod
+  - id
+  - contract
+  - fileId

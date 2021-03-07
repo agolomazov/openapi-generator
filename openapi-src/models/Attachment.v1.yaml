@@ -1,0 +1,34 @@
+type: object
+title: Attachment
+description: Вложение
+additionalProperties: false
+properties:
+  file:
+    $ref: ./FileInfo.v1.yaml
+  tenantSignature:
+    $ref: ./SignatureFileInfo.v1.yaml
+  landlordSignature:
+    $ref: ./SignatureFileInfo.v1.yaml
+  visualization:
+    $ref: ./FileInfo.v1.yaml
+required:
+  - file
+example:
+  file:
+    $ref: './FileInfo.v1.yaml#/x-examples/example-1'
+  tenantSignature:
+    $ref: './SignatureFileInfo.v1.yaml#/x-examples/tenant-signature'
+  landlordSignature:
+    $ref: './SignatureFileInfo.v1.yaml#/x-examples/landlord-signature'
+  visualization:
+    $ref: './FileInfo.v1.yaml#/x-examples/example-2'
+x-examples:
+  example-1:
+    file:
+      $ref: './FileInfo.v1.yaml#/x-examples/example-1'
+    tenantSignature:
+      $ref: './SignatureFileInfo.v1.yaml#/x-examples/tenant-signature'
+    landlordSignature:
+      $ref: './SignatureFileInfo.v1.yaml#/x-examples/landlord-signature'
+    visualization:
+      $ref: './FileInfo.v1.yaml#/x-examples/example-2'

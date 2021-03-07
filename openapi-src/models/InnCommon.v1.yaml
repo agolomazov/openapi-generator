@@ -1,0 +1,7 @@
+title: InnCommon
+type: string
+pattern: "^(\\d{10}|\\d{12})$"
+minLength: 10
+maxLength: 12
+x-examples:
+  example-1: '123123123123'

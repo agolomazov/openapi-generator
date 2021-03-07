@@ -1,0 +1,17 @@
+type: object
+title: SaveChangeCompanyNameAppealsRequest
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './ChangeCompanyNameAppealData.v1.yaml#/x-examples/example-1'
+description: 'Запрос на сохранение данных обращений "Смена наименования ЮЛ" ЖС "Изменить реквизиты Арендатора"'
+additionalProperties: false
+properties:
+  appeals:
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./ChangeCompanyNameAppealData.v1.yaml
+required:
+  - appeals

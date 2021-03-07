@@ -1,0 +1,18 @@
+title: SaveRequestActAppealsRequest
+type: object
+description: 'Запрос на сохранение обращений "Получить акт сверки" по ЖС "Получить акт сверки взаимных расчетов"'
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './ReconciliationActGetActAppealData.v1.yaml#/x-examples/example-1'
+additionalProperties: false
+properties:
+  appeals:
+    type: array
+    description: Обращения
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./ReconciliationActGetActAppealData.v1.yaml
+required:
+  - appeals

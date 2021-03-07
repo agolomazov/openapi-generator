@@ -1,0 +1,35 @@
+title: ReconciliationActSendScannedActAppealData
+type: object
+description: 'Данные обращения "Направить скан копию подписанного акта сверки" ЖС "Получить акт сверки взаимных расчетов"'
+additionalProperties: false
+x-examples:
+  example-1:
+    id:
+      $ref: './AppealId.v1.yaml#/x-examples/example-1'
+    contract:
+      $ref: './ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+    reconciliationActBeginDate: '2019-05-14'
+    reconciliationActEndDate: '2019-07-14'
+    fileId:
+      $ref: './FileId.v1.yaml#/x-examples/example-1'
+properties:
+  id:
+    $ref: ./AppealId.v1.yaml
+  contract:
+    $ref: ./ContractIdNumberDate.v1.yaml
+  reconciliationActBeginDate:
+    type: string
+    format: date
+    description: Дата начала периода формирования акта сверки
+  reconciliationActEndDate:
+    type: string
+    format: date
+    description: Дата окончания периода формирования акта сверки
+  fileId:
+    $ref: ./FileId.v1.yaml
+required:
+  - id
+  - contract
+  - reconciliationActBeginDate
+  - reconciliationActEndDate
+  - fileId

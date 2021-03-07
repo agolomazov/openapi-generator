@@ -1,0 +1,10 @@
+type: array
+minItems: 0
+maxItems: 255
+title: PaymentCalendarInfoResponse
+description: Информация о календаре оплат Арендатора
+items:
+  $ref: ./PaymentCalendarInfoItem.v1.yaml
+x-examples:
+  example-1:
+    - $ref: './PaymentCalendarInfoItem.v1.yaml#/x-examples/example-1'

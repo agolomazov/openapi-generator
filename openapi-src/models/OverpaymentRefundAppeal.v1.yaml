@@ -1,0 +1,68 @@
+type: object
+title: OverpaymentRefundAppeal
+description: 'Обращение "Возврат денежных средств"'
+additionalProperties: false
+x-examples:
+  example-1:
+    commonData:
+      $ref: './CommonAppealData.v1.yaml#/x-examples/example-offset-to-different-contract'
+    additionalData:
+      attachments:
+        - $ref: './Attachment.v1.yaml#/x-examples/example-1'
+      contract:
+        $ref: './ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+      overpaymentCause:
+        $ref: './OverpaymentCause.v1.yaml#/x-examples/example-1'
+      refundAmount: '111.01'
+      paymentOrders:
+        - $ref: './PaymentOrderWithFileId.v1.yaml#/x-examples/example-1'
+      payeeNaturalPerson:
+        $ref: './OverpaymentRefundPayeeNaturalPerson.v1.yaml#/x-examples/example-1'
+      scannedAppealFileId:
+        $ref: './FileId.v1.yaml#/x-examples/example-1'
+properties:
+  commonData:
+    $ref: ./CommonAppealData.v1.yaml
+  additionalData:
+    type: object
+    additionalProperties: false
+    required:
+      - attachments
+      - contract
+      - overpaymentCause
+      - refundAmount
+      - paymentOrders
+      - scannedAppealFileId
+    properties:
+      attachments:
+        type: array
+        minItems: 1
+        maxItems: 100
+        description: Вложения
+        items:
+          $ref: ./Attachment.v1.yaml
+      contract:
+        $ref: ./ContractIdNumberDate.v1.yaml
+      overpaymentCause:
+        $ref: ./OverpaymentCause.v1.yaml
+      refundAmount:
+        type: string
+        minLength: 1
+        maxLength: 255
+        pattern: "^(?:0|[1-9]\\d*)(?:\\.\\d{1,2})?$"
+        description: "Сумма к возврату\t\n"
+      paymentOrders:
+        type: array
+        items:
+          $ref: ./PaymentOrderWithFileId.v1.yaml
+      payeeNaturalPerson:
+        $ref: ./OverpaymentRefundPayeeNaturalPerson.v1.yaml
+      payeeJuridicalPerson:
+        $ref: ./OverpaymentRefundPayeeJuridicalPerson.v1.yaml
+      payeePublicSectorCompany:
+        $ref: ./OverpaymentRefundPayeePublicSectorCompany.v1.yaml
+      scannedAppealFileId:
+        $ref: ./FileId.v1.yaml
+required:
+  - commonData
+  - additionalData

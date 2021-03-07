@@ -1,0 +1,22 @@
+type: object
+title: ReceivePaperDocumentsAppealData
+additionalProperties: false
+description: 'Данные по обращению "Получение документов на бумажном носителе"'
+x-examples:
+  example-1:
+    commonData:
+      $ref: './CommonAppealRequestData.v1.yaml#/x-examples/example-1'
+    applicationFileId:
+      $ref: '../FileId.v1.yaml#/x-examples/example-1'
+    powerOfAttorneyFileId:
+      $ref: '../FileId.v1.yaml#/x-examples/example-1'
+properties:
+  commonData:
+    $ref: ./CommonAppealRequestData.v1.yaml
+  applicationFileId:
+    $ref: ../FileId.v1.yaml
+  powerOfAttorneyFileId:
+    $ref: ../FileId.v1.yaml
+required:
+  - applicationFileId
+  - commonData

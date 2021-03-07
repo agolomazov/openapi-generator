@@ -1,0 +1,23 @@
+title: ContractListTotalAmount
+type: object
+description: Общая сумма по списку Договоров аренды
+additionalProperties: false
+properties:
+  totalDebtAmount:
+    type: string
+    description: Задолженность по всем договорам аренды (сумма с учетом пени)
+  totalPenaltyAmount:
+    type: string
+    description: Пени
+  totalAmountToPayment:
+    type: string
+    description: Всего к оплате
+  totalCurrentPeriodAmountToPayment:
+    type: string
+    description: К оплате в этом периоде
+x-examples:
+  example-ri:
+    totalDebtAmount: '10529.60'
+    totalPenaltyAmount: '0'
+    totalAmountToPayment: '15794.41'
+    totalCurrentPeriodAmountToPayment: '5264.81'

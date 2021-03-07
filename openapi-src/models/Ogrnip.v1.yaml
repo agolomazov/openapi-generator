@@ -1,0 +1,6 @@
+title: Ogrnip
+type: string
+pattern: "^(\\d{15})$"
+minLength: 15
+maxLength: 15
+description: ОГРНИП

@@ -1,0 +1,84 @@
+title: CreateAppealRequest
+type: object
+additionalProperties: false
+description: Запрос на создание обращения
+properties:
+  tenantId:
+    $ref: ../TenantId.v1.yaml
+  messageId:
+    $ref: ../AppealId.v1.yaml
+  status:
+    description: Статус обращения
+    type: string
+    minLength: 1
+    maxLength: 100
+  createdDate:
+    description: Дата и время создания
+    type: string
+    format: date-time
+  name:
+    type: string
+    description: Наименование обращения
+    minLength: 1
+    maxLength: 255
+  messageType:
+    title: messageType
+    description: Тип обращения
+    type: string
+    minLength: 1
+    maxLength: 100
+  contractId:
+    $ref: ../ContractId.v1.yaml
+  landlordId:
+    $ref: ../LandlordId.v1.yaml
+  outgoingNumber:
+    $ref: ../OutgoingNumber.v1.yaml
+  outgoingDate:
+    $ref: ../OutgoingDate.v1.yaml
+  documents:
+    type: array
+    minItems: 0
+    maxItems: 255
+    uniqueItems: true
+    description: Список вложений
+    items:
+      $ref: ./Document.v1.yaml
+  files:
+    type: array
+    minItems: 0
+    maxItems: 255
+    uniqueItems: true
+    description: Список файлов
+    items:
+      $ref: ./File.v1.yaml
+required:
+  - tenantId
+  - messageId
+  - status
+  - createdDate
+  - name
+  - messageType
+  - outgoingNumber
+  - outgoingDate
+x-examples:
+  example-1:
+    tenantId:
+      $ref: '../TenantId.v1.yaml#/x-examples/example-1'
+    messageId:
+      $ref: '../AppealId.v1.yaml#/x-examples/example-1'
+    status: 'LK_MESSAGE_STATUS_DELIVERED'
+    createdDate: '2020-07-11T07:11:57Z'
+    name: 'Обращение №1'
+    messageType: 'LK_MESSAGE_TYPE_1'
+    contractId:
+      $ref: '../ContractId.v1.yaml#/x-examples/example-1'
+    landlordId:
+      $ref: '../LandlordId.v1.yaml#/x-examples/example-1'
+    outgoingNumber:
+      $ref: '../OutgoingNumber.v1.yaml#/x-examples/example-1'
+    outgoingDate:
+      $ref: '../OutgoingDate.v1.yaml#/x-examples/example-1'
+    documents:
+      - $ref: './Document.v1.yaml#/x-examples/example-1'
+    files:
+      - $ref: './File.v1.yaml#/x-examples/example-1'

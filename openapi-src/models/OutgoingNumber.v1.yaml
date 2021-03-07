@@ -1,0 +1,8 @@
+type: string
+title: OutgoingNumber
+description: Номер исходящего письма
+minLength: 1
+maxLength: 50
+example: '123'
+x-examples:
+  example-1: '123'

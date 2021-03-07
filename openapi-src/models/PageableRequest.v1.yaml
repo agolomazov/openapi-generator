@@ -1,0 +1,31 @@
+type: object
+title: PageableRequest
+description: Запрос с пагинацией
+additionalProperties: false
+x-examples:
+  example-1:
+    page: 1
+    size: 20
+    sortField: address
+    sortDirection:
+      $ref: './SortDirection.v1.yaml#/x-examples/example-1'
+properties:
+  page:
+    type: integer
+    example: 1
+    minimum: 0
+    maximum: 2147483647
+    description: Номер страницы
+  size:
+    type: integer
+    example: 1
+    minimum: 0
+    maximum: 2147483647
+    description: Размер страницы
+  sortField:
+    type: string
+    minLength: 0
+    maxLength: 255
+    description: 'Поле, по которому производится сортировка'
+  sortDirection:
+    $ref: ./SortDirection.v1.yaml

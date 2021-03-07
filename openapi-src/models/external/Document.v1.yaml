@@ -1,0 +1,25 @@
+type: object
+title: Document
+description: Вложение
+additionalProperties: false
+properties:
+  fileId:
+    $ref: ./FileId.v1.yaml
+  signatureTennantFileId:
+    $ref: ./FileId.v1.yaml
+  signatureLandlordFileId:
+    $ref: ./FileId.v1.yaml
+  fileStampId:
+    $ref: ./FileId.v1.yaml
+required:
+  - fileId
+x-examples:
+  example-1:
+    fileId:
+      $ref: './FileId.v1.yaml#/x-examples/example-1'
+    signatureTennantFileId:
+      $ref: './FileId.v1.yaml#/x-examples/example-1'
+    signatureLandlordFileId:
+      $ref: './FileId.v1.yaml#/x-examples/example-1'
+    fileStampId:
+      $ref: './FileId.v1.yaml#/x-examples/example-1'

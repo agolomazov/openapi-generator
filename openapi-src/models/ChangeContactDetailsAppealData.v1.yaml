@@ -1,0 +1,22 @@
+title: ChangeContactDetailsAppealData
+type: object
+description: 'Данные обращения "Смена контактных данных" ЖС "Изменить реквизиты Арендатора"'
+x-examples:
+  example-1:
+    phone: '+70000000000'
+    email: test@test.ru
+    comment:
+      $ref: './AppealCommentText.v1.yaml#/x-examples/example-1'
+    id:
+      $ref: './AppealId.v1.yaml#/x-examples/example-1'
+properties:
+  phone:
+    $ref: ./RussianMobilePhoneNumber.v1.yaml
+  email:
+    $ref: ./Email.v1.yaml
+  comment:
+    $ref: ./AppealCommentText.v1.yaml
+  id:
+    $ref: ./AppealId.v1.yaml
+required:
+  - id

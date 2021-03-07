@@ -1,0 +1,7 @@
+type: string
+title: TenantType
+description: Тип Арендатора
+x-examples:
+  example-1: NATURAL_PERSON
+  example-2: JURIDICAL_PERSON
+  example-3: ENTREPRENEUR

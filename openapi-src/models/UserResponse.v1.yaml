@@ -1,0 +1,75 @@
+type: object
+title: UserResponse
+description: Ответ с данными пользователя
+x-examples:
+  example-ri:
+    esiaOid: '3000'
+    name:
+      $ref: './PersonName.v1.yaml#/x-examples/example-ri'
+    permissions:
+      - Arlk.Arlk.generic.read
+      - Arlk.Arlk.generic.write
+      - Arlk.Arlk.incomingDocument.confirmReceipt
+      - Arlk.Arlk.incomingDocument.sign
+      - Arlk.Arlk.incomingDocument.read
+      - Arlk.Arlk.edo.edoConsent
+    tenantInfo:
+      $ref: './TenantInfo.v1.yaml#/x-examples/example-juridicalPerson'
+  example-active-company:
+    esiaOid: '3000'
+    name:
+      $ref: './PersonName.v1.yaml#/x-examples/example-ri'
+    activeCompanyEsiaOid: '3001'
+    permissions:
+      - Arlk.Arlk.generic.read
+      - Arlk.Arlk.generic.write
+      - Arlk.Arlk.incomingDocument.confirmReceipt
+      - Arlk.Arlk.incomingDocument.sign
+      - Arlk.Arlk.incomingDocument.read
+      - Arlk.Arlk.edo.edoConsent
+    tenantInfo:
+      $ref: './TenantInfo.v1.yaml#/x-examples/example-juridicalPerson'
+  example-3:
+    esiaOid: '1000'
+    name:
+      $ref: './PersonName.v1.yaml#/x-examples/example-ri'
+    organizations:
+      - $ref: './EsiaOrganization.v1.yaml#/x-examples/example-1'
+      - $ref: './EsiaOrganization.v1.yaml#/x-examples/example-2'
+    permissions:
+      - Arlk.Arlk.generic.read
+      - Arlk.Arlk.generic.write
+      - Arlk.Arlk.incomingDocument.confirmReceipt
+      - Arlk.Arlk.incomingDocument.sign
+      - Arlk.Arlk.incomingDocument.read
+      - Arlk.Arlk.edo.edoConsent
+    tenantInfo:
+      $ref: './TenantInfo.v1.yaml#/x-examples/example-juridicalPerson'
+additionalProperties: false
+properties:
+  esiaOid:
+    type: string
+    description: Идентификатор ЕСИА
+  name:
+    $ref: ./PersonName.v1.yaml
+  organizations:
+    description: Список организаций
+    type: array
+    items:
+      $ref: ./EsiaOrganization.v1.yaml
+  activeCompanyEsiaOid:
+    type: string
+  permissions:
+    type: array
+    description: Список привелегий пользователя
+    items:
+      type: string
+  tenantInfo:
+    $ref: ./TenantInfo.v1.yaml
+  error:
+    $ref: ./Error.v1.yaml
+required:
+  - esiaOid
+  - name
+  - permissions
+  - tenantInfo

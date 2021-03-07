@@ -1,0 +1,65 @@
+type: object
+title: ContractListResponse
+description: Список Договоров аренды
+additionalProperties: false
+x-examples:
+  example-1:
+    content:
+      - $ref: '../models/Contract.v1.yaml#/x-examples/example-1'
+    empty: false
+    first: true
+    last: true
+    number: 0
+    numberOfElements: 20
+    pageable:
+      $ref: '../models/Pageable.v1.yaml#/x-examples/example-1'
+    size: 1
+    totalElements: 1
+    totalPages: 1
+properties:
+  content:
+    type: array
+    minItems: 0
+    maxItems: 255
+    uniqueItems: true
+    description: Список Договоров аренды
+    items:
+      $ref: '../models/Contract.v1.yaml'
+  empty:
+    type: boolean
+    description: 'Флаг пустого массива, ксли true - в ответе не пришло ни одного элемента'
+  first:
+    type: boolean
+    description: Флаг первого результата (первая страница)
+  last:
+    type: boolean
+    description: Флаг последнего результата (последняя страница)
+  number:
+    type: integer
+    description: Номер страницы
+    maximum: 2147483647
+    minimum: 0
+  numberOfElements:
+    type: integer
+    description: Количество элементов на странице
+    maximum: 2147483647
+    minimum: 0
+  pageable:
+    $ref: '../models/Pageable.v1.yaml'
+  size:
+    type: integer
+    description: Количество элементов на странице
+    maximum: 2147483647
+    minimum: 0
+  totalElements:
+    type: integer
+    description: Общее количество элементов
+    maximum: 2147483647
+    minimum: 0
+  totalPages:
+    type: integer
+    description: Общее количество страниц
+    maximum: 2147483647
+    minimum: 0
+required:
+  - content

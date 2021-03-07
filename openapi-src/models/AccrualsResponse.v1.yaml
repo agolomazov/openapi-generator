@@ -1,0 +1,64 @@
+type: object
+title: AccrualsResponse
+description: Данные по начислениям
+additionalProperties: false
+properties:
+  accruals:
+    type: array
+    description: Начисления
+    minItems: 0
+    maxItems: 100
+    items:
+      $ref: ./Accrual.v1.yaml
+  empty:
+    type: boolean
+    description: 'Флаг пустого массива, ксли true - в ответе не пришло ни одного элемента'
+  first:
+    type: boolean
+    description: Флаг первого результата (первая страница)
+  last:
+    type: boolean
+    description: Флаг последнего результата (последняя страница)
+  number:
+    type: integer
+    description: Номер страницы
+    maximum: 2147483647
+    minimum: 0
+  numberOfElements:
+    type: integer
+    description: Количество элементов на странице
+    maximum: 2147483647
+    minimum: 0
+  pageable:
+    $ref: '../models/Pageable.v1.yaml'
+  size:
+    type: integer
+    description: Количество элементов на странице
+    maximum: 2147483647
+    minimum: 0
+  totalElements:
+    type: integer
+    description: Общее количество элементов
+    maximum: 2147483647
+    minimum: 0
+  totalPages:
+    type: integer
+    description: Общее количество страниц
+    maximum: 2147483647
+    minimum: 0
+required:
+  - accruals
+x-examples:
+  example-1:
+    accruals:
+      - $ref: './Accrual.v1.yaml#/x-examples/example-ri'
+    empty: false
+    first: true
+    last: true
+    number: 0
+    numberOfElements: 20
+    pageable:
+      $ref: '../models/Pageable.v1.yaml#/x-examples/example-1'
+    size: 1
+    totalElements: 1
+    totalPages: 1

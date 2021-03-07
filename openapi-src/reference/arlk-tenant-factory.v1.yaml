@@ -1,0 +1,5416 @@
+openapi: 3.0.3
+info:
+  title: API-сервис для Фабрики Арендатора
+  version: '1.2'
+  description: API-сервис для Фабрики Арендатора
+  contact:
+    name: Федосеев Александр Юрьевич
+    email: fedoseev.ay@esphere.ru
+servers:
+  - url: 'http://localhost:4009'
+paths:
+  /api/v1/get-contract-by-id:
+    parameters: []
+    post:
+      summary: Получить Договор аренды по идентификатору
+      operationId: post-api-v1-get-contract-by-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractResponse'
+              examples:
+                example-ri:
+                  value:
+                    $ref: '#/components/schemas/ContractResponse/x-examples/example-ri'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ByTenantIdAndContractIdRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/ByTenantIdAndContractIdRequest/x-examples/example-1'
+        description: ''
+      tags:
+        - contract
+      description: Получить Договор аренды по идентификатору
+  /api/v1/get-facility-rentals-by-tenant-id:
+    post:
+      summary: Получить Объекты аренды по переданным параметрам
+      tags:
+        - default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FacilityRentalListResponse.v1.yaml
+              examples:
+                example-ri:
+                  value:
+                    $ref: '../models/FacilityRentalListResponse.v1.yaml#/x-examples/example-ri'
+      operationId: post-api-v1-get-facility-rentals-by-tenant-id
+      description: Получить Объекты аренды по переданным параметрам
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/FacilityRentalListRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/FacilityRentalListRequest.v1.yaml#/x-examples/example-1'
+      parameters: []
+    parameters: []
+  '/api/v1/tenant/{tenantId}/widget/payment-calendar':
+    post:
+      summary: Получение информации о календаре оплат Арендатора
+      tags:
+        - default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/PaymentCalendarInfoResponse.v1.yaml
+              examples:
+                example-ri:
+                  value:
+                    $ref: '../models/PaymentCalendarInfoResponse.v1.yaml#/x-examples/example-1'
+      operationId: post-api-v1-get-payment-calendar-info
+      description: Получение информации о календаре оплат Арендатора
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/PaymentCalendarInfoRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/PaymentCalendarInfoRequest.v1.yaml#/x-examples/example-1'
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+  /api/v1/get-contracts-by-tenant-id:
+    post:
+      summary: Получить список Договоров аренды по идентификатору Арендатора
+      tags:
+        - default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/ContractListResponse.v1.yaml
+              examples:
+                example-ri:
+                  value:
+                    $ref: '../models/ContractListResponse.v1.yaml#/x-examples/example-1'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/ContractListRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/ContractListRequest.v1.yaml#/x-examples/example-1'
+      parameters: []
+      operationId: post-api-v1-get-contracts-by-tenant-id
+      description: Получить список Договоров аренды по идентификатору Арендатора
+    parameters: []
+  /api/v1/tenant/get:
+    post:
+      summary: Получить Арендатора
+      tags:
+        - default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/TenantProfileResponse.v1.yaml
+              examples:
+                example-naturalPerson:
+                  value:
+                    $ref: '../models/factory/TenantProfileResponse.v1.yaml#/x-examples/example-naturalPerson'
+                example-juridicalPerson:
+                  value:
+                    $ref: '../models/factory/TenantProfileResponse.v1.yaml#/x-examples/example-juridicalPerson'
+                example-entrepreneur:
+                  value:
+                    $ref: '../models/factory/TenantProfileResponse.v1.yaml#/x-examples/example-entrepreneur'
+      operationId: post-api-v1-tenant-get
+      description: Получить Арендатора
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../models/EmptyRequest.v1.yaml'
+            examples:
+              example-id:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      parameters: []
+    parameters: []
+  /api/v1/get-debt-summary:
+    post:
+      summary: Получить сводные данные по задолженности
+      tags:
+        - paymentWidget
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/PaymentWidgetResponse.v1.yaml
+              examples:
+                example-ri:
+                  value:
+                    $ref: '../models/PaymentWidgetResponse.v1.yaml#/x-examples/example-ri'
+      operationId: post-api-v1-get-debt-summary
+      description: Получить сводные данные по задолженности
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DebtSummaryRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/DebtSummaryRequest/x-examples/example-1'
+      parameters: []
+    parameters: []
+  '/api/v1/tenant/{tenantId}/life-situation/reconciliation-act/create':
+    post:
+      summary: 'Создать жизненную ситуацию "Получить акт сверки взаимных расчетов"'
+      operationId: post-api-v1-tenant-life-situation-reconciliation-act-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      description: 'Создание жизненной ситуации "Получить акт сверки взаимных расчетов"'
+      tags:
+        - reconciliation-act-life-situation
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+  '/api/v1/tenant/{tenantId}/life-situation/reconciliation-act/{lifeSituationId}/scanned-act/create':
+    post:
+      summary: 'Создать обращение "Направить скан-копию подписанного акта сверки"'
+      operationId: post-api-v1-tenant-life-situation-reconciliation-act-scanned-act-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      description: 'Создание обращения "Направить скан-копию подписанного акта сверки" по жизненной ситуации "Получить акт сверки взаимных расчетов"'
+      tags:
+        - reconciliation-act-life-situation
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: 'Идентификатор ЖС, в рамках которой создается новое обращение'
+  '/api/v1/tenant/{tenantId}/life-situation/reconciliation-act/{lifeSituationId}/request-act/create':
+    post:
+      summary: 'Создать обращение "Запросить акт сверки"'
+      operationId: post-api-v1-tenant-life-situation-reconciliation-act-request-act-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      description: 'Создание обращения "Запросить акт сверки" по жизненной ситуации "Получить акт сверки взаимных расчетов"'
+      tags:
+        - reconciliation-act-life-situation
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: 'Идентификатор ЖС, в рамках которой создается новое обращение'
+  '/api/v1/tenant/{tenantId}/life-situation/reconciliation-act/{lifeSituationId}/scanned-act/{appealId}/attachment/create':
+    post:
+      deprecated: true
+      summary: 'Сохранить вложение к обращению "Направить скан-копию подписанного акта сверки"'
+      operationId: post-api-v1-tenant-life-situation-reconciliation-act-scanned-act-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: ''
+      tags:
+        - reconciliation-act-life-situation
+      description: 'Сохранить вложение к обращению "Направить скан-копию подписанного акта сверки"'
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+  /api/v1/get-dictionary-collection:
+    post:
+      summary: Получить коллекцию справочников
+      operationId: post-api-v1-get-dictionary-collection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/DictionariesResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/DictionariesResponse.v1.yaml#/x-examples/example-1'
+      description: Загрузка справочников
+      tags:
+        - default
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+    parameters: []
+  /api/v1/get-landlord-collection:
+    post:
+      summary: Получить список арендодателей
+      operationId: post-api-v1-get-landlord-collection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/LandlordList.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/LandlordList.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: Получение списка арендодателей
+      tags:
+        - landlord
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+    parameters: [ ]
+  '/api/v1/landlord/{landlordId}/get':
+    post:
+      summary: Получить арендодателя по идентификатору
+      operationId: post-api-v1-landlord-landlordId-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/LandlordData.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/LandlordData.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: Получение списка арендодателей
+      tags:
+        - landlord
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+    parameters:
+      - schema:
+          type: string
+          minLength: 1
+          maxLength: 255
+        name: landlordId
+        in: path
+        required: true
+        description: Идентификтор арендодателя
+  '/api/v1/tenant/{tenantId}/life-situation/{lifeSituationId}/appeal/{appealId}/delete':
+    post:
+      summary: Удалить обращение
+      operationId: post-api-v1-tenant-life-situation-lifeSituationId-appeal-appealId-delete
+      responses:
+        '200':
+          description: OK
+        default:
+          $ref: '#/components/responses/DefaultError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      description: Удаление обращения
+      tags:
+        - life-situation-common
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификтор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+  '/api/v1/tenant/{tenantId}/life-situation/reconciliation-act/{lifeSituationId}/request-act-collection/create':
+    post:
+      summary: 'Сохранение обращений "Получить акт сверки" по ЖС "Получить акт сверки взаимных расчетов"'
+      operationId: post-api-v1-tenant-life-situation-reconciliation-act-request-act-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-request-act-collection-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Сохранение обращений "Получить акт сверки" по ЖС "Получить акт сверки взаимных расчетов"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveRequestActAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveRequestActAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: ''
+      tags:
+        - reconciliation-act-life-situation
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+  '/api/v1/tenant/{tenantId}/life-situation/reconciliation-act/{lifeSituationId}/scanned-act-collection/create':
+    post:
+      summary: 'Сохранение обращений "Направить скан копию подписанного акта сверки" по ЖС "Получить акт сверки взаимных расчетов"'
+      operationId: post-api-v1-tenant-life-situation-reconciliation-act-scanned-act-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-scanned-act-collection-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Сохранение обращений "Направить скан копию подписанного акта сверки" по ЖС "Получить акт сверки взаимных расчетов"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveScannedActAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveScannedActAppealsRequest.v1.yaml#/x-examples/example-1'
+      tags:
+        - reconciliation-act-life-situation
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+  '/api/v1/tenant/{tenantId}/appeal-collection/get':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          type: string
+        in: query
+        name: contractId
+        description: Идентификатор договора
+      - schema:
+          type: boolean
+        in: query
+        name: requiredReceiptConfirmation
+        description: Признак получения только входящих документов, требующих подписания
+    post:
+      summary: Получить список обращений
+      operationId: post-api-v1-tenant-appeal-collection-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      description: Получение списка обращений
+      tags:
+        - life-situation-common
+  '/api/v1/tenant/{tenantId}/appeal-collection/scanned-act/{appealId}/get':
+    post:
+      summary: 'Получить обращение "Направить скан-копию подписанного акта сверки"'
+      operationId: post-api-v1-tenant-appeal-collection-scanned-act-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/ScannedActAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/ScannedActAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      description: 'Получение обращения "Направить скан-копию подписанного акта сверки"'
+      tags:
+        - reconciliation-act-life-situation
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+  '/api/v1/tenant/{tenantId}/appeal-collection/request-act/{appealId}/get':
+    post:
+      summary: 'Получить обращение "Получить акт сверки"'
+      operationId: post-api-v1-tenant-appeal-collection-request-act-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/RequestActAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/RequestActAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      description: 'Получение обращения "Получить акт сверки"'
+      tags:
+        - reconciliation-act-life-situation
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+  '/api/v1/tenant/{tenantId}/appeal/{appealId}/attachment/{attachmentId}/get':
+    post:
+      deprecated: true
+      summary: Скачать вложение к обращению
+      operationId: post-api-v1-tenant-appeal-attachment-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+            application/zip:
+              schema:
+                type: string
+                format: binary
+            application/msword:
+              schema:
+                type: string
+                format: binary
+            application/vnd.openxmlformats-officedocument.wordprocessingml.document:
+              schema:
+                type: string
+                format: binary
+            application/vnd.oasis.opendocument.spreadshee:
+              schema:
+                type: string
+                format: binary
+            application/vnd.oasis.opendocument.text:
+              schema:
+                type: string
+                format: binary
+            application/vnd.rar:
+              schema:
+                type: string
+                format: binary
+            application/rtf:
+              schema:
+                type: string
+                format: binary
+            application/vnd.ms-excel:
+              schema:
+                type: string
+                format: binary
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: '#/components/responses/DefaultError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      description: Скачать вложение к обращению
+      tags:
+        - life-situation-common
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          example: 1
+        name: attachmentId
+        in: path
+        required: true
+        description: Идентификатор вложения
+  '/api/v1/tenant/{tenantId}/appeal/{appealId}/read':
+    post:
+      summary: Отметить обращение как прочитанное
+      operationId: post-api-v1-tenant-appeal-read
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/BaseResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/BaseResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: Отметить обращение как прочитанное
+      tags:
+        - life-situation-common
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+  '/api/v1/tenant/{tenantId}/appeal/{appealId}/comment/get':
+    post:
+      summary: Получить комментарии к обращению
+      operationId: post-api-v1-tenant-appeal-comment-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/AppealCommentList.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/AppealCommentList.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: Получение комментариев к обращению
+      tags:
+        - life-situation-common
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+  '/api/v1/tenant/{tenantId}/appeal/{appealId}/comment/create':
+    post:
+      summary: Создать комментарий к обращению
+      operationId: post-api-v1-tenant-appeal-comment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/EmptyResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/EmptyResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: Создание комментария к обращению
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/CreateAppealCommentRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/CreateAppealCommentRequest.v1.yaml#/x-examples/example-1'
+      tags:
+        - life-situation-common
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+  '/api/v1/tenant/{tenantId}/appeal/{appealId}/feedback/create':
+    post:
+      summary: Создать оценку удовлетворенности ответом
+      operationId: post-api-v1-tenant-appeal-feedback-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/BaseResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/BaseResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: Создание оценки удовлетворенности ответом
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AppealFeedback.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AppealFeedback.v1.yaml#/x-examples/example-excellent'
+      tags:
+        - life-situation-common
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+  '/api/v1/tenant/{tenantId}/life-situation/missing-contract/create':
+    post:
+      summary: 'Создать жизненную ситуацию "Отсутствует договор аренды"'
+      operationId: post-api-v1-tenant-life-situation-missing-contrac-createt
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      description: 'Создание жизненной ситуации "Отсутствует договор аренды"'
+      tags:
+        - missing-contract-life-situation
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+  '/api/v1/tenant/{tenantId}/life-situation/missing-contract/{lifeSituationId}/missing-contract-in-lk/create':
+    post:
+      summary: 'Создать обращение "В личном кабинете отсутствует информация о моем договоре аренды"'
+      operationId: post-api-v1-tenant-life-situation-missing-contract-missing-contract-in-lk-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      description: 'Создание обращения "В личном кабинете отсутствует информация о моем договоре аренды" по жизненной ситуации "Отсутствует договор аренды"'
+      tags:
+        - missing-contract-life-situation
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: 'Идентификатор ЖС, в рамках которой создается новое обращение'
+  '/api/v1/tenant/{tenantId}/life-situation/missing-contract/{lifeSituationId}/missing-contract-in-lk/{appealId}/attachment/create':
+    post:
+      deprecated: true
+      summary: 'Сохранить вложение к обращению "В личном кабинете отсутствует информация о моем договоре аренды"'
+      operationId: post-api-v1-tenant-life-situation-missing-contract-missing-contract-in-lk-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Сохранение вложения к обращению "В личном кабинете отсутствует информация о моем договоре аренды"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: ''
+      parameters: [ ]
+      tags:
+        - missing-contract-life-situation
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+  '/api/v1/tenant/{tenantId}/appeal-collection/missing-contract-in-lk/{appealId}/get':
+    post:
+      summary: 'Получить обращение "В личном кабинете отсутствует информация о моем договоре аренды"'
+      operationId: post-api-v1-tenant-appeal-collection-missing-contract-in-lk-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/MissingContractInLkAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/MissingContractInLkAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Получение обращения "В личном кабинете отсутствует информация о моем договоре аренды"'
+      tags:
+        - missing-contract-life-situation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+  '/api/v1/tenant/{tenantId}/life-situation/missing-contract/{lifeSituationId}/missing-contract-in-lk-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+    post:
+      summary: 'Сохранение обращений "В личном кабинете отсутствует информация о моем договоре аренды" по ЖС "Отсутствует договор аренды"'
+      operationId: post-api-tenant-v1-life-situation-missing-contract-missing-contract-in-lk-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-missing-contract-in-lk-collection-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Сохранение обращений "В личном кабинете отсутствует информация о моем договоре аренды" по ЖС "Отсутствует договор аренды"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveMissingContractInLkAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveMissingContractInLkAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: ''
+      tags:
+        - missing-contract-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-juridical-person-props/{lifeSituationId}/change-juridical-address-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Сохранение обращений "Смена юридического адреса/КПП"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-juridical-person-props-lifeSituationId-change-juridical-address-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-change-juridical-address-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Сохранение обращений "Смена юридического адреса/КПП"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveChangeJuridicalAddressAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveChangeJuridicalAddressAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: 'Запрос на сохранение данных обращений "Смена юридического адреса/КПП" ЖС "Изменить реквизиты Арендатора"'
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-juridical-person-props/{lifeSituationId}/change-organisational-legal-form-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Сохранение обращений "Смена организационно-правовой формы/ИНН"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-juridical-person-props-lifeSituationId-change-organizational-legal-form-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-change-organizational-legal-form-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Сохранение обращений "Смена организационно-правовой формы/ИНН"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveChangeOrganizationalLegalFormAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveChangeOrganizationalLegalFormAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: 'Запрос на сохранение данных обращений "Смена организационно-правовой формы/ИНН" ЖС "Изменить реквизиты Арендатора"'
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-juridical-person-props/{lifeSituationId}/change-company-name-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Сохранение обращений "Смена наименования ЮЛ"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-juridical-person-props-lifeSituationId-change-company-name-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-change-company-name-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Сохранение обращений "Смена наименования ЮЛ"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveChangeCompanyNameAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveChangeCompanyNameAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: 'Запрос на сохранение данных обращений "Смена наименования ЮЛ" ЖС "Изменить реквизиты Арендатора"'
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-juridical-person-props/{lifeSituationId}/change-director-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Сохранение обращений "Смена руководителя"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-juridical-person-props-lifeSituationId-change-director-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-change-director-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Сохранение обращений "Смена руководителя"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveChangeDirectorAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveChangeDirectorAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: 'Запрос на сохранение данных обращений "Смена руководителя" ЖС "Изменить реквизиты Арендатора"'
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-juridical-person-props/{lifeSituationId}/change-contact-details-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Сохранение обращений "Смена контактных данных"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-juridical-person-props-lifeSituationId-change-contact-details-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-change-contact-details-saved'
+      description: 'Сохранение обращений "Смена контактных данных"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveChangeContactDetailsAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveChangeContactDetailsAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: 'Запрос на сохранение данных обращений "Смена контактных данных" ЖС "Изменить реквизиты Арендатора"'
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-juridical-person-props/{lifeSituationId}/change-juridical-address/{appealId}/attachment/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+    post:
+      deprecated: true
+      summary: 'Добавление вложения к обращению "Смена юридического адреса/КПП"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-juridical-person-props-lifeSituationId-change-juridical-address-appealId-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Добавление вложения к обращению "Смена юридического адреса/КПП"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: 'Вложение к обращению "Смена юридического адреса/КПП"'
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/appeal-collection/change-company-name/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Получение обращения "Смена наименования ЮЛ"'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-change-company-name-appealId-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/ChangeCompanyNameAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/ChangeCompanyNameAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Получение обращения "Смена наименования ЮЛ"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/appeal-collection/change-juridical-address/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Получение обращения "Смена юридического адреса/КПП"'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-change-juridical-address-appealId-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/ChangeJuridicalAddressAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/ChangeJuridicalAddressAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Получение обращения "Смена юридического адреса/КПП"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/appeal-collection/change-organizational-legal-form/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Получение обращения "Смена организационно-правовой формы/ИНН"'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-change-organizational-legal-form-appealId-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/ChangeOrganizationalLegalFormAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/ChangeOrganizationalLegalFormAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Получение обращения "Смена организационно-правовой формы/ИНН"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/appeal-collection/change-director/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Получение обращения "Смена руководителя"'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-change-director-appealId-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/ChangeDirectorAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/ChangeDirectorAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Получение обращения "Смена руководителя"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: ''
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/appeal-collection/change-contact-details/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Получение обращения "Смена контактных данных"'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-change-contact-details-appealId-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/ChangeContactDetailsAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/ChangeContactDetailsAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Получение обращения "Смена контактных данных"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-juridical-person-props/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Создание ЖС "Изменить реквизиты ЮЛ"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-juridical-person-props-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создание ЖС "Изменить реквизиты ЮЛ"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: ''
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-juridical-person-props/{lifeSituationId}/change-organizational-legal-form/{appealId}/attachment/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+    post:
+      deprecated: true
+      summary: 'Добавление вложения к обращению "Смена организационно-правовой формы/ИНН"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-juridical-person-props-lifeSituationId-change-organizational-legal-form-appealId-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Добавление вложения к обращению "Смена организационно-правовой формы/ИНН"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: 'Вложение к обращению "Смена организационно-правовой формы/ИНН"'
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-juridical-person-props/{lifeSituationId}/change-company-name/{appealId}/attachment/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+    post:
+      deprecated: true
+      summary: 'Добавление вложения к обращению "Смена наименования ЮЛ"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-juridical-person-props-lifeSituationId-change-company-name-appealId-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Добавление вложения к обращению "Смена наименования ЮЛ"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: 'Вложение к обращению "Смена наименования ЮЛ"'
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-juridical-person-props/{lifeSituationId}/change-director/{appealId}/attachment/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+    post:
+      deprecated: true
+      summary: 'Добавление вложения к обращению "Смена руководителя"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-juridical-person-props-lifeSituationId-change-director-appealId-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Добавление вложения к обращению "Смена руководителя"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: 'Вложение к обращению "Смена руководителя"'
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-juridical-person-props/{lifeSituationId}/change-juridical-address/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+    post:
+      summary: 'Создание обращения "Смена юридического адреса/КПП"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-missing-contract-lifeSituationId-change-juridical-address-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создание обращения "Смена юридического адреса/КПП"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: ''
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-juridical-person-props/{lifeSituationId}/change-organizational-legal-form/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+    post:
+      summary: 'Создание обращения "Смена организационно-правовой формы/ИНН"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-missing-contract-lifeSituationId-change-organizational-legal-form-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создание обращения "Смена организационно-правовой формы/ИНН"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: ''
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-juridical-person-props/{lifeSituationId}/change-company-name/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+    post:
+      summary: 'Создание обращения "Смена наименования ЮЛ"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-missing-contract-lifeSituationId-change-company-name-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создание обращения "Смена наименования ЮЛ"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-juridical-person-props/{lifeSituationId}/change-director/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+    post:
+      summary: 'Создание обращения "Смена руководителя"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-missing-contract-lifeSituationId-change-director-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создание обращения "Смена руководителя"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-juridical-person-props/{lifeSituationId}/change-contact-details/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+    post:
+      summary: 'Создание обращения "Смена контактных данных"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-missing-contract-lifeSituationId-change-contact-details-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создание обращения "Смена контактных данных"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: ''
+      tags:
+        - change-juridical-person-props-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/missing-payment/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Создать жизненную ситуацию "Отсутствует платеж по договору аренды"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-missing-payment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - missing-payment-life-situation
+      description: 'Создать жизненную ситуацию "Отсутствует платеж по договору аренды"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+  '/api/v1/tenant/{tenantId}/life-situation/missing-payment/{lifeSituationId}/missing-payment/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+    post:
+      summary: 'Создать обращение "Отсутствует платеж по договору аренды"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-missing-payment-lifeSituationId-missing-payment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создать обращение "Отсутствует платеж по договору аренды"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+      tags:
+        - missing-payment-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/missing-payment/{lifeSituationId}/missing-payment/{appealId}/attachment/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+    post:
+      deprecated: true
+      summary: 'Сохранить вложение к обращению "Отсутствует платеж по договору аренды"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-missing-payment-lifeSituationId-missing-payment-appealId-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Сохранить вложение к обращению "Отсутствует платеж по договору аренды"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на сохранение файла по обращению
+      tags:
+        - missing-payment-life-situation
+  '/api/v1/tenant/{tenantId}/appeal-collection/missing-payment/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+    post:
+      summary: 'Получить обращение "Отсутствует платеж по договору аренды"'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-missing-payment-appealId-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/MissingPaymentAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/MissingPaymentAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Получить обращение "Отсутствует платеж по договору аренды"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+      tags:
+        - missing-payment-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/missing-payment/{lifeSituationId}/missing-payment-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+    post:
+      summary: 'Сохранить обращения "Отсутствует платеж по договору аренды"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-missing-payment-lifeSituationId-missing-payment-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-missing-payment-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Получить обращения "Отсутствует платеж по договору аренды"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveMissingPaymentAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveMissingPaymentAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: 'Запрос на сохранение данных по обращениям "Отсутствует платеж по договору аренды"'
+      tags:
+        - missing-payment-life-situation
+  '/api/v1/tenant/{tenantId}/payment-info/get':
+    post:
+      summary: Запрос данных для формирования квитанций
+      operationId: post-api-v1-payment-info-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/ReceiptFormationDataListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/ReceiptFormationDataListResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/ByMultipleContractIdsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/ByMultipleContractIdsRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос по идентификаторам Договоров аренды
+      description: Запрос данных для формирования квитанций
+      tags:
+        - default
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор Арендатора
+  '/api/v1/tenant/{tenantId}/life-situation/complaint/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Создать ЖС "Жалобы на акты, действия / бездействия должностных лиц"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-complaint-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - complaint-life-situation
+      description: 'Создать ЖС "Жалобы на акты, действия / бездействия должностных лиц"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+  '/api/v1/tenant/{tenantId}/life-situation/complaint/{lifeSituationId}/complaint-on-document/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+    post:
+      summary: 'Создать обращение "Жалоба на акт (документ)"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-complaint-lifeSituationId-complaint-on-document-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - complaint-life-situation
+      description: 'Создать обращение "Жалоба на акт (документ)"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+  '/api/v1/tenant/{tenantId}/life-situation/complaint/{lifeSituationId}/complaint-on-action/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+    post:
+      summary: 'Создать обращение "Жалоба на действие/бездействие должностных лиц"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-complaint-lifeSituationId-complaint-on-action-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создать обращение "Жалоба на действие/бездействие должностных лиц"'
+      tags:
+        - complaint-life-situation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+  '/api/v1/tenant/{tenantId}/life-situation/complaint/{lifeSituationId}/complaint-on-document/{appealId}/attachment/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+    post:
+      deprecated: true
+      summary: 'Добавить вложение к обращению "Жалоба на акт (документ)"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-complaint-lifeSituationId-complaint-on-document-appealId-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Добавить вложение к обращению "Жалоба на акт (документ)"'
+      tags:
+        - complaint-life-situation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на сохранение файла по обращению
+  '/api/v1/tenant/{tenantId}/life-situation/complaint/{lifeSituationId}/complaint-on-action/{appealId}/attachment/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+    post:
+      deprecated: true
+      summary: 'Добавить вложение к обращению "Жалоба на действие/бездействие должностных лиц"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-complaint-lifeSituationId-complaint-on-action-appealId-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - complaint-life-situation
+      description: 'Добавить вложение к обращению "Жалоба на действие/бездействие должностных лиц"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на сохранение файла по обращению
+  '/api/v1/tenant/{tenantId}/life-situation/complaint/{lifeSituationId}/complaint-on-document-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+    post:
+      summary: 'Сохранить обращения "Жалоба на акт (документ)"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-complaint-lifeSituationId-complaint-on-document-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-missing-payment-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Сохранить обращения "Жалоба на акт (документ)"'
+      tags:
+        - complaint-life-situation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveComplaintOnDocumentAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveComplaintOnDocumentAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: 'Запрос на сохранение данных обращений "Жалоба на акт (документ)"'
+  '/api/v1/tenant/{tenantId}/life-situation/complaint/{lifeSituationId}/complaint-on-action-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+    post:
+      summary: 'Сохранить обращения "Жалоба на действие/бездействие должностных лиц"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-complaint-lifeSituationId-complaint-on-action-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-missing-payment-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Сохранить обращения "Жалоба на действие/бездействие должностных лиц"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveComplaintOnActionAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveComplaintOnActionAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: 'Запрос на сохранение данных обращений "Жалоба на действие или бездействие должностных лиц"'
+      tags:
+        - complaint-life-situation
+  '/api/v1/tenant/{tenantId}/appeal-collection/complaint-on-document/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+    post:
+      summary: 'Получить обращение "Жалоба на акт (документ)"'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-complaint-on-document-appealId-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/ComplaintOnDocumentAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/ComplaintOnDocumentAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Получить обращение "Жалоба на акт (документ)"'
+      tags:
+        - complaint-life-situation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+  '/api/v1/tenant/{tenantId}/appeal-collection/complaint-on-action/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+    post:
+      summary: 'Получить обращение "Жалоба на действие/бездействие должностных лиц"'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-complaint-on-action-appealId-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/ComplaintOnActionAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/ComplaintOnActionAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Получить обращение "Жалоба на действие/бездействие должностных лиц"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+      tags:
+        - complaint-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/no-suitable-life-situation/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Создать ЖС "Нет подходящей ЖС"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-no-suitable-life-situation-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - no-suitable-life-situation-life-situation
+      description: 'Создать ЖС "Нет подходящей ЖС"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+  '/api/v1/tenant/{tenantId}/life-situation/no-suitable-life-situation/{lifeSituationId}/no-suitable-life-situation/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+    post:
+      summary: 'Создать обращение "Нет подходящей ЖС"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-no-suitable-life-situation-lifeSituationId-no-suitable-life-situation-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создать обращение "Нет подходящей ЖС"'
+      tags:
+        - no-suitable-life-situation-life-situation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+  '/api/v1/tenant/{tenantId}/life-situation/no-suitable-life-situation/{lifeSituationId}/no-suitable-life-situation/{appealId}/attachment/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+    post:
+      deprecated: true
+      summary: 'Добавить вложение к обращению "Нет подходящей ЖС"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-no-suitable-life-situation-lifeSituationId-no-suitable-life-situation-appealId-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Добавить вложение к обращению "Нет подходящей ЖС"'
+      tags:
+        - no-suitable-life-situation-life-situation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на сохранение файла по обращению
+  '/api/v1/tenant/{tenantId}/life-situation/no-suitable-life-situation/{lifeSituationId}/no-suitable-life-situation-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+    post:
+      summary: 'Сохранить обращения "Нет подходящей ЖС"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-no-suitable-life-situation-lifeSituationId-no-suitable-life-situation-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-no-suitable-life-situation-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - no-suitable-life-situation-life-situation
+      description: 'Сохранить обращения "Нет подходящей ЖС"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveNoSuitableLifeSituationAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveNoSuitableLifeSituationAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: 'Запрос на сохранение данных по обращениям "Нет подходящей ЖС"'
+  '/api/v1/tenant/{tenantId}/appeal-collection/no-suitable-life-situation/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+    post:
+      summary: 'Получить обращение "Нет подходящей ЖС"'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-no-suitable-life-situation-appealId-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/NoSuitableLifeSituationAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/NoSuitableLifeSituationAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Получить обращение "Нет подходящей ЖС"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+      tags:
+        - no-suitable-life-situation-life-situation
+  '/api/v1/tenant/{tenantId}/appeal/{appealId}/attachment/{attachmentId}/delete':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          type: integer
+          example: 1
+          minimum: 0
+          maximum: 2147483647
+        name: attachmentId
+        in: path
+        required: true
+        description: Идентификатор вложения
+    post:
+      deprecated: true
+      summary: Удалить вложение к обращению
+      operationId: post-api-v1-tenant-tenantId-appeal-appealId-attachment-attachmentId-delete
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/BaseResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/BaseResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - default
+      description: Удалить вложение к обращению
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+  '/api/v1/tenant/{tenantId}/life-situation/sublease-notice/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Создать ЖС "Уведомление о субаренде"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-sublease-notice-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создать ЖС "Уведомление о субаренде"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+      tags:
+        - sublease-notice-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/sublease-notice/{lifeSituationId}/sublease-notice/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+    post:
+      summary: 'Создать обращение "Уведомление о субаренде"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-sublease-notice-lifeSituationId-sublease-notice-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создать обращение "Уведомление о субаренде"'
+      tags:
+        - sublease-notice-life-situation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+  '/api/v1/tenant/{tenantId}/life-situation/sublease-notice/{lifeSituationId}/sublease-notice/{appealId}/attachment/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        description: Идентификатор обращения
+        required: true
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      deprecated: true
+      summary: 'Добавить вложение к обращению "Уведомление о субаренде"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-sublease-notice-lifeSituationId-sublease-notice-appealId-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Добавить вложение к обращению "Уведомление о субаренде"'
+      tags:
+        - sublease-notice-life-situation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на сохранение файла по обращению
+  '/api/v1/tenant/{tenantId}/life-situation/sublease-notice/{lifeSituationId}/sublease-notice-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Сохранить обращения "Уведомление о субаренде"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-sublease-notice-lifeSituationId-sublease-notice-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-sublease-notice-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Сохранить обращения "Уведомление о субаренде"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveSubleaseNoticeAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveSubleaseNoticeAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: 'Запрос на сохранение данных по обращениям "Уведомление о субаренде"'
+      tags:
+        - sublease-notice-life-situation
+  '/api/v1/tenant/{tenantId}/appeal-collection/sublease-notice/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+    post:
+      summary: 'Получить обращение "Уведомление о субаренде"'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-sublease-notice-appealId-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/SubleaseNoticeAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/SubleaseNoticeAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Получить обращение "Уведомление о субаренде"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+      tags:
+        - sublease-notice-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/overpayment/create':
+    post:
+      summary: 'ЖС "Распорядиться переплатой"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-overpayment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'ЖС "Распорядиться переплатой"'
+      tags:
+        - overpayment-life-situation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+  '/api/v1/tenant/{tenantId}/life-situation/overpayment/{lifeSituationId}/offset-to-different-contract/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Создать обращение "Зачет денежных средств на другой договор"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-overpayment-lifeSituationId-offset-to-different-contract-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создать обращение "Зачет денежных средств на другой договор"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+      tags:
+        - overpayment-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/overpayment/{lifeSituationId}/offset-to-different-contract/{appealId}/payment-order/attachment/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Добавить документ платежного поручения к обращению "Зачет денежных средств на другой договор"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-overpayment-lifeSituationId-offset-to-different-contract-appealId-payment-order-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Добавить документ платежного поручения к обращению "Зачет денежных средств на другой договор"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на сохранение файла по обращению
+      tags:
+        - overpayment-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/overpayment/{lifeSituationId}/offset-to-different-contract/{appealId}/scanned-appeal/attachment/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      deprecated: true
+      summary: 'Добавить скан-образ подписанного заявления к обращению "Зачет денежных средств на другой договор"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-overpayment-lifeSituationId-offset-to-different-contract-appealId-scanned-appeal-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Добавить скан-образ подписанного заявления к обращению "Зачет денежных средств на другой договор"'
+      tags:
+        - overpayment-life-situation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на сохранение файла по обращению
+  '/api/v1/tenant/{tenantId}/life-situation/overpayment/{lifeSituationId}/offset-to-different-contract-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Сохранить обращения "Зачет денежных средств на другой договор"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-overpayment-lifeSituationId-offset-to-different-contract-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-offset-to-different-contract-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - overpayment-life-situation
+      description: 'Сохранить обращения "Зачет денежных средств на другой договор"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveOffsetToDifferentContractAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveOffsetToDifferentContractAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: 'Запрос на сохранение данных по обращениям "Зачет денежных средств на другой договор"'
+  '/api/v1/tenant/{tenantId}/appeal-collection/offset-to-different-contract/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Получить обращение "Зачет денежных средств на другой договор"'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-offset-to-different-contract-appealId-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/OffsetToDifferentContractAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/OffsetToDifferentContractAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - overpayment-life-situation
+      description: 'Получить обращение "Зачет денежных средств на другой договор"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+  '/api/v1/tenant/{tenantId}/life-situation/overpayment/{lifeSituationId}/offset-to-different-contract/{appealId}/appeal-document-data/get':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Получить данные для формирования заявления по обращению "Зачет денежных средств на другой договор"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-overpayment-lifeSituationId-offset-to-different-contract-appealId-appeal-document-data-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/OffsetToDifferentContractDocumentFormationData.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/OffsetToDifferentContractDocumentFormationData.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Получить данные для формирования заявления по обращению "Зачет денежных средств на другой договор"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/OffsetToDifferentContractAppealDocumentFormationRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/OffsetToDifferentContractAppealDocumentFormationRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+      tags:
+        - overpayment-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/overpayment/{lifeSituationId}/overpayment-refund/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Создать обращение  "Возврат денежных средств"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-overpayment-lifeSituationId-overpayment-refund-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создать обращение "Возврат денежных средств"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+      tags:
+        - overpayment-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/overpayment/{lifeSituationId}/overpayment-refund/{appealId}/payment-order/attachment/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Добавить документ платежного поручения к обращению "Возврат денежных средств"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-overpayment-lifeSituationId-overpayment-refund-appealId-payment-order-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Добавить документ платежного поручения к обращению "Возврат денежных средств"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на сохранение файла по обращению
+      tags:
+        - overpayment-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/overpayment/{lifeSituationId}/overpayment-refund/{appealId}/scanned-appeal/attachment/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      deprecated: true
+      summary: 'Добавить скан-образ подписанного заявления к обращению "Возврат денежных средств"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-overpayment-lifeSituationId-overpayment-refund-appealId-scanned-appeal-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Добавить скан-образ подписанного заявления к обращению "Возврат денежных средств"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на сохранение файла по обращению
+      tags:
+        - overpayment-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/overpayment/{lifeSituationId}/overpayment-refund-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Сохранить обращения "Возврат денежных средств"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-overpayment-lifeSituationId-overpayment-refund-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-overpayment-refund-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - overpayment-life-situation
+      description: 'Сохранить обращения "Возврат денежных средств"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveOverpaymentRefundAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveOverpaymentRefundAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на сохранение файла по обращению
+  '/api/v1/tenant/{tenantId}/appeal-collection/overpayment-refund/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Получить обращение "Возврат денежных средств"'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-overpayment-refund-appealId-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/OverpaymentRefundAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/OverpaymentRefundAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - overpayment-life-situation
+      description: 'Получить обращение "Возврат денежных средств"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+  '/api/v1/tenant/{tenantId}/life-situation/overpayment/{lifeSituationId}/overpayment-refund/{appealId}/appeal-document-data/get':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Получить данные для формирования заявления по обращению "Возврат денежных средств"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-overpayment-lifeSituationId-overpayment-refund-appealId-appeal-document-data-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/OverpaymentRefundDocumentFormationData.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/OverpaymentRefundDocumentFormationData.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - overpayment-life-situation
+      description: 'Получить данные для формирования заявления по обращению "Возврат денежных средств"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/OverpaymentRefundAppealDocumentFormationRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/OverpaymentRefundAppealDocumentFormationRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+  '/api/v1/tenant/{tenantId}/life-situation/change-facility-rental/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Создать ЖС "Внести изменения в характеристики арендованных объектов"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-facility-rental-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'ЖС "Внести изменения в характеристики арендованных объектов"'
+      tags:
+        - change-facility-rental-life-situation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+  '/api/v1/tenant/{tenantId}/life-situation/change-facility-rental/{lifeSituationId}/change-facility-rental/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Создать обращение "Внести изменения в характеристики арендованных объектов"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-facility-rental-lifeSituationId-change-facility-rental-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создать обращение "Внести изменения в характеристики арендованных объектов"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+      tags:
+        - change-facility-rental-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-facility-rental/{lifeSituationId}/change-facility-rental/{appealId}/attachment/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      deprecated: true
+      summary: 'Добавить вложение к обращению "Внести изменения в характеристики арендованных объектов"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-facility-rental-lifeSituationId-change-facility-rental-appealId-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Добавить вложение к обращению "Внести изменения в характеристики арендованных объектов"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на сохранение файла по обращению
+      tags:
+        - change-facility-rental-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-facility-rental/{lifeSituationId}/change-facility-rental-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Сохранить обращения "Внести изменения в характеристики арендованных объектов"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-facility-rental-lifeSituationId-change-facility-rental-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-change-facility-rental-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - change-facility-rental-life-situation
+      description: 'Сохранить обращения "Внести изменения в характеристики арендованных объектов"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveChangeFacilityRentalAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveChangeFacilityRentalAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на сохранение файла по обращению
+  '/api/v1/tenant/{tenantId}/appeal-collection/change-facility-rental/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Получить обращение "Внести изменения в характеристики арендованных объектов"'
+      tags:
+        - change-facility-rental-life-situation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/ChangeFacilityRentalAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/ChangeFacilityRentalAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-change-facility-rental-appealId-get
+      description: 'Получить обращение "Внести изменения в характеристики арендованных объектов"'
+  '/api/v1/tenant/{tenantId}/life-situation/change-facility-rental/{lifeSituationId}/missing-data-in-facility/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Создать обращение "Сообщить об отсутствии данных по арендованным объектам"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-facility-rental-lifeSituationId-missing-data-in-facility-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создать обращение "Сообщить об отсутствии данных по арендованным объектам"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+      tags:
+        - change-facility-rental-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-facility-rental/{lifeSituationId}/missing-data-in-facility/{appealId}/attachment/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      deprecated: true
+      summary: 'Добавить вложение к обращению "Сообщить об отсутствии данных по арендованным объектам"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-facility-rental-lifeSituationId-missing-data-in-facility-appealId-attachment-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Добавить вложение к обращению "Сообщить об отсутствии данных по арендованным объектам"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на сохранение файла по обращению
+      tags:
+        - change-facility-rental-life-situation
+  '/api/v1/tenant/{tenantId}/life-situation/change-facility-rental/{lifeSituationId}/missing-data-in-facility-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Сохранить обращения "Сообщить об отсутствии данных по арендованным объектам"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-change-facility-rental-lifeSituationId-missing-data-in-facility-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-missing-data-in-facility-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - change-facility-rental-life-situation
+      description: 'Сохранить обращения "Сообщить об отсутствии данных по арендованным объектам"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveMissingDataInFacilityAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveMissingDataInFacilityAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на сохранение файла по обращению
+  '/api/v1/tenant/{tenantId}/appeal-collection/missing-data-in-facility/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Получить обращение "Сообщить об отсутствии данных по арендованным объектам"'
+      tags:
+        - change-facility-rental-life-situation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/MissingDataInFacilityAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/MissingDataInFacilityAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-missing-data-in-facility-appealId-get
+      description: 'Получить обращение "Сообщить об отсутствии данных по арендованным объектам"'
+  '/api/v1/tenant/{tenantId}/contract/{contractId}/missing-facility-data/get':
+    parameters:
+      - schema:
+          $ref: ../models/ContractId.v1.yaml
+        name: contractId
+        in: path
+        required: true
+        description: Идентификатор договора
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: Получить отсутствующую информацию по объектам аренды
+      tags:
+        - change-facility-rental-life-situation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/MissingFacilityDataResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/MissingFacilityDataResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      operationId: post-api-v1-tenant-tenantId-contract-contractId-missing-facility-data-get
+      description: Получить отсутствующую информацию по объектам аренды
+  '/api/v1/tenant/{tenantId}/sign-documents':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: Подписание документов
+      tags:
+        - incoming-documents
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/SignDocumentsResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/SignDocumentsResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      operationId: get-api-v1-tenant-tenantId-sign-documents
+      description: Подписание документов
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SignDocumentsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SignDocumentsRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на подписание документов
+  '/api/v1/tenant/{tenantId}/contract/{contractId}/accruals':
+    post:
+      summary: Получение данных по начислениям
+      tags:
+        - default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/AccrualsResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/AccrualsResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      operationId: post-api-v1-tenant-tenantId-contract-contractId-accruals
+      description: Получение данных по начислениям
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/PageableRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/PageableRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос с пагинацией
+    parameters:
+      - schema:
+          $ref: ../models/ContractId.v1.yaml
+        name: contractId
+        in: path
+        required: true
+        description: Идентификатор договора
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+  '/api/v1/tenant/{tenantId}/contract/{contractId}/payment-history':
+    post:
+      summary: Получение данных по истории платежей
+      tags:
+        - default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/PaymentHistoryResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/PaymentHistoryResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      operationId: post-api-v1-tenant-tenantId-contract-contractId-payment-history
+      description: Получение данных по истории платежей
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/PageableRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/PageableRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос с пагинацией
+    parameters:
+      - schema:
+          $ref: ../models/ContractId.v1.yaml
+        name: contractId
+        in: path
+        required: true
+        description: Идентификатор договора
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+  /api/v1/tenant/{tenantId}/widget/incoming-documents/get:
+    post:
+      summary: Получить входящие документы для виджета
+      tags:
+        - incoming-documents
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/IncomingDocumentListWidgetResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/IncomingDocumentListWidgetResponse.v1.yaml#/x-examples/example-1'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        default:
+          $ref: '#/components/responses/DefaultError'
+      operationId: post-api-v1-widget-incoming-documents-get
+      description: Получить входящие документы для виджета
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+  '/api/v1/tenant/{tenantId}/appeal-collection/incoming-document-signature-required/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Получить обращение "Входящий документ, требующий подписание"'
+      tags:
+        - incoming-documents
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/IncomingDocumentSignatureRequiredAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/IncomingDocumentSignatureRequiredAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      operationId: get-api-v1-tenant-tenantId-appeal-collection-incoming-document-signature-required-appealId-get
+      description: 'Получить обращение "Входящий документ, требующий подписания"'
+  '/api/v1/tenant/{tenantId}/appeal-collection/incoming-document-signature-not-required/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Получить обращение "Входящий документ, не требующий подписания"'
+      tags:
+        - incoming-documents
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/IncomingDocumentSignatureNotRequiredAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/IncomingDocumentSignatureNotRequiredAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      operationId: get-api-v1-tenant-tenantId-appeal-collection-incoming-document-signature-not-required-appealId-get
+      description: 'Получить обращение "Входящий документ, не требующий подписания"'
+  /api/v1/tenant/{tenantId}/incoming-document/{appealId}/reject/post:
+    post:
+      summary: Отклонить входящий документ
+      tags:
+        - incoming-documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/RejectIncomingDocumentRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/RejectIncomingDocumentRequest.v1.yaml#/x-examples/example-1'
+        description: Отклонить входящий документ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/BaseResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/BaseResponse.v1.yaml#/x-examples/example-1'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        default:
+          $ref: '#/components/responses/DefaultError'
+      operationId: post-api-v1-tenant-tenantId-incoming-document-appealId-reject-post
+      description: Отклонить входящий документ
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+  /api/v1/createAppeal:
+    post:
+      summary: Сохранить обращение из ДМЗ
+      tags:
+        - appeal-dmz
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/external/CreateAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/external/CreateAppealRequest.v1.yaml#/x-examples/example-1'
+        description: Отклонить входящий документ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/BaseResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/BaseResponse.v1.yaml#/x-examples/example-1'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        default:
+          $ref: '#/components/responses/DefaultError'
+      operationId: post-api-v1-createAppeal
+      description: Сохранить обращение из ДМЗ
+  '/api/v1/tenant/{tenantId}/appeal/{appealId}/file/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+    post:
+      summary: 'Сохранить файл по обращению'
+      operationId: post-api-v1-tenant-tenantId-appeal-appealId-file-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/FileInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/FileInfo.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - appeal-attachment
+      description: 'Сохранить файл по обращению'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/AttachFileToAppealRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/AttachFileToAppealRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос на сохранение файла по обращению
+  '/api/v1/tenant/{tenantId}/appeal/{appealId}/file/{fileId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: '../models/FileId.v1.yaml'
+        name: fileId
+        in: path
+        required: true
+        description: Идентификатор файла
+    post:
+      summary: Скачать файл обращения
+      operationId: post-api-v1-tenant-tenantId-appeal-appealId-file-fileId-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/FileDownloadInfo.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/FileDownloadInfo.v1.yaml#/x-examples/example-1'
+        '401':
+          description: ''
+        '403':
+          description: Forbidden
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: Скачать файл обращения
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+      tags:
+        - appeal-attachment
+  '/api/v1/tenant/{tenantId}/appeal/{appealId}/file/{fileId}/delete':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: '../models/FileId.v1.yaml'
+        name: fileId
+        in: path
+        required: true
+        description: Идентификатор файла
+    post:
+      summary: Удалить файл обращения
+      operationId: post-api-v1-tenant-tenantId-appeal-appealId-file-fileId-delete
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/BaseResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/BaseResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - appeal-attachment
+      description: Удалить файл обращения
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+  /api/v1/tenant/{tenantId}/incoming-document/{appealId}/confirm-receipt:
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+    post:
+      summary: Подтвердить получение входящего документа
+      tags:
+        - incoming-documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/ConfirmIncomingDocumentReceiptRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/ConfirmIncomingDocumentReceiptRequest.v1.yaml#/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/BaseResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/BaseResponse.v1.yaml#/x-examples/example-1'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        default:
+          $ref: '#/components/responses/DefaultError'
+      operationId: post-api-v1-tenant-tenantId-incoming-document-appealId-confirm-receipt
+      description: Подтвердить получение входящего документа
+  '/api/v1/callback/{packageId}/signature/send':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+          minLength: 36
+          maxLength: 36
+        name: packageId
+        in: path
+        required: true
+        description: Идентификатор пакета
+    post:
+      summary: Отправить подписи арендатора в ДМЗ
+      tags:
+        - incoming-documents
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/EmptyResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/EmptyResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      operationId: post-api-v1-callback-packageId-signature-send
+      description: Отправить подписи арендатора в ДМЗ
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/TenantSignatureToDmzRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/TenantSignatureToDmzRequest.v1.yaml#/x-examples/example-1'
+        description: Запрос с файлами подписей арендатора
+  /api/v1/tenant/{tenantId}/life-situation/paper-documents/create:
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Создать ЖС "Заявки на получение/отказ документов на бумаге"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-paper-documents-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создать ЖС "Заявки на получение/отказ документов на бумаге"'
+      tags:
+        - lsPaperDocuments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+  '/api/v1/tenant/{tenantId}/life-situation/paper-documents/{lifeSituationId}/consent-to-paper-workflow/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Создать обращение "Получение документов на бумажном носителе"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-paper-documents-lifeSituationId-consent-to-paper-workflow-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создать обращение "Получение документов на бумажном носителе"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+      tags:
+        - lsPaperDocuments
+  '/api/v1/tenant/{tenantId}/life-situation/paper-documents/{lifeSituationId}/refusal-from-paper-workflow/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Создать обращение "Отказ от получения документов на бумажном носителе"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-paper-documents-lifeSituationId-refusal-from-paper-workflow-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/UuidIdResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/UuidIdResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      description: 'Создать обращение "Отказ от получения документов на бумажном носителе"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/EmptyRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/EmptyRequest.v1.yaml#/x-examples/example-1'
+        description: Пустой запрос
+      tags:
+        - lsPaperDocuments
+  '/api/v1/tenant/{tenantId}/appeal-collection/consent-to-paper-workflow/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Получить обращение "Получение документов на бумажном носителе"'
+      tags:
+        - lsPaperDocuments
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/ReceivePaperDocumentsAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/ReceivePaperDocumentsAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-consent-to-paper-workflow-appealId-get
+      description: 'Получить обращение "Получение документов на бумажном носителе"'
+  '/api/v1/tenant/{tenantId}/appeal-collection/refusal-from-paper-workflow/{appealId}/get':
+    parameters:
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Получить обращение "Отказ от получения документов на бумажном носителе"'
+      tags:
+        - lsPaperDocuments
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/RejectPaperDocumentsAppeal.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/RejectPaperDocumentsAppeal.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      operationId: post-api-v1-tenant-tenantId-appeal-collection-refusal-from-paper-workflow-appealId-get
+      description: 'Получить обращение "Отказ от получения документов на бумажном носителе"'
+  '/api/v1/tenant/{tenantId}/life-situation/paper-documents/{lifeSituationId}/refusal-from-paper-workflow-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Сохранить обращения "Отказ от получения документов на бумажном носителе"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-paper-documents-lifeSituationId-refusal-from-paper-workflow-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-reject-paper-documents-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - lsPaperDocuments
+      description: 'Сохранить обращение "Отказ от получения документов на бумажном носителе"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveRejectPaperDocumentsAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveRejectPaperDocumentsAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: 'Запрос на сохранение данных обращений "Отказ от получения документов на бумажном носителе"'
+  '/api/v1/tenant/{tenantId}/life-situation/paper-documents/{lifeSituationId}/consent-to-paper-workflow-collection/create':
+    parameters:
+      - schema:
+          $ref: ../models/LifeSituationId.v1.yaml
+        name: lifeSituationId
+        in: path
+        required: true
+        description: Идентификатор ЖС
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Сохранить обращения "Получение документов на бумажном носителе"'
+      operationId: post-api-v1-tenant-tenantId-life-situation-paper-documents-lifeSituationId-consent-to-paper-workflow-collection-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/AppealListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/factory/AppealListResponse.v1.yaml#/x-examples/example-receive-paper-documents-saved'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - lsPaperDocuments
+      description: 'Сохранить обращение "Получение документов на бумажном носителе"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/SaveReceivePaperDocumentsAppealsRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/SaveReceivePaperDocumentsAppealsRequest.v1.yaml#/x-examples/example-1'
+        description: 'Запрос на сохранение данных обращений "Получение документов на бумажном носителе"'
+  '/api/v1/tenant/{tenantId}/edo-consent/create':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: 'Подтверждение согласия на ЭДО'
+      operationId: post-api-v1-tenant-tenantId-edo-consent-create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/BaseResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: '../models/BaseResponse.v1.yaml#/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - profile
+      description: 'Сохранить обращение "Получение документов на бумажном носителе"'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/EdoConsentRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/EdoConsentRequest.v1.yaml#/x-examples/example-1'
+        description: 'Подтверждение согласия на ЭДО'
+  '/api/v1/tenant/{tenantId}/contract/{contractId}/payment':
+    parameters:
+      - schema:
+          $ref: ../models/ContractId.v1.yaml
+        name: contractId
+        in: path
+        required: true
+        description: Идентификатор договора
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: Получить данные для промежуточной страницы оплаты
+      operationId: post-api-v1-tenant-tenantId-contract-contractId-payment
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/PaymentResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: ../models/PaymentResponse.v1.yaml#/x-examples/example-1
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - payment
+      description: Получить данные для промежуточной страницы оплаты
+  '/api/v1/tenant/{tenantId}/incoming-document/{appealId}/receive-confirmation-data/get':
+    parameters:
+      - schema:
+          $ref: ../models/AppealId.v1.yaml
+        name: appealId
+        in: path
+        required: true
+        description: Идентификатор обращения
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: Получить данные для формирования подтверждения получения входящего документа
+      operationId: post-api-v1-tenant-tenantId-incoming-document-appealId-receive-confirmation-data-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/IncomingDocumentReceiveConfirmationDataResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: ../models/factory/IncomingDocumentReceiveConfirmationDataResponse.v1.yaml#/x-examples/example-1
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - incoming-documents
+      description: Получить данные для формирования подтверждения получения входящего документа
+  '/api/v1/tenant/{tenantId}/file-list/get':
+    parameters:
+      - schema:
+          $ref: ../models/TenantId.v1.yaml
+        name: tenantId
+        in: path
+        required: true
+        description: Идентификатор арендатора
+    post:
+      summary: Получить данные файлов
+      operationId: post-api-v1-tenant-tenantId-file-list-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/factory/FileDataListResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: ../models/factory/FileDataListResponse.v1.yaml#/x-examples/example-1
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - appeal-attachment
+      description: Получить данные файлов
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/factory/FileDataListRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: '../models/factory/FileDataListRequest.v1.yaml#/x-examples/example-1'
+        description: 'Список идентификторов файлов'
+  /api/v1/tech-support:
+    post:
+      summary: Отправить сообщение в службу поддержки
+      operationId: post-api-v1-tech-support
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/EmptyResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: ../models/EmptyResponse.v1.yaml#/x-examples/example-1
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - support
+      description: Отправить сообщение в службу поддержки
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/CreateSupportMessageRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: ../models/CreateSupportMessageRequest.v1.yaml#/x-examples/example-1
+        description: 'Сообщение в службу поддержки'
+  /api/v1/feedback:
+    post:
+      summary: Отправить отзыв о личном кабинете арендатора
+      operationId: post-api-v1-feedback
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/EmptyResponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    $ref: ../models/EmptyResponse.v1.yaml#/x-examples/example-1
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        default:
+          $ref: '#/components/responses/DefaultError'
+      tags:
+        - support
+      description: Отправить отзыв о личном кабинете арендатора
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/CreateFeedbackMessageRequest.v1.yaml
+            examples:
+              example-1:
+                value:
+                  $ref: ../models/CreateFeedbackMessageRequest.v1.yaml#/x-examples/example-1
+        description: 'Отзыв о личном кабинете арендатора'
+components:
+  schemas:
+    facilityRentalAddress:
+      type: string
+      title: facilityRentalAddress
+      description: Адрес объекта аренды
+      minLength: 3
+      maxLength: 1000
+    ByTenantIdAndContractIdRequest:
+      title: ByTenantIdAndContractIdRequest
+      type: object
+      description: Запрос по индентификатору Арендатора и индентификатору Договора аренды
+      x-examples:
+        example-1:
+          tenantId:
+            $ref: '../models/TenantId.v1.yaml#/x-examples/example-1'
+          contractId:
+            $ref: '../models/ContractId.v1.yaml#/x-examples/example-1'
+      properties:
+        tenantId:
+          $ref: ../models/TenantId.v1.yaml
+        contractId:
+          $ref: ../models/ContractId.v1.yaml
+      required:
+        - tenantId
+        - contractId
+    ContractResponse:
+      title: ContractResponse
+      type: object
+      description: Договор аренды
+      x-examples:
+        example-ri:
+          id:
+            $ref: '../models/ContractId.v1.yaml#/x-examples/example-1'
+          number: 248/22
+          BCC:
+            - $ref: ../models/Bcc.v1.yaml#/x-examples/example-1
+            - $ref: ../models/Bcc.v1.yaml#/x-examples/example-2
+          date: '2016-09-01'
+          type: LAND_RENTAL
+          status: ACTIVE
+          landlord:
+            $ref: '../models/Landlord.v1.yaml#/x-examples/example-1'
+          startDate: '2016-09-01'
+          expirationDate: '2065-07-31'
+          currentPeriodAmountForPayment: '4323.94'
+          nextPaymentDate: '2020-07-01'
+          debtAmount: '8647.87'
+          penaltyAmount: '0'
+          overpaymentAmount: '0'
+          penaltyRate: '0.01%'
+          annualRentalRate: '16791.99'
+          rentalCalculationMethod: Квартал
+          facilityRentalType: Земельный участок
+          facilityRentalAddress:
+            - 'обл. Архангельская, р-н. Приморский, МО Катунинское, дер.  Лахта, ул. Геологов, д. 12, к. 2'
+          facilityRentalTotalArea: 5243 кв. м
+          facilityRentalsCadastralNumbers:
+            - '29:16:240401:1072'
+      properties:
+        id:
+          $ref: ../models/ContractId.v1.yaml
+        number:
+          type: string
+        BCC:
+          type: array
+          minItems: 0
+          maxItems: 255
+          description: 'Код бюджетной классификации, КБК'
+          items:
+            $ref: ../models/Bcc.v1.yaml
+        date:
+          type: string
+          format: date
+          description: Дата
+        startDate:
+          type: string
+          format: date
+          description: Дата начала действия
+        expirationDate:
+          type: string
+          format: date
+          description: Дата окончания действия
+        type:
+          $ref: ../models/ContractType.v1.yaml
+        status:
+          $ref: ../models/ContractStatus.v1.yaml
+        currentPeriodAmountForPayment:
+          type: string
+          description: 'Сумма, начисленная к оплате за текущий период'
+        nextPaymentDate:
+          type: string
+          description: Дата следующей оплаты
+          format: date
+        debtAmount:
+          type: string
+          description: Сумма задолженности
+        penaltyAmount:
+          type: string
+          description: Сумма пени
+        overpaymentAmount:
+          type: string
+          description: Сумма переплаты
+        penaltyRate:
+          type: string
+          description: Ставка по пени
+        annualRentalRate:
+          type: string
+          description: Ставка годовой арендной платы
+        rentalCalculationMethod:
+          type: string
+          description: Порядок начисления аренды
+        landlord:
+          $ref: ../models/Landlord.v1.yaml
+        facilityRentalType:
+          type: string
+          description: Тип Объекта аренды
+        facilityRentalTotalArea:
+          type: string
+          description: Общая площадь Объектов аренды
+        facilityRentalAddress:
+          type: array
+          minItems: 0
+          maxItems: 255
+          items:
+            $ref: '#/components/schemas/facilityRentalAddress'
+        facilityRentalsCadastralNumbers:
+          type: array
+          description: Список кадастровых номеров Объектов аренды
+          items:
+            $ref: ../models/CadastralNumber.v1.yaml
+        error:
+          $ref: ../models/Error.v1.yaml
+      required:
+        - id
+        - number
+        - BCC
+        - date
+        - type
+        - status
+        - landlord
+        - facilityRentalType
+        - facilityRentalTotalArea
+        - facilityRentalAddress
+    DebtSummaryRequest:
+      title: PaymentSummaryRequest
+      type: object
+      description: ''
+      properties:
+        tenantId:
+          $ref: ../models/TenantId.v1.yaml
+      required:
+        - tenantId
+      x-examples:
+        example-1:
+          tenantId:
+            $ref: '../models/TenantId.v1.yaml#/x-examples/example-1'
+  securitySchemes:
+    platformAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    DefaultError:
+      description: Ошибка
+      content:
+        application/json:
+          schema:
+            $ref: ../models/ErrorResponse.v1.yaml
+tags:
+  - name: default
+    description: Default
+  - name: life-situation-common
+    description: Жизненные ситуации
+  - name: reconciliation-act-life-situation
+    description: 'ЖС "Получить акт сверки взаимных расчетов"'
+  - name: missing-contract-life-situation
+    description: 'ЖС "Отсутствует договор аренды"'
+  - name: change-juridical-person-props-life-situation
+    description: 'ЖС "Изменить реквизиты ЮЛ"'
+  - name: missing-payment-life-situation
+    description: 'ЖС "Отсутствует договор аренды"'
+  - name: complaint-life-situation
+    description: 'ЖС "Жалобы на акты, действия / бездействия должностных лиц"'
+  - name: no-suitable-life-situation-life-situation
+    description: 'ЖС "Нет подходящей ЖС"'
+  - name: sublease-notice-life-situation
+    description: 'ЖС "Уведомление о субаренде"'
+  - name: overpayment-life-situation
+    description: 'ЖС "Распорядиться переплатой"'
+  - name: change-facility-rental-life-situation
+    description: 'ЖС "Внести изменения в характеристики арендованных объектов"'
+  - name: paymentWidget
+    description: Сводная информация по задолженности
+  - name: landlord
+    description: Информация по арендодателю
+  - name: contract
+    description: Информация по договору аренды
+  - name: incoming-documents
+    description: Входящие документы
+  - name: appeal-dmz
+    description: Обращение (ДМЗ)
+  - name: appeal-attachment
+    description: Вложения обращения
+  - name: lsPaperDocuments
+    description: 'ЖС "Заявление на получение / отказ от получения документов на бумажном носителе"'
+  - name: profile
+    description: Профиль арендатора
+  - name: payment
+    description: Оплата
+  - name: support
+    description: Помощь и поддержка
+security:
+  - platformAuth: [ ]

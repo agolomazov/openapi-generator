@@ -1,0 +1,8 @@
+title: InnJuridicalPerson
+type: string
+pattern: "^(\\d{10})$"
+minLength: 10
+maxLength: 10
+x-examples:
+  example-1: '4352813414'
+  landlord-inn-1: '7708701670'

@@ -1,0 +1,40 @@
+title: JuridicalPerson
+type: object
+description: Юридическое лицо
+x-examples:
+  example-1:
+    name: 'ООО "Бесконечность"'
+    ogrn: '1033849496614'
+    inn: '8568639942'
+    kpp: '795943971'
+    juridicalAddress: '453342, г. Турки, ул. Малый пр-кт (Василеостровский), дом 17'
+    head:
+      lastName: Я.
+      firstName: Виктория
+      middleName: Борисовна
+    email: u*@*l.ru
+    mobilePhone: '+797*******3'
+additionalProperties: false
+properties:
+  name:
+    type: string
+  ogrn:
+    $ref: ./Ogrn.v1.yaml
+  inn:
+    $ref: ./InnJuridicalPerson.v1.yaml
+  kpp:
+    $ref: ./Kpp.v1.yaml
+  juridicalAddress:
+    type: string
+  head:
+    $ref: ./PersonName.v1.yaml
+  email:
+    $ref: ./MaskedEmail.v1.yaml
+  mobilePhone:
+    $ref: ./MaskedRussianMobilePhoneNumber.v1.yaml
+required:
+  - name
+  - ogrn
+  - inn
+  - kpp
+  - juridicalAddress

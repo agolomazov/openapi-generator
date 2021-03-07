@@ -1,0 +1,144 @@
+type: object
+title: Contract
+description: Договор аренды
+x-examples:
+  example-1:
+    id: 96177ef0-6680-48c1-b02c-e156d3f0e808
+    landlordId:
+      $ref: '../models/LandlordId.v1.yaml#/x-examples/example-1'
+    number: 248/22
+    date: '2016-09-01'
+    startDate: '2016-09-01'
+    expirationDate: '2065-07-31'
+    typeId:
+      $ref: '../models/ContractType.v1.yaml#/x-examples/example-1'
+    statusId:
+      $ref: '../models/ContractStatus.v1.yaml#/x-examples/example-1'
+    bcc:
+      - '11105021016000120'
+      - '11105021016000120'
+    annualRentalRate: '16791.99'
+    rentalCalculationPeriodId:
+      $ref: '../models/AccrualPeriodType.v1.yaml#/x-examples/example-2'
+    penaltyRate: '0.01'
+    penaltyRateOnDate: '0.01'
+    penaltyRateDate: '2020-06-20'
+    nextPaymentDate: '2020-07-01'
+    currentPeriodAmountForPayment: '4323.94'
+    debtAmount: '8647.87'
+    penaltyAmount: '0'
+    overpaymentAmount: '0'
+    facilityRentalAddress:
+      - 'обл. Архангельская, р-н. Приморский, МО Катунинское, дер.  Лахта, ул. Геологов, д. 12, к. 2'
+additionalProperties: false
+properties:
+  id:
+    $ref: '../models/ContractId.v1.yaml'
+  landlordId:
+    $ref: '../models/LandlordId.v1.yaml'
+  number:
+    $ref: '../models/ContractNumber.v1.yaml'
+  date:
+    type: string
+    format: date
+  startDate:
+    type: string
+    description: Дата начала действия договора
+    format: date
+  expirationDate:
+    type: string
+    description: Дата окончания действия договора
+    format: date
+  typeId:
+    $ref: '../models/ContractType.v1.yaml'
+  statusId:
+    $ref: '../models/ContractStatus.v1.yaml'
+  bcc:
+    type: array
+    minItems: 0
+    maxItems: 255
+    items:
+      type: string
+      minLength: 17
+      maxLength: 20
+      pattern: "^\\d{17}(\\d{3})?$"
+  annualRentalRate:
+    type: string
+    description: Ставка годовой арендной платы
+    example: '9.4'
+    pattern: "^([1-9]\\d*)|0(\\.\\d{1,2})?$"
+    minLength: 1
+    maxLength: 20
+  rentalCalculationPeriodId:
+    $ref: ./AccrualPeriodType.v1.yaml
+  penaltyRate:
+    type: string
+    description: Ставка по пени
+    example: '1.12'
+    pattern: "^([1-9]\\d*)|0(\\.\\d{1,2})?$"
+    minLength: 1
+    maxLength: 20
+  penaltyRateOnDate:
+    type: string
+    description: Ставка по пени на дату
+    example: '1.12'
+    pattern: "^([1-9]\\d*)|0(\\.\\d{1,2})?$"
+    minLength: 1
+    maxLength: 20
+  penaltyRateDate:
+    type: string
+    description: Дата последнего расчета пеней
+    format: date
+  nextPaymentDate:
+    type: string
+    description: Дата следующей оплаты
+    format: date
+  currentPeriodAmountForPayment:
+    type: string
+    description: 'Сумма, начисленная к оплате за текущий период'
+    example: '52.40'
+    pattern: "^([1-9]\\d*)|0(\\.\\d{1,2})?$"
+    minLength: 1
+    maxLength: 20
+  debtAmount:
+    type: string
+    description: Сумма задолженности
+    example: '52.40'
+    pattern: "^([1-9]\\d*)|0(\\.\\d{1,2})?$"
+    minLength: 1
+    maxLength: 20
+  penaltyAmount:
+    type: string
+    description: Сумма пени
+    example: '52.40'
+    pattern: "^([1-9]\\d*)|0(\\.\\d{1,2})?$"
+    minLength: 1
+    maxLength: 20
+  overpaymentAmount:
+    type: string
+    description: Сумма переплаты
+    example: '52.40'
+    pattern: "^([1-9]\\d*)|0(\\.\\d{1,2})?$"
+    minLength: 1
+    maxLength: 20
+  facilityRentalAddress:
+    type: array
+    minItems: 0
+    maxItems: 255
+    items:
+      $ref: ./Address.v1.yaml
+required:
+  - id
+  - landlordId
+  - number
+  - date
+  - startDate
+  - expirationDate
+  - typeId
+  - statusId
+  - bcc
+  - rentalCalculationPeriodId
+  - currentPeriodAmountForPayment
+  - debtAmount
+  - overpaymentAmount
+  - facilityRentalAddress

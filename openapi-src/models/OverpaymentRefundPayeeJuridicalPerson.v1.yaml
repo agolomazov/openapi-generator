@@ -1,0 +1,38 @@
+type: object
+title: OverpaymentRefundPayeeJuridicalPerson
+description: Данные юридического лица - получателя платежа при возврате переплаты
+additionalProperties: false
+properties:
+  companyName:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: Наименование организации
+  inn:
+    $ref: ./InnJuridicalPerson.v1.yaml
+  kpp:
+    $ref: ./Kpp.v1.yaml
+  bankInfo:
+    $ref: ./BankInfo.v1.yaml
+  corrAccount:
+    type: string
+    minLength: 20
+    maxLength: 20
+    description: Корреспондентский счет
+    pattern: "^\\d{20}$"
+required:
+  - companyName
+  - inn
+  - kpp
+  - bankInfo
+  - corrAccount
+x-examples:
+  example-1:
+    companyName: ОАО Организация
+    inn:
+      $ref: './InnJuridicalPerson.v1.yaml#/x-examples/example-1'
+    kpp:
+      $ref: './Kpp.v1.yaml#/x-examples/example-1'
+    bankInfo:
+      $ref: './BankInfo.v1.yaml#/x-examples/example-1'
+    corrAccount: '12345678901234567000'

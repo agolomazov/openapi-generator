@@ -1,0 +1,8 @@
+type: string
+title: FacilityRentalId
+minLength: 1
+maxLength: 36
+x-examples:
+  example-1: 1
+  example-2: 2
+description: Идентификатор объекта аренды

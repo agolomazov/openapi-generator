@@ -1,0 +1,30 @@
+type: object
+title: CreateSupportMessageRequest
+description: Запрос на отправку сообщения в службу поддержки
+additionalProperties: false
+properties:
+  subject:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: Тема сообщения
+  text:
+    type: string
+    minLength: 1
+    maxLength: 4000
+    description: Текст сообщения
+  email:
+    $ref: ./Email.v1.yaml
+  attachment:
+    $ref: ./SupportMessageFile.v1.yaml
+required:
+  - subject
+  - text
+  - email
+x-examples:
+  example-1:
+    subject: Нужна помощь с ЛК
+    text: Ничего не работает, помогите
+    email: user@email.ru
+    attachment:
+      $ref: './SupportMessageFile.v1.yaml#/x-examples/example-1'

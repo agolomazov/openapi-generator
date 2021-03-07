@@ -1,0 +1,7 @@
+type: string
+title: LandlordId
+description: Идентификатор Арендодателя
+minLength: 1
+maxLength: 255
+x-examples:
+  example-1: '3ab5270f-6d28-4b9b-b3c4-0187e9c59683'

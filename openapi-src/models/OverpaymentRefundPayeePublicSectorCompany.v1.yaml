@@ -1,0 +1,43 @@
+type: object
+title: OverpaymentRefundPayeePublicSectorCompany
+description: Данные бюджетной организации - получателя платежа при возврате переплаты
+additionalProperties: false
+x-examples:
+  example-1:
+    companyName: Бюджетная организация
+    inn:
+      $ref: './InnJuridicalPerson.v1.yaml#/x-examples/example-1'
+    kpp:
+      $ref: './Kpp.v1.yaml#/x-examples/example-1'
+    bankInfo:
+      $ref: './BankInfo.v1.yaml#/x-examples/example-1'
+    personalAccount: '12345678901234567000'
+    bcc:
+      $ref: ./Bcc.v1.yaml#/x-examples/example-1
+properties:
+  companyName:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: Наименование организации
+  inn:
+    $ref: ./InnJuridicalPerson.v1.yaml
+  kpp:
+    $ref: ./Kpp.v1.yaml
+  bankInfo:
+    $ref: ./BankInfo.v1.yaml
+  personalAccount:
+    type: string
+    minLength: 20
+    maxLength: 20
+    pattern: "^\\d{20}$"
+    description: Лицевой счет
+  bcc:
+    $ref: ./Bcc.v1.yaml
+required:
+  - companyName
+  - inn
+  - kpp
+  - bankInfo
+  - personalAccount
+  - bcc

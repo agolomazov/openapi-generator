@@ -1,0 +1,10 @@
+type: string
+title: BCC
+description: 'Код бюджетной классификации, КБК'
+minLength: 17
+maxLength: 20
+example: '11105071016000120'
+pattern: '^\d{17}(\d{3})?$'
+x-examples:
+  example-1: '11105071016000120'
+  example-2: '16711610121010001140'

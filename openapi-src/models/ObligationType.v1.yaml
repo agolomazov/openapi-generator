@@ -1,0 +1,8 @@
+type: string
+title: ObligationType
+description: Тип обязательства
+enum:
+  - MAIN
+  - PENALTY
+x-examples:
+  example-1: MAIN

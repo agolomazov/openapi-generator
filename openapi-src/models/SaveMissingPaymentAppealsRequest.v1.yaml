@@ -1,0 +1,18 @@
+type: object
+title: SaveMissingPaymentAppealsRequest
+additionalProperties: false
+description: 'Запрос на сохранение данных по обращениям "Отсутствует платеж по договору аренды"'
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './MissingPaymentAppealData.v1.yaml#/x-examples/example-1'
+properties:
+  appeals:
+    type: array
+    description: Данные обращений
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./MissingPaymentAppealData.v1.yaml
+required:
+  - appeals

@@ -1,0 +1,18 @@
+type: object
+title: SaveNoSuitableLifeSituationAppealsRequest
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './NoSuitableLifeSituationAppealData.v1.yaml#/x-examples/example-1'
+additionalProperties: false
+properties:
+  appeals:
+    type: array
+    minItems: 1
+    maxItems: 100
+    description: Обращения
+    items:
+      $ref: ./NoSuitableLifeSituationAppealData.v1.yaml
+required:
+  - appeals
+description: 'Запрос на сохранение данных по обращениям "Нет подходящей ЖС"'

@@ -1,0 +1,23 @@
+type: object
+title: LandlordItem
+description: Арендодатель (элемент возвращаемого списка)
+additionalProperties: false
+properties:
+  id:
+    $ref: ./LandlordId.v1.yaml
+  name:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: Наименование
+required:
+  - id
+  - name
+x-examples:
+  example-1:
+    id:
+      $ref: './LandlordId.v1.yaml#/x-examples/example-1'
+    name: МТУ в Архангельской области и Ненецком автономном округе
+  example-2:
+    id: '2'
+    name: ТУ Росимущества в Оренбургской области

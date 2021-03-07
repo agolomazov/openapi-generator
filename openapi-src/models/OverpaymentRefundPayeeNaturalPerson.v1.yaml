@@ -1,0 +1,51 @@
+type: object
+title: OverpaymentRefundPayeeNaturalPerson
+additionalProperties: false
+description: Данные физического лица - получателя платежа при возврате переплаты
+x-examples:
+  example-1:
+    fullName: Иванов Иван Иванович
+    inn:
+      $ref: './InnNaturalPerson.v1.yaml#/x-examples/example-1'
+    passportSeriesAndNumber:
+      $ref: './Passport.v1.yaml#/x-examples/example-ri'
+    passportIssuedBy: отделом УФМС чего-нибудь
+    passportIssueDate: '2020-05-10'
+    bankInfo:
+      $ref: './BankInfo.v1.yaml#/x-examples/example-1'
+    corrAccount: '12345678901234567000'
+properties:
+  fullName:
+    type: string
+    minLength: 1
+    maxLength: 255
+    example: Иванов Иван Иванович
+  inn:
+    $ref: ./InnNaturalPerson.v1.yaml
+  passportSeriesAndNumber:
+    $ref: ./Passport.v1.yaml
+  passportIssuedBy:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: Кем выдан паспорт
+  passportIssueDate:
+    type: string
+    format: date
+    description: Дата выдачи паспорта
+  bankInfo:
+    $ref: ./BankInfo.v1.yaml
+  corrAccount:
+    type: string
+    minLength: 20
+    maxLength: 20
+    pattern: "^\\d{20}$"
+    description: Корреспондентский счет
+required:
+  - fullName
+  - inn
+  - passportSeriesAndNumber
+  - passportIssuedBy
+  - passportIssueDate
+  - bankInfo
+  - corrAccount

@@ -1,0 +1,7 @@
+title: Ogrn
+type: string
+pattern: '^(\d{13})$'
+minLength: 13
+maxLength: 13
+x-examples:
+  example-1: '5143783411020'

@@ -1,0 +1,12 @@
+title: IdResponse
+type: object
+additionalProperties: false
+properties:
+  id:
+    type: string
+  error:
+    $ref: ./Error.v1.yaml
+description: Ответ с идентификатором
+x-examples:
+  example-1:
+    id: '1'

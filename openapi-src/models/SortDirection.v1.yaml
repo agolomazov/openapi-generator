@@ -1,0 +1,8 @@
+type: string
+title: SortDirection
+description: Направление сортировки
+enum:
+  - ASC
+  - DESC
+x-examples:
+  example-1: ASC

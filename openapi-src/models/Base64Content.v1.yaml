@@ -1,0 +1,9 @@
+title: Base64Content
+description: Файл в base64
+type: string
+format: byte
+minLength: 1
+maxLength: 20000000
+example: 'dGVzdA=='
+x-examples:
+  example-1: dGVzdA==

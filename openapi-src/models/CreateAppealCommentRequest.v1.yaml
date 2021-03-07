@@ -1,0 +1,23 @@
+type: object
+title: CreateAppealCommentRequest
+description: Запрос на создание комментария к обращению
+additionalProperties: false
+properties:
+  body:
+    type: string
+    description: Текст
+  attachments:
+    type: array
+    minItems: 0
+    maxItems: 1024
+    uniqueItems: true
+    description: Список приложенных файлов к комментарию
+    items:
+      $ref: ./AppealCommentAttachment.v1.yaml
+required:
+  - body
+x-examples:
+  example-1:
+    body: Прошу рассмотреть дополнительно документы по моему запросу. Файл во вложении.
+    attachments:
+      - $ref: './AppealCommentAttachment.v1.yaml#/x-examples/example-1'

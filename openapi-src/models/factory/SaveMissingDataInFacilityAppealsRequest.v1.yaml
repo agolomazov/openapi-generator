@@ -1,0 +1,18 @@
+title: SaveMissingDataInFacilityAppealsRequest
+type: object
+description: 'Запрос на сохранение обращений "Сообщить об отсутствии данных по арендованным объектам" по ЖС "Внести изменения в характеристики объектов"'
+additionalProperties: false
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './MissingDataInFacilityAppealData.v1.yaml#/x-examples/example-1'
+properties:
+  appeals:
+    type: array
+    description: Обращения
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./MissingDataInFacilityAppealData.v1.yaml
+required:
+  - appeals

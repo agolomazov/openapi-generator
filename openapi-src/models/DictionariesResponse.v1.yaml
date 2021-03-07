@@ -1,0 +1,85 @@
+title: DictionariesResponse
+type: object
+description: Справочники
+x-examples:
+  example-1:
+    contractTypes:
+      - code: LAND_RENTAL
+        name: Договор аренды земли
+      - code: PROPRIETARY_RENTAL
+        name: Договор аренды имущества
+    contractStatuses:
+      - code: ACTIVE
+        name: действующий
+      - code: TERMINATED
+        name: расторгнутый
+    tenantTypes:
+      - code: NATURAL_PERSON
+        name: ФЛ
+      - code: ENTREPRENEUR
+        name: ИП
+      - code: JURIDICAL_PERSON
+        name: ЮЛ
+    facilityRentalTypes:
+      - code: LAND_PLOT
+        name: Земельный участок
+      - code: BUILDING
+        name: 'Здания, сооружения'
+      - code: SHARES_IN_RIGHT
+        name: Доли в праве
+      - code: MOVABLE_PROPERTY
+        name: Движимое имущество
+      - code: AIRCRAFTS_AND_SHIPS
+        name: Воздушные и морские суда
+      - code: PROPERTY_COMPLEX
+        name: Имущественный комплекс
+      - code: OTHER_MOVABLE_PROPERTY
+        name: Иное движимое имущество
+      - code: LAND_PLOT_COMPLEX
+        name: Комплекс земельных участков
+      - code: ROOM
+        name: Помещения
+    accrualTypes:
+      - code: RENTAL
+        name: Услуги аренды
+      - code: RENTAL_PENALTY
+        name: Пени по услугам аренды
+    accrualPeriods:
+      - code: MONTH
+        name: Месяц
+      - code: QUARTER
+        name: Квартал
+      - code: HALF_YEAR
+        name: Полугодие
+      - code: YEAR
+        name: Год
+      - code: ARBITRARY
+        name: Произвольный
+additionalProperties: false
+properties:
+  contractTypes:
+    type: array
+    items:
+      $ref: ./BaseDictionaryValue.v1.yaml
+  contractStatuses:
+    type: array
+    items:
+      $ref: ./BaseDictionaryValue.v1.yaml
+  tenantTypes:
+    type: array
+    items:
+      $ref: ./BaseDictionaryValue.v1.yaml
+  facilityRentalTypes:
+    type: array
+    items:
+      $ref: ./BaseDictionaryValue.v1.yaml
+  accrualTypes:
+    type: array
+    items:
+      $ref: ./BaseDictionaryValue.v1.yaml
+  accrualPeriods:
+    type: array
+    items:
+      $ref: ./BaseDictionaryValue.v1.yaml
+  error:
+    $ref: ./Error.v1.yaml

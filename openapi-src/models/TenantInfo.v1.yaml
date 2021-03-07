@@ -1,0 +1,45 @@
+title: TenantInfo
+type: object
+description: Профиль Арендатора
+x-examples:
+  example-juridicalPerson:
+    id:
+      $ref: './TenantId.v1.yaml#/x-examples/example-2'
+    type: JURIDICAL_PERSON
+    juridicalPerson:
+      $ref: './JuridicalPerson.v1.yaml#/x-examples/example-1'
+    edoConsent: true
+  example-naturalPerson:
+    id:
+      $ref: './TenantId.v1.yaml#/x-examples/example-1'
+    type: NATURAL_PERSON
+    naturalPerson:
+      $ref: './NaturalPerson.v1.yaml#/x-examples/example-ri'
+    edoConsent: true
+  example-entrepreneur:
+    id:
+      $ref: './TenantId.v1.yaml#/x-examples/example-3'
+    type: ENTREPRENEUR
+    entrepreneur:
+      $ref: './Entrepreneur.v1.yaml#/x-examples/example-1'
+    edoConsent: true
+additionalProperties: false
+properties:
+  id:
+    $ref: ./TenantId.v1.yaml
+  type:
+    $ref: ./TenantType.v1.yaml
+  juridicalPerson:
+    $ref: ./JuridicalPerson.v1.yaml
+  naturalPerson:
+    $ref: ./NaturalPerson.v1.yaml
+  entrepreneur:
+    $ref: ./Entrepreneur.v1.yaml
+  error:
+    $ref: ./Error.v1.yaml
+  edoConsent:
+    type: boolean
+    description: Признак согласия на ЭДО
+required:
+  - type
+  - edoConsent

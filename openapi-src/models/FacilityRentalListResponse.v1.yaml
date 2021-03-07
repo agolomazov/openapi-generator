@@ -1,0 +1,74 @@
+type: object
+title: FacilityRentalListResponse
+description: Список Объектов аренды
+additionalProperties: false
+x-examples:
+  example-ri:
+    content:
+      - $ref: '../models/FacilityRental.v1.yaml#/x-examples/example-1'
+    empty: false
+    first: true
+    last: true
+    number: 0
+    numberOfElements: 20
+    pageable:
+      $ref: '../models/Pageable.v1.yaml#/x-examples/example-1'
+    size: 1
+    totalElements: 1
+    totalPages: 1
+properties:
+  content:
+    type: array
+    minItems: 0
+    maxItems: 255
+    uniqueItems: true
+    description: Список Объектов аренды
+    items:
+      $ref: ../models/FacilityRental.v1.yaml
+  empty:
+    type: boolean
+    description: 'Флаг пустого массива, если true - в ответе не пришло ни одного элемента'
+  first:
+    type: boolean
+    description: Флаг первого результата (первая страница)
+  last:
+    type: boolean
+    description: Флаг последнего результата (последняя страница)
+  number:
+    type: integer
+    description: Номер страницы
+    maximum: 2147483647
+    minimum: 0
+  numberOfElements:
+    type: integer
+    description: Количество элементов на странице
+    maximum: 2147483647
+    minimum: 0
+  pageable:
+    $ref: ../models/Pageable.v1.yaml
+  size:
+    type: integer
+    description: количество элементов на странице
+    maximum: 2147483647
+    minimum: 0
+  totalElements:
+    type: integer
+    description: общее количество элементов
+    maximum: 2147483647
+    minimum: 0
+  totalPages:
+    type: integer
+    maximum: 2147483647
+    minimum: 0
+    description: общее количество страниц
+required:
+  - content
+  - empty
+  - first
+  - last
+  - number
+  - numberOfElements
+  - pageable
+  - size
+  - totalElements
+  - totalPages

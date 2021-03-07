@@ -1,0 +1,517 @@
+type: object
+title: CommonAppealData
+description: Общие для всех обращений данные
+additionalProperties: false
+x-examples:
+  example-scanned-act-finished:
+    id: '375294a8-1e88-11eb-adc1-0242ac120001'
+    type: SCANNED_ACT
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/scanned-act-finished
+    contractId:
+      $ref: './ContractId.v1.yaml#/x-examples/example-1'
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    feedback:
+      $ref: ./AppealFeedback.v1.yaml#/x-examples/example-excellent
+    created: '2020-07-10T07:11:57Z'
+    updated: '2020-07-10T07:11:57Z'
+    direction: IN
+    read: false
+    href: /api/v1/appeal-collection/scanned-act/375294a8-1e88-11eb-adc1-0242ac120002
+    nextState: []
+  example-request-act-sent-1:
+    id: '375294a8-1e88-11eb-adc1-0242ac120002'
+    type: REQUEST_ACT
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/request-act-sent-1
+    contractId:
+      $ref: './ContractId.v1.yaml#/x-examples/example-1'
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-11T07:11:57Z'
+    updated: '2020-07-11T07:11:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/request-act/375294a8-1e88-11eb-adc1-0242ac120002
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-request-act-sent-2:
+    id: '375294a8-1e88-11eb-adc1-0242ac120003'
+    type: REQUEST_ACT
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/request-act-sent-2
+    contractId:
+      $ref: './ContractId.v1.yaml#/x-examples/example-1'
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-11T07:11:57Z'
+    updated: '2020-07-11T07:11:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/request-act/375294a8-1e88-11eb-adc1-0242ac120003
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-scanned-act-sent-1:
+    id: '375294a8-1e88-11eb-adc1-0242ac120004'
+    type: SCANNED_ACT
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/scanned-act-sent-1
+    contractId:
+      $ref: './ContractId.v1.yaml#/x-examples/example-1'
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-11T07:11:57Z'
+    updated: '2020-07-11T07:11:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/scanned-act/375294a8-1e88-11eb-adc1-0242ac120004
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-scanned-act-sent-2:
+    id: '375294a8-1e88-11eb-adc1-0242ac120005'
+    type: SCANNED_ACT
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/scanned-act-sent-2
+    contractId:
+      $ref: './ContractId.v1.yaml#/x-examples/example-1'
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-11T07:11:57Z'
+    updated: '2020-07-11T07:11:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/scanned-act/375294a8-1e88-11eb-adc1-0242ac120005
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-missing-contract-in-lk-1:
+    id: '375294a8-1e88-11eb-adc1-0242ac120006'
+    type: MISSING_CONTRACT_IN_LK
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/missing-contract-in-lk-1
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/missing-contract-in-lk/375294a8-1e88-11eb-adc1-0242ac120006
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-change-company-name:
+    id: '375294a8-1e88-11eb-adc1-0242ac120007'
+    type: CHANGE_COMPANY_NAME
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/change-company-name
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/change-company-name/375294a8-1e88-11eb-adc1-0242ac120007
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-change-contact-details:
+    id: '375294a8-1e88-11eb-adc1-0242ac120008'
+    type: CHANGE_CONTACT_DETAILS
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/change-contact-details
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/change-contact-details/375294a8-1e88-11eb-adc1-0242ac120008
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-change-director:
+    id: '375294a8-1e88-11eb-adc1-0242ac120009'
+    type: CHANGE_DIRECTOR
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/change-director
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/change-director/375294a8-1e88-11eb-adc1-0242ac120009
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-change-juridical-address:
+    id: '375294a8-1e88-11eb-adc1-0242ac120010'
+    type: CHANGE_JURIDICAL_ADDRESS
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/change-juridical-address
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/change-juridical-address/375294a8-1e88-11eb-adc1-0242ac120010
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-change-organizational-legal-form:
+    id: '375294a8-1e88-11eb-adc1-0242ac120011'
+    type: CHANGE_ORGANIZATIONAL_LEGAL_FORM
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/change-organizational-legal-form
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/change-organizational-legal-form/375294a8-1e88-11eb-adc1-0242ac120011
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-missing-payment:
+    id: '375294a8-1e88-11eb-adc1-0242ac120012'
+    type: MISSING_PAYMENT
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/missing-payment
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/missing-payment/375294a8-1e88-11eb-adc1-0242ac120012
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-complaint-on-document:
+    id: '375294a8-1e88-11eb-adc1-0242ac120013'
+    type: COMPLAINT_ON_DOCUMENT
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/complaint-on-document
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/complaint-on-document/375294a8-1e88-11eb-adc1-0242ac120013
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-complaint-on-action:
+    id: '375294a8-1e88-11eb-adc1-0242ac120014'
+    type: COMPLAINT_ON_ACTION
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/complaint-on-action
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/complaint-on-action/375294a8-1e88-11eb-adc1-0242ac120014
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-no-suitable-life-situation:
+    id: '375294a8-1e88-11eb-adc1-0242ac120015'
+    type: NO_SUITABLE_LIFE_SITUATION
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/no-suitable-life-situation
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/no-suitable-life-situation/375294a8-1e88-11eb-adc1-0242ac120015
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-sublease-notice:
+    id: '375294a8-1e88-11eb-adc1-0242ac120016'
+    type: SUBLEASE_NOTICE
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/sublease-notice
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/sublease-notice/375294a8-1e88-11eb-adc1-0242ac120016
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-offset-to-different-contract:
+    id: '375294a8-1e88-11eb-adc1-0242ac120017'
+    type: OFFSET_TO_DIFFERENT_CONTRACT
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/offset-to-different-contract
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/offset-to-different-contract/375294a8-1e88-11eb-adc1-0242ac120017
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-overpayment-refund:
+    id: '375294a8-1e88-11eb-adc1-0242ac120018'
+    type: OVERPAYMENT_REFUND
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/overpayment-refund
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/overpayment-refund/375294a8-1e88-11eb-adc1-0242ac120018
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-change-facility-rental:
+    id: '375294a8-1e88-11eb-adc1-0242ac120019'
+    type: CHANGE_FACILITY_RENTAL
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/change-facility-rental
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/change-facility-rental/375294a8-1e88-11eb-adc1-0242ac120019
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-missing-data-in-facility:
+    id: '375294a8-1e88-11eb-adc1-0242ac120020'
+    type: MISSING_DATA_IN_FACILITY
+    state:
+      $ref: ./AppealState.v1.yaml#/x-examples/example-sent
+    title:
+      $ref: ./AppealTitle.v1.yaml#/x-examples/missing-data-in-facility
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/missing-data-in-facility/375294a8-1e88-11eb-adc1-0242ac120020
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-incoming-document-signature-required:
+    id: '375294a8-1e88-11eb-adc1-0242ac120021'
+    type: INCOMING_DOCUMENT_SIGNATURE_REQUIRED
+    state:
+      $ref: './AppealState.v1.yaml#/x-examples/example-sent'
+    title:
+      $ref: './AppealTitle.v1.yaml#/x-examples/incoming-document-signature-required'
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: './Attachment.v1.yaml#/x-examples/example-1'
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: IN
+    read: false
+    href: /api/v1/appeal-collection/incoming-document-signature-required/375294a8-1e88-11eb-adc1-0242ac120021
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-signed
+  example-incoming-document-signature-not-required:
+    id: '375294a8-1e88-11eb-adc1-0242ac120022'
+    type: INCOMING_DOCUMENT_SIGNATURE_NOT_REQUIRED
+    state:
+      $ref: './AppealState.v1.yaml#/x-examples/example-sent'
+    title:
+      $ref: './AppealTitle.v1.yaml#/x-examples/incoming-document-signature-not-required'
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: './Attachment.v1.yaml#/x-examples/example-1'
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: IN
+    read: false
+    href: /api/v1/appeal-collection/incoming-document-signature-not-required/375294a8-1e88-11eb-adc1-0242ac120022
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-rejected
+  example-reject-paper-documents:
+    id: '375294a8-1e88-11eb-adc1-0242ac120023'
+    type: REJECT_PAPER_DOCUMENTS
+    state:
+      $ref: './AppealState.v1.yaml#/x-examples/example-sent'
+    title:
+      $ref: './AppealTitle.v1.yaml#/x-examples/reject-paper-documents'
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: './Attachment.v1.yaml#/x-examples/example-1'
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/reject-paper-documents/375294a8-1e88-11eb-adc1-0242ac120023
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+  example-receive-paper-documents:
+    id: '375294a8-1e88-11eb-adc1-0242ac120024'
+    type: RECEIVE_PAPER_DOCUMENTS
+    state:
+      $ref: './AppealState.v1.yaml#/x-examples/example-sent'
+    title:
+      $ref: './AppealTitle.v1.yaml#/x-examples/receive-paper-documents'
+    sourceAttachments:
+      - $ref: ./Attachment.v1.yaml#/x-examples/example-1
+    lastAttachments:
+      - $ref: './Attachment.v1.yaml#/x-examples/example-1'
+    created: '2020-07-12T08:13:57Z'
+    updated: '2020-07-12T08:13:57Z'
+    direction: OUT
+    read: false
+    href: /api/v1/appeal-collection/receive-paper-documents/375294a8-1e88-11eb-adc1-0242ac120024
+    nextState:
+      - $ref: ./AppealState.v1.yaml#/x-examples/example-final-answer
+properties:
+  id:
+    $ref: ./AppealId.v1.yaml
+  type:
+    $ref: ./AppealType.v1.yaml
+  state:
+    $ref: ./AppealState.v1.yaml
+  title:
+    $ref: ./AppealTitle.v1.yaml
+  contractId:
+    $ref: ./ContractId.v1.yaml
+  sourceAttachments:
+    type: array
+    minItems: 0
+    maxItems: 1024
+    description: 'Вложения обращения добавленные при его создании'
+    items:
+      $ref: ./Attachment.v1.yaml
+  lastAttachments:
+    type: array
+    minItems: 0
+    maxItems: 1024
+    description: 'Последние вложения (файлы из последнего сообщения, либо из обращения, если сообщений нет)'
+    items:
+      $ref: ./Attachment.v1.yaml
+  feedback:
+    $ref: ./AppealFeedback.v1.yaml
+  created:
+    type: string
+    format: date-time
+    description: Дата-время создания
+  updated:
+    type: string
+    format: date-time
+    description: Дата-время обновления
+  direction:
+    type: string
+    enum:
+      - IN
+      - OUT
+    description: 'Направление последнего сообщения или обращения (OUT - исходящее, IN - входящее)'
+  read:
+    type: boolean
+    description: Признак прочтения
+  href:
+    type: string
+    minLength: 0
+    maxLength: 255
+    description: Ссылка на обращение
+  nextState:
+    type: array
+    minItems: 0
+    maxItems: 255
+    uniqueItems: true
+    description: Список доступных статусов обращения
+    items:
+      $ref: ../models/AppealState.v1.yaml
+required:
+  - id
+  - type
+  - state
+  - title
+  - sourceAttachments
+  - lastAttachments
+  - created
+  - updated
+  - direction
+  - read
+  - href

@@ -1,0 +1,38 @@
+title: ChangeContactDetailsAppeal
+type: object
+description: 'Обращение "Смена контактных данных"'
+x-examples:
+  example-1:
+    commonData:
+      $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-contact-details'
+    additionalData:
+      phone: '+79999999999'
+      email: test@test.ru
+      comment:
+        $ref: '../AppealCommentText.v1.yaml#/x-examples/example-1'
+      attachments:
+        - $ref: '../Attachment.v1.yaml#/x-examples/example-1'
+properties:
+  commonData:
+    $ref: ./CommonAppealData.v1.yaml
+  additionalData:
+    type: object
+    additionalProperties: false
+    required:
+      - attachments
+    properties:
+      phone:
+        $ref: ../RussianMobilePhoneNumber.v1.yaml
+      email:
+        $ref: ../Email.v1.yaml
+      comment:
+        $ref: ../AppealCommentText.v1.yaml
+      attachments:
+        type: array
+        minItems: 1
+        maxItems: 100
+        items:
+          $ref: ../Attachment.v1.yaml
+required:
+  - commonData
+  - additionalData

@@ -1,0 +1,19 @@
+type: object
+title: SignDocumentsRequest
+additionalProperties: false
+properties:
+  documentIds:
+    type: array
+    minItems: 1
+    maxItems: 100
+    description: Идентификаторы документов
+    items:
+      $ref: ./FileId.v1.yaml
+required:
+  - documentIds
+description: Запрос на подписание документов
+x-examples:
+  example-1:
+    documentIds:
+      - $ref: './FileId.v1.yaml#/x-examples/example-2'
+      - $ref: './FileId.v1.yaml#/x-examples/example-1'

@@ -1,0 +1,17 @@
+type: object
+title: AppealCommentAuthor
+description: Автор комментария к обращению
+additionalProperties: false
+properties:
+  rosim:
+    type: boolean
+    description: Признак сообщения от Росимущества
+  name:
+    $ref: ./PersonName.v1.yaml
+required:
+  - rosim
+x-examples:
+  example-1:
+    rosim: false
+    name:
+      $ref: './PersonName.v1.yaml#/x-examples/example-ri'

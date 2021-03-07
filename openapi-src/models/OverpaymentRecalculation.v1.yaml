@@ -1,0 +1,33 @@
+type: object
+title: OverpaymentRecalculation
+description: Информация о перезачете переплаты
+additionalProperties: false
+x-examples:
+  example-1:
+    contract:
+      $ref: './ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+    obligationType:
+      $ref: './ObligationType.v1.yaml#/x-examples/example-1'
+    obligationPaymentPeriod: 2 квартал 2021
+    recalculationAmount: '2000'
+properties:
+  contract:
+    $ref: ./ContractIdNumberDate.v1.yaml
+  obligationType:
+    $ref: ./ObligationType.v1.yaml
+  obligationPaymentPeriod:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: Период погашения обязательства
+  recalculationAmount:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: 'Сумма, требующая перезачета'
+    pattern: "^(?:0|[1-9]\\d*)(?:\\.\\d{1,2})?$"
+required:
+  - contract
+  - obligationType
+  - obligationPaymentPeriod
+  - recalculationAmount

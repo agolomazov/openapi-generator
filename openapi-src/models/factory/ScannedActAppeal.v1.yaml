@@ -1,0 +1,42 @@
+title: ScannedActAppeal
+type: object
+description: 'Обращение "Направить скан копию подписанного акта сверки"'
+additionalProperties: false
+x-examples:
+  example-1:
+    commonData:
+      $ref: './CommonAppealData.v1.yaml#/x-examples/example-scanned-act-finished'
+    additionalData:
+      contract:
+        $ref: '../ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+      reconciliationActBeginDate: '2019-05-14'
+      reconciliationActEndDate: '2019-07-14'
+      attachment:
+        $ref: '../Attachment.v1.yaml#/x-examples/example-1'
+properties:
+  commonData:
+    $ref: ./CommonAppealData.v1.yaml
+  additionalData:
+    type: object
+    additionalProperties: false
+    required:
+      - reconciliationActBeginDate
+      - reconciliationActEndDate
+      - attachment
+    description: Дополнительные данные
+    properties:
+      contract:
+        $ref: ../ContractIdNumberDate.v1.yaml
+      reconciliationActBeginDate:
+        type: string
+        format: date
+        description: Дата начала периода формирования акта сверки
+      reconciliationActEndDate:
+        type: string
+        format: date
+        description: Дата окончания периода формирования акта сверки
+      attachment:
+        $ref: ../Attachment.v1.yaml
+required:
+  - commonData
+  - additionalData

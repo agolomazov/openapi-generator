@@ -1,0 +1,49 @@
+type: object
+title: ComplaintOnActionAppeal
+additionalProperties: false
+description: 'Обращение "Жалоба на действие/бездействие должностных лиц"'
+x-examples:
+  example-1:
+    commonData:
+      $ref: './CommonAppealData.v1.yaml#/x-examples/example-complaint-on-action'
+    additionalData:
+      complaintCause: Основание для подачи жалобы
+      demands: 'Требования лица, подающего жалобу'
+      attachments:
+        - $ref: './Attachment.v1.yaml#/x-examples/example-1'
+      landlord:
+        $ref: './LandlordItem.v1.yaml#/x-examples/example-1'
+properties:
+  commonData:
+    $ref: ./CommonAppealData.v1.yaml
+  additionalData:
+    type: object
+    additionalProperties: false
+    required:
+      - complaintCause
+      - demands
+      - attachments
+      - landlord
+    properties:
+      complaintCause:
+        type: string
+        maxLength: 4000
+        minLength: 1
+        description: Основание для подачи жалобы
+      demands:
+        type: string
+        description: 'Требования лица, подающего жалобу'
+        minLength: 1
+        maxLength: 4000
+      attachments:
+        type: array
+        minItems: 1
+        maxItems: 100
+        description: Вложения к обращению
+        items:
+          $ref: ./Attachment.v1.yaml
+      landlord:
+        $ref: ./LandlordItem.v1.yaml
+required:
+  - commonData
+  - additionalData

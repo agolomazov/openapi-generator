@@ -1,0 +1,18 @@
+title: SaveScannedActAppealsRequest
+type: object
+description: 'Запрос на сохранение обращений "Направить скан копию подписанного акта сверки" по ЖС "Получить акт сверки взаимных расчетов"'
+additionalProperties: false
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './ReconciliationActSendScannedActAppealData.v1.yaml#/x-examples/example-1'
+properties:
+  appeals:
+    type: array
+    description: Обращения
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./ReconciliationActSendScannedActAppealData.v1.yaml
+required:
+  - appeals

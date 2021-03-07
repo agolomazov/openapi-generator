@@ -1,0 +1,11 @@
+type: string
+title: AppealFeedbackRate
+description: Балл оценки удовлетворенности ответом
+enum:
+  - ONE_POINT
+  - TWO_POINTS
+  - THREE_POINTS
+  - FOUR_POINTS
+  - FIVE_POINTS
+x-examples:
+  example-1: FIVE_POINTS

@@ -1,0 +1,69 @@
+type: object
+title: ChangeFacilityRentalAppealData
+additionalProperties: false
+description: 'Данные обращения "Внести изменения в характеристики арендованных объектов"'
+x-examples:
+  example-1:
+    contract:
+      $ref: './ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+    facilityAddress:
+      $ref: './Address.v1.yaml#/x-examples/example-1'
+    cadastralNumber:
+      $ref: './CadastralNumber.v1.yaml#/x-examples/example-1'
+    facilityType:
+      $ref: './FacilityRentalType.v1.yaml#/x-examples/example-1'
+    facilityArea: 250 кв. м.
+    permittedUse: разрешенное использование
+    facilityCategory:
+      $ref: './FacilityRentalCategory.v1.yaml#/x-examples/example-1'
+    facilityPurpose: назначение
+    comment:
+      $ref: './AppealCommentText.v1.yaml#/x-examples/example-1'
+    newCadastralNumber:
+      $ref: './CadastralNumber.v1.yaml#/x-examples/example-2'
+    newFacilityAddress:
+      $ref: './Address.v1.yaml#/x-examples/example-2'
+    id:
+      $ref: './AppealId.v1.yaml#/x-examples/example-1'
+    fileId:
+      $ref: './FileId.v1.yaml#/x-examples/example-1'
+properties:
+  contract:
+    $ref: ./ContractIdNumberDate.v1.yaml
+  facilityAddress:
+    $ref: ./Address.v1.yaml
+  cadastralNumber:
+    $ref: ./CadastralNumber.v1.yaml
+  facilityType:
+    $ref: ./FacilityRentalType.v1.yaml
+  facilityArea:
+    type: string
+    description: Площадь объекта
+    minLength: 0
+    maxLength: 255
+  permittedUse:
+    type: string
+    minLength: 0
+    maxLength: 255
+    description: Вид разрешенного использования
+  facilityCategory:
+    $ref: ./FacilityRentalCategory.v1.yaml
+  facilityPurpose:
+    type: string
+    description: Назначение объекта
+    minLength: 0
+    maxLength: 255
+  comment:
+    $ref: ./AppealCommentText.v1.yaml
+  newFacilityAddress:
+    $ref: ./Address.v1.yaml
+  newCadastralNumber:
+    $ref: ./CadastralNumber.v1.yaml
+  id:
+    $ref: ./AppealId.v1.yaml
+  fileId:
+    $ref: ./FileId.v1.yaml
+required:
+  - contract
+  - facilityType
+  - id

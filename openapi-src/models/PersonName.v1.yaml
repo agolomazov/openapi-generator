@@ -1,0 +1,22 @@
+title: PersonName
+type: object
+additionalProperties: false
+properties:
+  lastName:
+    type: string
+    description: Фамилия
+  firstName:
+    type: string
+    description: Имя
+  middleName:
+    type: string
+    description: Отчество
+required:
+  - lastName
+  - firstName
+description: Имя
+x-examples:
+  example-ri:
+    lastName: Данилов
+    firstName: Фёдор
+    middleName: Сергеевич

@@ -1,0 +1,7 @@
+type: string
+title: OutgoingDate
+description: Дата исходящего письма
+format: date
+example: '2019-08-24'
+x-examples:
+  example-1: '2019-08-24'

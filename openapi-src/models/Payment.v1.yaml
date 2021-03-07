@@ -1,0 +1,38 @@
+title: Payment
+type: object
+description: Платеж
+x-examples:
+  example-1:
+    id: '1'
+    receiveDate: '2020-05-10'
+    paymentDocNumber: '278'
+    paymentDocDate: '2020-05-10'
+    amount: '15574.53'
+  example-2:
+    id: '2'
+    receiveDate: '2020-04-12'
+    paymentDocNumber: '267'
+    paymentDocDate: '2020-04-12'
+    amount: '15574.53'
+additionalProperties: false
+properties:
+  id:
+    type: string
+  receiveDate:
+    type: string
+    format: date
+    description: Дата поступления платежа
+  paymentDocNumber:
+    type: string
+    description: Номер платежного поручения
+  paymentDocDate:
+    type: string
+    description: Дата платежного поручения
+    format: date
+  amount:
+    type: string
+    description: Сумма
+required:
+  - id
+  - receiveDate
+  - amount

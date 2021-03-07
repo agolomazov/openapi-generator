@@ -1,0 +1,46 @@
+title: MissingContractInLkAppealData
+type: object
+description: 'Данные обращения "В личном кабинете отсутствует информация о моем договоре аренды" по ЖС "Отсутствует договор аренды"'
+additionalProperties: false
+x-examples:
+  example-1:
+    landlordId: '1'
+    contractNumber: 17/ЗД-0500
+    contractDate: '2020-03-09'
+    facilityRentalAddress: 'г. Санкт-Петербург, п. Лисий Нос, ул. Деловая'
+    cadastralNumber: '78:34:0004418:61'
+    comment:
+      $ref: './AppealCommentText.v1.yaml#/x-examples/example-1'
+    id:
+      $ref: './AppealId.v1.yaml#/x-examples/example-1'
+    fileId:
+      $ref: './FileId.v1.yaml#/x-examples/example-1'
+properties:
+  landlordId:
+    $ref: ./LandlordId.v1.yaml
+  contractNumber:
+    $ref: ./ContractNumber.v1.yaml
+  contractDate:
+    type: string
+    format: date
+    description: Дата договора
+  facilityRentalAddress:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: Адрес объекта аренды
+  cadastralNumber:
+    $ref: ./CadastralNumber.v1.yaml
+  comment:
+    $ref: ./AppealCommentText.v1.yaml
+  id:
+    $ref: ./AppealId.v1.yaml
+  fileId:
+    $ref: ./FileId.v1.yaml
+required:
+  - landlordId
+  - contractNumber
+  - contractDate
+  - facilityRentalAddress
+  - id
+  - fileId

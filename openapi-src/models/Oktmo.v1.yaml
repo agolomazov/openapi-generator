@@ -1,0 +1,8 @@
+title: Oktmo
+description: ОКТМО
+type: string
+pattern: "^\\d{8}(\\d{3})?$"
+minLength: 8
+maxLength: 11
+x-examples:
+  landlord-oktmo-1: '45378000'

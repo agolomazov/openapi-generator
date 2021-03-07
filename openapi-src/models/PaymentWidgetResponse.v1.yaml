@@ -1,0 +1,48 @@
+title: PaymentWidgetResponse
+type: object
+description: Информация для виджета оплаты
+x-examples:
+  example-ri:
+    contractCount: 2
+    facilityRentalCount: 2
+    accuredContractCount: 2
+    totalAmount:
+      totalDebtAmount: '10529.6'
+      totalPenaltyAmount: '0'
+      totalAmountToPayment: 15794.41‬
+      totalCurrentPeriodAmountToPayment: 5264.81‬
+    currentDate: '2020-06-17'
+    hasDebt: true
+additionalProperties: false
+properties:
+  contractCount:
+    type: integer
+    description: Количество Договоров аренды
+    minimum: 0
+    maximum: 2147483647
+  facilityRentalCount:
+    type: integer
+    description: Количество Объектов аренды
+    minimum: 0
+    maximum: 2147483647
+  accuredContractCount:
+    type: integer
+    description: Количество Договоров аренды с начислениями
+    maximum: 2147483647
+    minimum: 0
+  totalAmount:
+    $ref: ./ContractListTotalAmount.v1.yaml
+  currentDate:
+    type: string
+    format: date
+  hasDebt:
+    type: boolean
+    description: Признак наличия задолженности
+  error:
+    $ref: ./Error.v1.yaml
+required:
+  - contractCount
+  - facilityRentalCount
+  - accuredContractCount
+  - currentDate
+  - hasDebt

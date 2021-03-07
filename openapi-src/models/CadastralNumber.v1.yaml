@@ -1,0 +1,11 @@
+title: CadastralNumber
+type: string
+minLength: 15
+maxLength: 24
+pattern: "^\\d{2}:\\d{2}:\\d{6,7}:\\d{1,10}$"
+additionalProperties: false
+description: Кадастровый номер
+example: '47:14:1203001:814'
+x-examples:
+  example-1: '47:14:1203001:814'
+  example-2: '29:16:240401:1072'

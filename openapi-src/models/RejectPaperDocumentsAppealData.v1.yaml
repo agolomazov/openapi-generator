@@ -1,0 +1,22 @@
+type: object
+title: RejectPaperDocumentsAppealData
+additionalProperties: false
+description: 'Данные по обращению "Отказ от получения документов на бумажном носителе"'
+x-examples:
+  example-1:
+    id:
+      $ref: './AppealId.v1.yaml#/x-examples/example-1'
+    applicationFileId:
+      $ref: './FileId.v1.yaml#/x-examples/example-1'
+    powerOfAttorneyFileId:
+      $ref: './FileId.v1.yaml#/x-examples/example-1'
+properties:
+  id:
+    $ref: ./AppealId.v1.yaml
+  applicationFileId:
+    $ref: ./FileId.v1.yaml
+  powerOfAttorneyFileId:
+    $ref: ./FileId.v1.yaml
+required:
+  - id
+  - applicationFileId

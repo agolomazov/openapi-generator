@@ -1,0 +1,19 @@
+title: IncomingDocumentListWidgetResponse
+type: object
+additionalProperties: false
+description: Ответ с входящими документами для виджета
+x-examples:
+  example-1:
+    incomingDocuments:
+      - $ref: ../models/IncomingDocumentWidgetData.v1.yaml#/x-examples/example-1
+properties:
+  incomingDocuments:
+    type: array
+    minItems: 0
+    maxItems: 255
+    uniqueItems: true
+    description: Список входящих документов
+    items:
+      $ref: ../models/IncomingDocumentWidgetData.v1.yaml
+required:
+  - incomingDocuments

@@ -1,0 +1,17 @@
+title: ChangeCompanyNameAppeal
+type: object
+description: 'Обращение "Смена наименования ЮЛ"'
+x-examples:
+  example-1:
+    commonData:
+      $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-company-name'
+    additionalData:
+      $ref: './ChangeCompanyNameAppealAdditionalData.v1.yaml#/x-examples/example-1'
+properties:
+  commonData:
+    $ref: ./CommonAppealData.v1.yaml
+  additionalData:
+    $ref: ./ChangeCompanyNameAppealAdditionalData.v1.yaml
+required:
+  - commonData
+  - additionalData

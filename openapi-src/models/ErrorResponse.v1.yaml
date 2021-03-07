@@ -1,0 +1,28 @@
+title: ErrorResponse
+type: object
+description: Ошибка
+additionalProperties: false
+x-examples:
+  example-1:
+    code: GENERAL_ERROR
+    title: Ошибка
+    message: Описание ошибки
+properties:
+  code:
+    type: string
+    description: Код ошибки
+    minLength: 0
+    maxLength: 255
+  title:
+    type: string
+    description: Заголовок
+    minLength: 0
+    maxLength: 255
+  message:
+    type: string
+    description: Сообщение
+    minLength: 0
+    maxLength: 255
+required:
+  - code
+  - title

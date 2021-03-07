@@ -1,0 +1,37 @@
+title: ReceivePaperDocumentsAppeal
+type: object
+description: Обращение "Получение документов на бумажном носителе"
+x-examples:
+  example-1:
+    commonData:
+      $ref: ./CommonAppealData.v1.yaml#/x-examples/example-receive-paper-documents
+    additionalData:
+      attachments:
+        - $ref: ../Attachment.v1.yaml#/x-examples/example-1
+      applicationFile:
+        $ref: ../FileId.v1.yaml#/x-examples/example-1
+      powerOfAttorneyFile:
+        $ref: ../FileId.v1.yaml#/x-examples/example-1
+properties:
+  commonData:
+    $ref: ./CommonAppealData.v1.yaml
+  additionalData:
+    type: object
+    required:
+      - attachments
+      - applicationFileId
+    properties:
+      attachments:
+        type: array
+        minItems: 1
+        maxItems: 100
+        description: Вложения
+        items:
+          $ref: ../Attachment.v1.yaml
+      applicationFileId:
+        $ref: ../FileId.v1.yaml
+      powerOfAttorneyFileId:
+        $ref: ../FileId.v1.yaml
+required:
+  - commonData
+  - additionalData

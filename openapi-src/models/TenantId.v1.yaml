@@ -1,0 +1,7 @@
+type: string
+title: TenantId
+x-examples:
+  example-1: '6883039659745280001'
+  example-2: '6883039659745280002'
+  example-3: '6883039659745280003'
+description: Идентификатор Арендатора

@@ -1,0 +1,9 @@
+title: BaseResponse
+type: object
+additionalProperties: false
+properties:
+  error:
+    $ref: ./Error.v1.yaml
+description: Базовый ответ
+x-examples:
+  example-1: {}

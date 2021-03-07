@@ -1,0 +1,78 @@
+type: object
+title: AppealListResponse
+additionalProperties: false
+description: Ответ со списком обращений
+x-examples:
+  example-1:
+    appeals:
+      $ref: './CommonAppealDataArray.v1.yaml#/x-examples/example-1'
+  example-request-act-collection-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-request-act-sent-1'
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-request-act-sent-2'
+  example-scanned-act-collection-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-scanned-act-sent-1'
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-scanned-act-sent-2'
+  example-missing-contract-in-lk-collection-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-missing-contract-in-lk-1'
+  example-change-juridical-address-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-juridical-address'
+  example-change-organizational-legal-form-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-organizational-legal-form'
+  example-change-company-name-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-company-name'
+  example-change-director-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-director'
+  example-change-contact-details-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-contact-details'
+  example-missing-payment-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-missing-payment'
+  example-complaint-on-document-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-complaint-on-document'
+  example-complaint-on-action-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-complaint-on-action'
+  example-no-suitable-life-situation-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-no-suitable-life-situation'
+  example-sublease-notice-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-sublease-notice'
+  example-offset-to-different-contract-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-offset-to-different-contract'
+  example-overpayment-refund-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-overpayment-refund'
+  example-change-facility-rental-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-facility-rental'
+  example-missing-data-in-facility-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-missing-data-in-facility'
+  example-incoming-document-signature-required:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-incoming-document-signature-required'
+  example-incoming-document-signature-not-required:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-incoming-document-signature-not-required'
+  example-reject-paper-documents-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-reject-paper-documents'
+  example-receive-paper-documents-saved:
+    appeals:
+      - $ref: './CommonAppealData.v1.yaml#/x-examples/example-receive-paper-documents'
+properties:
+  appeals:
+    $ref: ./CommonAppealDataArray.v1.yaml
+required:
+  - appeals

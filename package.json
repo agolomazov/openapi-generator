@@ -1,0 +1,15 @@
+{
+  "name": "arlk-api-design",
+  "version": "1.0.0",
+  "description": "Проект для генерации серверной и клиентской частей API РИ",
+  "main": "index.js",
+  "scripts": {
+    "openapi:gen": "openapi-generator-cli generate -i openapi-src/reference/TPA_TenantContract.v1.yaml -g typescript-axios -o generated-src/openapi --type-mappings=array=Array,set=Array,Error=ModelError -c openapi-gen-config.json",
+    "openapi:only-models": "openapi-generator-cli generate --global-property models -i openapi-src/reference/TPA_TenantContract.v1.yaml -g typescript-axios -o generated-src/openapi --type-mappings=array=Array,set=Array -c openapi-gen-config.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.1.22"
+  }
+}

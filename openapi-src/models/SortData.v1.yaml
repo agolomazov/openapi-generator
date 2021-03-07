@@ -1,0 +1,19 @@
+type: object
+title: SortData
+additionalProperties: false
+description: Информация о сортировке
+properties:
+  empty:
+    type: boolean
+    description: Пустой ответ
+  sorted:
+    type: boolean
+    description: Применяется сортировка
+  unsorted:
+    type: boolean
+    description: Не применяется сортировка
+x-examples:
+  example-1:
+    empty: true
+    sorted: false
+    unsorted: true

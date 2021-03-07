@@ -1,0 +1,22 @@
+title: CommonAppealRequestData
+type: object
+description: 'Общие данные сохраняемого обращения'
+x-examples:
+  example-1:
+    id:
+      $ref: '../AppealId.v1.yaml#/x-examples/example-1'
+    title:
+      $ref: '../AppealTitle.v1.yaml#/x-examples/scanned-act-sent-1'
+    preview:
+      $ref: './AppealPreviewFile.v1.yaml#/x-examples/example-1'
+properties:
+  id:
+    $ref: ../AppealId.v1.yaml
+  title:
+    $ref: ../AppealTitle.v1.yaml
+  preview:
+    $ref: ./AppealPreviewFile.v1.yaml
+required:
+  - id
+  - title
+  - preview

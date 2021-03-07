@@ -1,0 +1,18 @@
+title: SaveChangeFacilityRentalAppealsRequest
+type: object
+description: 'Запрос на сохранение обращений "Внести изменения в характеристики арендованных объектов"'
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './ChangeFacilityRentalAppealData.v1.yaml#/x-examples/example-1'
+additionalProperties: false
+properties:
+  appeals:
+    type: array
+    description: Обращения
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./ChangeFacilityRentalAppealData.v1.yaml
+required:
+  - appeals

@@ -1,0 +1,45 @@
+type: object
+title: PaymentData
+description: Данные начисления для оплаты
+additionalProperties: false
+properties:
+  landlord:
+    $ref: ./LandlordData.v1.yaml
+  paymentAmount:
+    $ref: ./PaymentAmount.v1.yaml
+  accrualType:
+    $ref: ./AccrualType.v1.yaml
+  uin:
+    type: string
+    description: УИН
+    minLength: 20
+    maxLength: 25
+  accrualStartDate:
+    type: string
+    description: Дата начала периода
+    format: date
+  accrualEndDate:
+    type: string
+    description: Дата окончания периода
+    format: date
+  esiaHref:
+    type: string
+    description: Ссылка на оплату ЕПГУ
+    minLength: 1
+    maxLength: 255
+required:
+  - landlord
+  - paymentAmount
+  - accrualType
+x-examples:
+  example-1:
+    landlord:
+      $ref: ./LandlordData.v1.yaml#/x-examples/example-1
+    paymentAmount:
+      $ref: ./PaymentAmount.v1.yaml#/x-examples/example-1
+    accrualType:
+      $ref: ./AccrualType.v1.yaml#/x-examples/example-1
+    uin: '1233455673534534534111111'
+    accrualStartDate: '2019-08-24'
+    accrualEndDate: '2021-08-24'
+    esiaHref: 'http://mock.mock'

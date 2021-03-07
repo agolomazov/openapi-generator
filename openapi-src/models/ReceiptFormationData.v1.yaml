@@ -1,0 +1,96 @@
+type: object
+title: ReceiptFormationData
+description: Данные для формирования квитанции
+additionalProperties: false
+x-examples:
+  example-1:
+    contract:
+      $ref: './ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+    tenantId:
+      $ref: './TenantId.v1.yaml#/x-examples/example-1'
+    uin: '1233455673534534534111111'
+    paymentType: LK_ACCRUAL_TYPE_RENTAL
+    paymentAmount: '31.40'
+    paymentName: Оплата за Землю
+    bcc:
+      $ref: ./Bcc.v1.yaml#/x-examples/example-1
+    oktmo: '12312312312'
+    payee:
+      $ref: './PayeeInfo.v1.yaml#/x-examples/example-1'
+    accrualStartDate: '2016-07-01'
+    accrualEndDate: '2020-10-01'
+  example-2:
+    contract:
+      $ref: './ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+    tenantId:
+      $ref: './TenantId.v1.yaml#/x-examples/example-1'
+    uin: '1233455673534534534111111'
+    paymentType: LK_ACCRUAL_TYPE_RENTAL
+    paymentAmount: '31.40'
+    paymentName: Оплата за Землю
+    bcc:
+      $ref: ./Bcc.v1.yaml#/x-examples/example-2
+    oktmo: '12312312312'
+    payee:
+      $ref: './PayeeInfo.v1.yaml#/x-examples/example-1'
+    accrualStartDate: '2016-07-01'
+    accrualEndDate: '2020-10-01'
+properties:
+  contract:
+    $ref: ./ContractIdNumberDate.v1.yaml
+  tenantId:
+    $ref: ./TenantId.v1.yaml
+  paymentType:
+    type: string
+    example: LK_ACCRUAL_TYPE_RENTAL
+    minLength: 3
+    maxLength: 255
+    description: Тип платежа
+  uin:
+    type: string
+    description: УИН
+    example: '1233455673534534534534545'
+    pattern: "^([0-9]\\d*)?$"
+    minLength: 20
+    maxLength: 25
+  paymentName:
+    type: string
+    minLength: 1
+    maxLength: 255
+    example: Оплата за Землю
+    description: Наименование платежа
+  paymentAmount:
+    type: string
+    description: Сумма платежа
+    pattern: "^([1-9]\\d*)|0(\\.\\d{1,2})?$"
+    minLength: 1
+    maxLength: 20
+    example: '52.40'
+  bcc:
+    $ref: ./Bcc.v1.yaml
+  oktmo:
+    type: string
+    description: ОКТМО
+    minLength: 8
+    maxLength: 11
+    pattern: "^\\d{8,11}$"
+  payee:
+    $ref: ./PayeeInfo.v1.yaml
+  accrualStartDate:
+    type: string
+    format: date
+    description: Дата начала периода
+  accrualEndDate:
+    type: string
+    format: date
+    description: Дата окончания периода
+required:
+  - contract
+  - tenantId
+  - paymentType
+  - uin
+  - paymentName
+  - paymentAmount
+  - bcc
+  - oktmo
+  - payee

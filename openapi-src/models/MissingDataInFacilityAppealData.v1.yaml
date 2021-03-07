@@ -1,0 +1,27 @@
+title: MissingDataInFacilityAppealData
+type: object
+description: 'Данные обращения "Сообщить об отсутствии данных по арендованным объектам" по ЖС "Внести изменения в характеристики объектов"'
+additionalProperties: false
+x-examples:
+  example-1:
+    id:
+      $ref: './AppealId.v1.yaml#/x-examples/example-1'
+    contract:
+      $ref: './ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+    comment:
+      $ref: './AppealCommentText.v1.yaml#/x-examples/example-1'
+    missingFacilityData:
+      $ref: './MissingFacilityData.v1.yaml#/x-examples/example-1'
+properties:
+  id:
+    $ref: ./AppealId.v1.yaml
+  contract:
+    $ref: ./ContractIdNumberDate.v1.yaml
+  comment:
+    $ref: ./AppealCommentText.v1.yaml
+  missingFacilityData:
+    $ref: ./MissingFacilityData.v1.yaml
+required:
+  - id
+  - contract
+  - missingFacilityData

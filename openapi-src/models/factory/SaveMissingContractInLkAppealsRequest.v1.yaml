@@ -1,0 +1,18 @@
+title: SaveMissingContractInLkAppealsRequest
+type: object
+description: 'Запрос на сохранение обращений "В личном кабинете отсутствует информация о моем договоре аренды" по ЖС "Отсутствует договор аренды"'
+additionalProperties: false
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './MissingContractInLkAppealData.v1.yaml#/x-examples/example-1'
+properties:
+  appeals:
+    type: array
+    description: Обращения
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./MissingContractInLkAppealData.v1.yaml
+required:
+  - appeals

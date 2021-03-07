@@ -1,0 +1,22 @@
+type: object
+title: TenantSignatureToDmzRequest
+description: Данные подписей арендатора для отправки в ДМЗ
+additionalProperties: false
+properties:
+  signatureItems:
+    type: array
+    minItems: 0
+    maxItems: 1024
+    uniqueItems: true
+    description: Список подписей арендатора
+    items:
+      $ref: ./TenantSignatureToDmzItem.v1.yaml
+required:
+  - signatureItems
+example:
+  signatureItems:
+    - $ref: './TenantSignatureToDmzItem.v1.yaml#/x-examples/example-1'
+x-examples:
+  example-1:
+    signatureItems:
+      - $ref: './TenantSignatureToDmzItem.v1.yaml#/x-examples/example-1'

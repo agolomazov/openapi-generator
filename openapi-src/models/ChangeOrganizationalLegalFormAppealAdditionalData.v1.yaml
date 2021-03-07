@@ -1,0 +1,20 @@
+title: ChangeOrganizationalLegalFormAppealAdditionalData
+type: object
+properties:
+  comment:
+    $ref: ./AppealCommentText.v1.yaml
+  attachments:
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./Attachment.v1.yaml
+required:
+  - attachments
+x-examples:
+  example-1:
+    comment:
+      $ref: './AppealCommentText.v1.yaml#/x-examples/example-1'
+    attachments:
+      - $ref: './Attachment.v1.yaml#/x-examples/example-1'
+description: 'Дополнительные данные обращения "Смена организационно-правовой формы/ИНН"'

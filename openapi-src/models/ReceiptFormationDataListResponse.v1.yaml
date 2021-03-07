@@ -1,0 +1,19 @@
+type: object
+title: ReceiptFormationDataListResponse
+description: Данные для формирования квитанций
+x-examples:
+  example-1:
+    receiptFormationDataList:
+      - $ref: './ReceiptFormationData.v1.yaml#/x-examples/example-1'
+      - $ref: './ReceiptFormationData.v1.yaml#/x-examples/example-2'
+additionalProperties: false
+properties:
+  receiptFormationDataList:
+    type: array
+    minItems: 1
+    maxItems: 100
+    description: Данные для формирования квитанции
+    items:
+      $ref: ./ReceiptFormationData.v1.yaml
+required:
+  - receiptFormationDataList

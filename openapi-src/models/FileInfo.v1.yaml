@@ -1,0 +1,37 @@
+type: object
+title: FileInfo
+description: Информация о файле
+additionalProperties: false
+example:
+  id:
+    $ref: '../models/FileId.v1.yaml#/x-examples/example-1'
+  size: 20
+  name: file.pdf
+x-examples:
+  example-1:
+    id:
+      $ref: '../models/FileId.v1.yaml#/x-examples/example-1'
+    size: 20
+    name: file.pdf
+  example-2:
+    id:
+      $ref: '../models/FileId.v1.yaml#/x-examples/example-4'
+    size: 30
+    name: file_(файл отображения).pdf
+properties:
+  id:
+    $ref: ./FileId.v1.yaml
+  size:
+    type: integer
+    description: Размер в байтах
+    maximum: 2147483647
+    minimum: 0
+  name:
+    type: string
+    minLength: 0
+    maxLength: 255
+    description: Название
+required:
+  - id
+  - size
+  - name

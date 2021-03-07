@@ -1,0 +1,37 @@
+type: object
+title: OffsetToDifferentContractDocumentFormationData
+description: 'Данные для формирования заявления "Заявление на зачет денежных средств на другой договор"'
+additionalProperties: false
+properties:
+  landlordName:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: Арендодатель
+  tenantName:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: Арендатор
+  tenantInn:
+    $ref: ./InnCommon.v1.yaml
+  tenantAddress:
+    $ref: ./Address.v1.yaml
+  tenantPhoneNumber:
+    $ref: ./RussianMobilePhoneNumber.v1.yaml
+required:
+  - landlordName
+  - tenantName
+  - tenantInn
+  - tenantAddress
+  - tenantPhoneNumber
+x-examples:
+  example-1:
+    landlordName: ОАО Арендодатель
+    tenantName: Иванов Иван
+    tenantInn:
+      $ref: './InnCommon.v1.yaml#/x-examples/example-1'
+    tenantAddress:
+      $ref: './Address.v1.yaml#/x-examples/example-1'
+    tenantPhoneNumber:
+      $ref: './RussianMobilePhoneNumber.v1.yaml#/x-examples/example-1'

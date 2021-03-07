@@ -1,0 +1,18 @@
+type: object
+title: AppealCommentList
+additionalProperties: false
+description: Список комментариев по обращению
+properties:
+  comments:
+    type: array
+    maxItems: 4096
+    uniqueItems: true
+    items:
+      $ref: ./AppealCommentListItem.v1.yaml
+required:
+  - comments
+x-examples:
+  example-1:
+    comments:
+      - $ref: './AppealCommentListItem.v1.yaml#/x-examples/example-1'
+      - $ref: './AppealCommentListItem.v1.yaml#/x-examples/example-rosim'

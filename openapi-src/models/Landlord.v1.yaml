@@ -1,0 +1,48 @@
+type: object
+title: Landlord
+additionalProperties: false
+description: Арендодатель
+x-examples:
+  example-1:
+    id:
+      $ref: './LandlordId.v1.yaml#/x-examples/example-1'
+    name: МТУ в Архангельской области и Ненецком автономном округе
+    legalAddress:
+      $ref: './Address.v1.yaml#/x-examples/landlord-address-1'
+    inn:
+      $ref: './InnJuridicalPerson.v1.yaml#/x-examples/landlord-inn-1'
+    kpp:
+      $ref: './Kpp.v1.yaml#/x-examples/landlord-kpp-1'
+    email:
+      $ref: './Email.v1.yaml#/x-examples/landlord-email-1'
+    phone: +7 495 608-12-59
+properties:
+  id:
+    $ref: ./LandlordId.v1.yaml
+  name:
+    type: string
+    description: наименование
+    minLength: 3
+    maxLength: 255
+  legalAddress:
+    $ref: ./Address.v1.yaml
+  inn:
+    $ref: ./InnJuridicalPerson.v1.yaml
+  kpp:
+    $ref: ./Kpp.v1.yaml
+  email:
+    $ref: ./Email.v1.yaml
+  phone:
+    type: string
+    minLength: 0
+    maxLength: 100
+    title: phone
+    description: Телефон
+required:
+  - id
+  - name
+  - legalAddress
+  - inn
+  - kpp
+  - email
+  - phone

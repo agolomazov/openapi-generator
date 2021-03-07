@@ -1,0 +1,76 @@
+type: object
+title: FacilityRentalListRequest
+description: Список Объектов аренды
+additionalProperties: false
+x-examples:
+  example-1:
+    filter:
+      contractId:
+        $ref: './ContractId.v1.yaml#/x-examples/example-1'
+      contractNumber:
+        $ref: './ContractNumber.v1.yaml#/x-examples/example-1'
+      contractDateFrom: '2015-01-01'
+      contractDateTo: '2020-01-01'
+      address:
+        $ref: './Address.v1.yaml#/x-examples/example-1'
+      typeId:
+        $ref: './FacilityRentalType.v1.yaml#/x-examples/example-1'
+      cadastralNumber:
+        $ref: './CadastralNumber.v1.yaml#/x-examples/example-1'
+    page: 1
+    size: 20
+    sortField: address
+    sortDirection:
+      $ref: './SortDirection.v1.yaml#/x-examples/example-1'
+    tenantId:
+      $ref: './TenantId.v1.yaml#/x-examples/example-1'
+properties:
+  filter:
+    type: object
+    additionalProperties: false
+    description: Фильтр
+    properties:
+      contractId:
+        $ref: ./ContractId.v1.yaml
+      contractNumber:
+        $ref: ./ContractNumber.v1.yaml
+      contractDateFrom:
+        type: string
+        description: Дата начала договора
+        format: date
+        example: '2015-01-01'
+      address:
+        $ref: ./Address.v1.yaml
+      typeId:
+        $ref: ./FacilityRentalType.v1.yaml
+      cadastralNumber:
+        $ref: ./CadastralNumber.v1.yaml
+      contractDateTo:
+        type: string
+        example: '2015-01-01'
+        format: date
+        description: Дата окончания договора
+  page:
+    type: integer
+    example: 1
+    description: Номер страницы
+    minimum: 0
+    maximum: 2147483647
+  size:
+    type: integer
+    example: 20
+    description: Размер страницы
+    minimum: 0
+    maximum: 2147483647
+  sortField:
+    type: string
+    minLength: 0
+    maxLength: 255
+    example: address
+    description: 'Поле, по которому проводится сортировка'
+  tenantId:
+    $ref: ./TenantId.v1.yaml
+  sortDirection:
+    $ref: ./SortDirection.v1.yaml
+required:
+  - tenantId

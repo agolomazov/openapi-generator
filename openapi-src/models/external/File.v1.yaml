@@ -1,0 +1,53 @@
+type: object
+title: File
+description: Прикрепленный файл
+additionalProperties: false
+properties:
+  fileId:
+    $ref: ./FileId.v1.yaml
+  fileSize:
+    description: Размер файла
+    type: integer
+    maximum: 2147483647
+    minimum: 0
+  fileName:
+    description: Имя файла
+    type: string
+    minLength: 1
+    maxLength: 255
+  base64:
+    description: Файл в base64
+    type: string
+    format: byte
+    minLength: 1
+    maxLength: 20000000
+  fileType:
+    description: Тип файла
+    type: string
+    minLength: 1
+    maxLength: 255
+  createdDate:
+    description: Дата и время создания
+    type: string
+    format: date-time
+required:
+  - fileId
+  - fileSize
+  - fileName
+  - fileType
+  - createdDate
+example:
+  fileId:
+    $ref: './FileId.v1.yaml#/x-examples/example-1'
+  fileSize: 123456
+  fileName: Имя файла
+  fileType: LK_ORIGINAL_DOC
+  createdDate: '2020-10-05T14:19:19.205598Z'
+x-examples:
+  example-1:
+    fileId:
+      $ref: './FileId.v1.yaml#/x-examples/example-1'
+    fileSize: 123456
+    fileName: Имя файла
+    fileType: LK_ORIGINAL_DOC
+    createdDate: '2020-10-05T14:19:19.205598Z'

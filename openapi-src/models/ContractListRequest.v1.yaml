@@ -1,0 +1,92 @@
+type: object
+title: ContractListRequest
+description: Запрос на получение списка договоров аренды по параметрам
+additionalProperties: false
+x-examples:
+  example-1:
+    filter:
+      contractIds:
+        - 99019ca8-efc4-4882-b4cc-e9777dd0631c
+      number: '248'
+      contractDateTo: '2021-01-01'
+      contractDateFrom: '2020-01-01'
+      expirationDateFrom: '2015-01-01'
+      expirationDateTo: '2066-01-01'
+      facilityRentalAddress: 'Приморский, МО Ка'
+      typeId:
+        $ref: '../models/ContractType.v1.yaml#/x-examples/example-1'
+      statusId:
+        $ref: '../models/ContractStatus.v1.yaml#/x-examples/example-1'
+    page: 1
+    size: 20
+    sortField: address
+    sortDirection:
+      $ref: './SortDirection.v1.yaml#/x-examples/example-1'
+    tenantId:
+      $ref: './TenantId.v1.yaml#/x-examples/example-1'
+properties:
+  filter:
+    type: object
+    additionalProperties: false
+    properties:
+      contractIds:
+        type: array
+        minItems: 0
+        maxItems: 255
+        description: Идентификаторы договоров
+        items:
+          $ref: ./ContractId.v1.yaml
+      number:
+        type: string
+        minLength: 0
+        maxLength: 255
+        example: '123'
+        description: Номер
+      contractDateTo:
+        type: string
+        format: date
+        description: 'Дата действия договора, по'
+      contractDateFrom:
+        type: string
+        format: date
+        description: 'Дата действия договора, с'
+      expirationDateTo:
+        type: string
+        format: date
+        description: 'Дата окончания действия, по'
+      expirationDateFrom:
+        type: string
+        format: date
+        description: 'Дата окончания действия, с'
+      facilityRentalAddress:
+        type: string
+        minLength: 0
+        maxLength: 1000
+        description: Адрес
+      typeId:
+        $ref: ./ContractType.v1.yaml
+      statusId:
+        $ref: ./ContractStatus.v1.yaml
+  page:
+    type: integer
+    example: 1
+    minimum: 0
+    maximum: 2147483647
+    description: Номер страницы
+  size:
+    type: integer
+    example: 1
+    minimum: 0
+    maximum: 2147483647
+    description: Размер страницы
+  sortField:
+    type: string
+    minLength: 0
+    maxLength: 255
+    description: 'Поле, по которому производится сортировка'
+  tenantId:
+    $ref: ./TenantId.v1.yaml
+  sortDirection:
+    $ref: ./SortDirection.v1.yaml
+required:
+  - tenantId

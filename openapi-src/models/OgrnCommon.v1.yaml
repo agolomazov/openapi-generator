@@ -1,0 +1,5 @@
+title: OgrnCommon
+type: string
+pattern: "^(\\d{13}|\\d{15})$"
+minLength: 13
+maxLength: 15

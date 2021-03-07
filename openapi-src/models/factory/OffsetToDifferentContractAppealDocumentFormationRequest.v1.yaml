@@ -1,0 +1,13 @@
+type: object
+title: OffsetToDifferentContractAppealDocumentFormationRequest
+additionalProperties: false
+description: 'Запрос на получение данных для формирования заявления по обращению "Зачет денежных средств на другой договор"'
+x-examples:
+  example-1:
+    contractId:
+      $ref: '../ContractId.v1.yaml#/x-examples/example-1'
+properties:
+  contractId:
+    $ref: ../ContractId.v1.yaml
+required:
+  - contractId

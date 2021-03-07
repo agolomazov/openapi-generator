@@ -1,0 +1,20 @@
+title: PaymentCalendarInfoRequest
+type: object
+description: Запрос на получение информации о календаре оплат арендатора
+additionalProperties: false
+properties:
+  accrualEndDateFrom:
+    description: Дата, до которой должен быть произведен платеж. Значение, c
+    type: string
+    format: date
+  accrualEndDateTo:
+    description: Дата, до которой должен быть произведен платеж. Значение, по
+    type: string
+    format: date
+required:
+  - accrualEndDateFrom
+  - accrualEndDateTo
+x-examples:
+  example-1:
+    accrualEndDateFrom: '2015-01-01'
+    accrualEndDateTo: '2020-01-01'

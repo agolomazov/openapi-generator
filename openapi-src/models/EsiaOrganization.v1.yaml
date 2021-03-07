@@ -1,0 +1,36 @@
+type: object
+title: EsiaOrganization
+description: 'Организация в ЕСИА (ФЛ, ИП или ЮЛ)'
+additionalProperties: false
+x-examples:
+  example-1:
+    type:
+      $ref: './TenantType.v1.yaml#/x-examples/example-2'
+    ogrn: '123456789012345'
+    inn:
+      $ref: './InnCommon.v1.yaml#/x-examples/example-1'
+  example-2:
+    type:
+      $ref: './TenantType.v1.yaml#/x-examples/example-1'
+    shortName: ООО "Ромашка"
+    fullName: Общество с ограниченной ответственностью "Ромашка"
+    ogrn: '123456789012345'
+    inn:
+      $ref: './InnCommon.v1.yaml#/x-examples/example-1'
+properties:
+  esiaOid:
+    type: string
+  shortName:
+    type: string
+  fullName:
+    type: string
+  type:
+    $ref: ./TenantType.v1.yaml
+  ogrn:
+    $ref: ./OgrnCommon.v1.yaml
+  inn:
+    $ref: ./InnCommon.v1.yaml
+  kpp:
+    $ref: ./Kpp.v1.yaml
+required:
+  - type

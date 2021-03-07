@@ -1,0 +1,12 @@
+title: BaseDictionaryValue
+type: object
+additionalProperties: false
+properties:
+  code:
+    type: string
+  name:
+    type: string
+required:
+  - code
+  - name
+description: Значение справочника

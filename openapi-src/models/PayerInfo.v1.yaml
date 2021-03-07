@@ -1,0 +1,23 @@
+type: object
+title: PayerInfo
+description: Данные плательщика
+additionalProperties: false
+x-examples:
+  example-1:
+    name:
+      $ref: './PersonName.v1.yaml#/x-examples/example-ri'
+    address: г. Санкт-Петербург
+properties:
+  address:
+    type: string
+    maxLength: 1000
+    description: Адрес
+  name:
+    $ref: ./PersonName.v1.yaml
+  juridicalName:
+    type: string
+    minLength: 0
+    maxLength: 255
+    description: Наименование ЮЛ
+required:
+  - address

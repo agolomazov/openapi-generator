@@ -1,0 +1,18 @@
+type: object
+title: SaveComplaintOnActionAppealsRequest
+description: 'Запрос на сохранение данных обращений "Жалоба на действие или бездействие должностных лиц"'
+additionalProperties: false
+properties:
+  appeals:
+    type: array
+    description: Обращения
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./ComplaintOnActionAppealData.v1.yaml
+required:
+  - appeals
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './ComplaintOnActionAppealData.v1.yaml#/x-examples/example-1'

@@ -1,0 +1,18 @@
+type: object
+title: SaveSubleaseNoticeAppealsRequest
+description: 'Запрос на сохранение обращений "Уведомление о субаренде"'
+additionalProperties: false
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './SubleaseNoticeAppealData.v1.yaml#/x-examples/example-1'
+properties:
+  appeals:
+    type: array
+    minItems: 1
+    maxItems: 100
+    description: Обращения
+    items:
+      $ref: ./SubleaseNoticeAppealData.v1.yaml
+required:
+  - appeals

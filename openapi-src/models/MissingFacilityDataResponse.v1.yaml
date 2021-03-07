@@ -1,0 +1,18 @@
+title: MissingFacilityDataResponse
+type: object
+description: Отсутствующая информация по объектам аренды
+additionalProperties: false
+x-examples:
+  example-1:
+    missingDataExists: true
+    missingData:
+      $ref: './MissingFacilityData.v1.yaml#/x-examples/example-1'
+properties:
+  missingDataExists:
+    type: boolean
+    description: 'Признак наличия отсутствующей информации в объектах'
+  missingData:
+    $ref: ./MissingFacilityData.v1.yaml
+required:
+  - missingDataExists
+  - missingData

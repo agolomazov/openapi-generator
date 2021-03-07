@@ -1,0 +1,17 @@
+title: ChangeOrganizationalLegalFormAppeal
+type: object
+description: 'Обращение "Смена организационно-правовой формы/ИНН"'
+x-examples:
+  example-1:
+    commonData:
+      $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-organizational-legal-form'
+    additionalData:
+      $ref: '../ChangeOrganizationalLegalFormAppealAdditionalData.v1.yaml#/x-examples/example-1'
+properties:
+  commonData:
+    $ref: ./CommonAppealData.v1.yaml
+  additionalData:
+    $ref: ../ChangeOrganizationalLegalFormAppealAdditionalData.v1.yaml
+required:
+  - commonData
+  - additionalData

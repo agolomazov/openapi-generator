@@ -1,0 +1,20 @@
+title: AppealPreviewFile
+type: object
+description: Файл-превью обращения
+x-examples:
+  example-1:
+    file: dGVzdA==
+    fileName: appeal.pdf
+additionalProperties: false
+properties:
+  file:
+    type: string
+    description: Файл (в base64)
+  fileName:
+    type: string
+    description: Название файла
+    minLength: 1
+    maxLength: 255
+required:
+  - file
+  - fileName

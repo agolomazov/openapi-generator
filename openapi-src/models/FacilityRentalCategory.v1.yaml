@@ -1,0 +1,13 @@
+type: string
+title: FacilityRentalCategory
+description: Категория объекта аренды
+enum:
+  - AGRICULTURAL_LAND
+  - SETTLEMENTS_LAND
+  - INDUSTRY_LAND
+  - PROTECTED_AREAS_LAND
+  - FOREST_LAND
+  - WATER_FUND_LAND
+  - RESERVE_LAND
+x-examples:
+  example-1: SETTLEMENTS_LAND

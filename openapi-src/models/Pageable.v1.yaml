@@ -1,0 +1,37 @@
+type: object
+title: Pageable
+description: Pageable
+additionalProperties: false
+x-examples:
+  example-1:
+    offset: 0
+    pageNumber: 0
+    pageSize: 20
+    paged: true
+    sort:
+      $ref: './SortData.v1.yaml#/x-examples/example-1'
+    unpaged: false
+properties:
+  offset:
+    type: integer
+    description: смещение относительно первой страницы (от какой позиции отображаются данные)
+    maximum: 2147483647
+    minimum: 0
+  pageNumber:
+    type: integer
+    description: номер страницы
+    maximum: 2147483647
+    minimum: 0
+  pageSize:
+    type: integer
+    description: максимальное количество элементов на странице
+    maximum: 2147483647
+    minimum: 0
+  paged:
+    type: boolean
+    description: признак отображения с учетом пагинации
+  sort:
+    $ref: ./SortData.v1.yaml
+  unpaged:
+    type: boolean
+    description: Признак отображения без учета пагинации

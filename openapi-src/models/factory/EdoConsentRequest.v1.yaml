@@ -1,0 +1,39 @@
+type: object
+title: EdoConsentRequest
+additionalProperties: false
+description: Запрос на подтверждение согласия на ЭДО
+x-examples:
+  example-1:
+    consentFileBody: d2h5IGRpZCB5b3UgZGVjb2RlIHRoaXM=
+    consentFileName: consentFile.pdf
+    confirmationFileBody: d2h5IGRpZCB5b3UgZGVjb2RlIHRoaXM=
+    confirmationFileName: confirmationFile.pdf
+    esiaOid: '1000'
+properties:
+  consentFileBody:
+    type: string
+    format: byte
+    description: Тело файла согласия на ЭДО
+  consentFileName:
+    type: string
+    maxLength: 250
+    minLength: 1
+    description: Имя файла согласия на ЭДО
+  confirmationFileBody:
+    type: string
+    format: byte
+    description: Тело файла подтверждения огласия на ЭДО
+  confirmationFileName:
+    type: string
+    maxLength: 250
+    minLength: 1
+    description: Имя файла подтверждения согласия на ЭДО
+  esiaOid:
+    type: string
+    description: Идентификатор ЕСИА
+required:
+  - consentFileBody
+  - consentFileName
+  - confirmationFileBody
+  - confirmationFileName
+  - esiaOid

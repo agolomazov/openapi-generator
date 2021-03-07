@@ -1,0 +1,17 @@
+title: PaymentResponse
+type: object
+properties:
+  bccPayments:
+    type: array
+    minItems: 0
+    maxItems: 100
+    description: 'Данные оплаты, сгруппированные по КБК'
+    items:
+      $ref: ./BccPaymentData.v1.yaml
+required:
+  - bccPayments
+description: Данные для промежуточной страницы оплаты
+x-examples:
+  example-1:
+    bccPayments:
+      - $ref: ../models/BccPaymentData.v1.yaml#/x-examples/example-1

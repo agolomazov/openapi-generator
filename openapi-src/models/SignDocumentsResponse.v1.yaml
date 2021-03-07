@@ -1,0 +1,16 @@
+type: object
+title: SignDocumentsResponse
+description: Результат подписания документов
+additionalProperties: false
+properties:
+  packageId:
+    type: string
+    description: Идентификатор пакета
+    format: uuid
+    minLength: 36
+    maxLength: 36
+required:
+  - packageId
+x-examples:
+  example-1:
+    packageId: eca95da4-0499-11eb-adc1-0242ac120002

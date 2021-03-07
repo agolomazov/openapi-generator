@@ -1,0 +1,47 @@
+type: object
+title: AppealCommentListItem
+description: Комментарий к обращению (элемент возвращаемого списка)
+additionalProperties: false
+properties:
+  id:
+    $ref: ./AppealCommentId.v1.yaml
+  author:
+    $ref: ./AppealCommentAuthor.v1.yaml
+  created:
+    type: string
+    format: date-time
+    description: Дата-время создания
+  body:
+    $ref: './AppealCommentText.v1.yaml'
+  attachments:
+    type: array
+    minItems: 0
+    maxItems: 1024
+    uniqueItems: true
+    description: Список приложенных файлов к комментарию
+    items:
+      $ref: ./Attachment.v1.yaml
+required:
+  - id
+  - author
+  - created
+  - body
+x-examples:
+  example-1:
+    id:
+      $ref: './AppealCommentId.v1.yaml#/x-examples/example-1'
+    author:
+      $ref: './AppealCommentAuthor.v1.yaml#/x-examples/example-1'
+    created: '2020-07-11T07:11:57Z'
+    body: Прошу рассмотреть дополнительно документы по моему запросу. Файл во вложении.
+    attachments:
+      - $ref: './Attachment.v1.yaml#/x-examples/example-1'
+  example-rosim:
+    id:
+      $ref: './AppealCommentId.v1.yaml#/x-examples/example-1'
+    author:
+      $ref: './AppealCommentAuthor.v1.yaml#/x-examples/example-1'
+    created: '2020-07-12T01:12:57Z'
+    body: Файл рассмотрен
+    attachments:
+      - $ref: './Attachment.v1.yaml#/x-examples/example-1'

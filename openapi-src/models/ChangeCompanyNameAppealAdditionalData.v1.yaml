@@ -1,0 +1,21 @@
+type: object
+title: ChangeCompanyNameAppealAdditionalData
+description: 'Дополнительные данные обращения "Смена наименования ЮЛ"'
+x-examples:
+  example-1:
+    comment:
+      $ref: './AppealCommentText.v1.yaml#/x-examples/example-1'
+    attachments:
+      - $ref: './Attachment.v1.yaml#/x-examples/example-1'
+additionalProperties: false
+properties:
+  comment:
+    $ref: ./AppealCommentText.v1.yaml
+  attachments:
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./Attachment.v1.yaml
+required:
+  - attachments

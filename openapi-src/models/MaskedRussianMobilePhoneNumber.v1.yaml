@@ -1,0 +1,6 @@
+type: string
+title: MaskedRussianMobilePhoneNumber
+pattern: "^\\+7.{10}$"
+description: Номер телефона
+x-examples:
+  example-1: '+799******99'

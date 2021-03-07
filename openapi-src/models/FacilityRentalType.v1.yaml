@@ -1,0 +1,14 @@
+type: string
+title: FacilityRentalType
+description: 'Тип Объекта аренды (здание, помещение, земельный участок, сооружение, имущественный комплекс)'
+example: LAND_PLOT
+x-examples:
+  example-1: LAND_PLOT
+  example-2: BUILDING
+  example-3: SHARES_IN_RIGHT
+  example-4: MOVABLE_PROPERTY
+  example-5: AIRCRAFTS_AND_SHIPS
+  example-6: PROPERTY_COMPLEX
+  example-7: OTHER_MOVABLE_PROPERTY
+  example-8: LAND_PLOT_COMPLEX
+  example-9: ROOM

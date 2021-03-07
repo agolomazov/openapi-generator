@@ -1,0 +1,30 @@
+type: object
+title: NaturalPerson
+description: Физическое лицо
+additionalProperties: false
+properties:
+  name:
+    $ref: ./PersonName.v1.yaml
+  snils:
+    $ref: ./MaskedSnils.v1.yaml
+  passport:
+    $ref: ./MaskedPassport.v1.yaml
+  email:
+    $ref: ./MaskedEmail.v1.yaml
+  mobilePhone:
+    $ref: ./MaskedRussianMobilePhoneNumber.v1.yaml
+required:
+  - name
+  - snils
+x-examples:
+  example-ri:
+    name:
+      lastName: Д.
+      firstName: Фёдор
+      middleName: Сергеевич
+    snils: 3**-***-**4 *0
+    passport:
+      series: '4***'
+      number: '*****4'
+    email: danilovF@gmail.com
+    mobilePhone: '+790*******4'

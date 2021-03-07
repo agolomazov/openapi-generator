@@ -1,0 +1,60 @@
+type: object
+title: PayeeInfo
+additionalProperties: false
+description: Данные получателя платежа
+x-examples:
+  example-1:
+    personalAcc: '12312312312312312312'
+    name: получатель платежа
+    inn:
+      $ref: './InnCommon.v1.yaml#/x-examples/example-1'
+    kpp:
+      $ref: './Kpp.v1.yaml#/x-examples/example-1'
+    bankName: ПАО Сбербанк
+    correspAcc: '45645645645645645645'
+    bic: '123123123'
+    legalAddress:
+      $ref: './Address.v1.yaml#/x-examples/example-1'
+properties:
+  personalAcc:
+    type: string
+    minLength: 20
+    maxLength: 20
+    description: Номер счета получателя платежа
+    pattern: "^\\d{20}$"
+  name:
+    type: string
+    description: Наименование
+    minLength: 1
+    maxLength: 255
+  inn:
+    $ref: ./InnCommon.v1.yaml
+  kpp:
+    $ref: ./Kpp.v1.yaml
+  correspAcc:
+    type: string
+    description: Номер кор./сч. банка получателя платежа
+    minLength: 1
+    maxLength: 20
+    pattern: "^\\d{20}$"
+  bankName:
+    type: string
+    minLength: 0
+    maxLength: 255
+    example: Сбербанк
+    description: Наименование банка
+  bic:
+    type: string
+    minLength: 9
+    maxLength: 9
+    description: БИК
+    pattern: "^\\d{9}$"
+  legalAddress:
+    $ref: ./Address.v1.yaml
+required:
+  - personalAcc
+  - name
+  - correspAcc
+  - bankName
+  - bic
+  - legalAddress

@@ -1,0 +1,28 @@
+type: object
+title: CreateFeedbackMessageRequest
+description: Запрос на отправку отзыва о личном кабинете арендатора
+additionalProperties: false
+properties:
+  subjectType:
+    $ref: ./FeedbackSubjectType.v1.yaml
+  text:
+    type: string
+    minLength: 1
+    maxLength: 4000
+    description: Текст сообщения
+  email:
+    $ref: ./Email.v1.yaml
+  attachment:
+    $ref: ./SupportMessageFile.v1.yaml
+required:
+  - subjectType
+  - text
+  - email
+x-examples:
+  example-1:
+    subjectType: 
+      $ref: './FeedbackSubjectType.v1.yaml#/x-examples/example-1'
+    text: Все работает
+    email: user@email.ru
+    attachment:
+      $ref: './SupportMessageFile.v1.yaml#/x-examples/example-1'

@@ -1,0 +1,8 @@
+title: Kpp
+type: string
+pattern: "^(\\d{9})$"
+minLength: 9
+maxLength: 9
+x-examples:
+  example-1: '999999999'
+  landlord-kpp-1: '770801001'

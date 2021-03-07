@@ -1,0 +1,40 @@
+type: object
+title: BankInfo
+description: Информация о банковском счете
+additionalProperties: false
+x-examples:
+  example-1:
+    bankName: ПАО Сбербанк
+    bic: '123456789'
+    bankAccount: '12345678901234567000'
+  landlord-account-1:
+    bankName: ГУ БАНКА РОССИИ ПО ЦФО
+    bic: '044525000'
+    bankAccount: '40101810045250010041'
+properties:
+  bankName:
+    type: string
+    description: Наименование банка
+    minLength: 1
+    maxLength: 255
+  bic:
+    type: string
+    description: БИК
+    minLength: 9
+    maxLength: 9
+    pattern: "^\\d{9}$"
+  bankAccount:
+    type: string
+    description: Банковский счет
+    pattern: "^\\d{20}$"
+    minLength: 20
+    maxLength: 20
+  corAccount:
+    type: string
+    minLength: 20
+    maxLength: 20
+    pattern: "^\\d{20}$"
+required:
+  - bankName
+  - bic
+  - bankAccount

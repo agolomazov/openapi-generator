@@ -1,0 +1,6 @@
+type: string
+title: ContractStatus
+description: Статус Договора
+x-examples:
+  example-1: ACTIVE
+  example-2: TERMINATED

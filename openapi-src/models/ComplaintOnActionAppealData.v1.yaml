@@ -1,0 +1,41 @@
+type: object
+title: ComplaintOnActionAppealData
+description: 'Данные обращения "Жалоба на действие/бездействие должностных лиц"'
+additionalProperties: false
+x-examples:
+  example-1:
+    id:
+      $ref: './AppealId.v1.yaml#/x-examples/example-1'
+    complaintCause: Основание для подачи жалобы
+    demands: 'Требования лица, подающего жалобу'
+    landlordId:
+      $ref: './LandlordId.v1.yaml#/x-examples/example-1'
+    fileIdList:
+      - $ref: './FileId.v1.yaml#/x-examples/example-1'
+properties:
+  id:
+    $ref: ./AppealId.v1.yaml
+  complaintCause:
+    type: string
+    minLength: 1
+    maxLength: 4000
+    description: Основание для подачи жалобы
+  demands:
+    type: string
+    description: 'Требования лица, подающего жалобу'
+    minLength: 1
+    maxLength: 4000
+  landlordId:
+    $ref: ./LandlordId.v1.yaml
+  fileIdList:
+    type: array
+    description: Идентификаторы вложенных файлов
+    minItems: 0
+    maxItems: 5
+    items:
+      $ref: ./FileId.v1.yaml
+required:
+  - id
+  - complaintCause
+  - demands
+  - landlordId

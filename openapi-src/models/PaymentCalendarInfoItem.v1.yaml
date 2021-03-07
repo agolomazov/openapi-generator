@@ -1,0 +1,28 @@
+type: object
+title: PaymentCalendarInfoItem
+description: Договор по которому необходимо произвести оплату
+additionalProperties: false 
+properties:
+  contractId:
+    $ref: ./ContractId.v1.yaml
+  typeId:
+    $ref: ./AccrualType.v1.yaml
+  paymentAmount:
+    $ref: ./PaymentAmount.v1.yaml
+  accrualEndDate:
+    type: string
+    description: Дата, до которой должен быть произведен платеж
+    format: date
+required:
+  - contractId
+  - typeId
+  - paymentAmount
+  - accrualEndDate
+x-examples:
+  example-1:
+    contractId:
+      $ref: './ContractId.v1.yaml#/x-examples/example-1'
+    typeId:
+      $ref: './AccrualType.v1.yaml#/x-examples/example-1'
+    paymentAmount: '52.4'
+    accrualEndDate: '2020-10-10'

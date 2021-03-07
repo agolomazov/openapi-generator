@@ -1,0 +1,8 @@
+type: string
+title: PaymentAmount
+description: Сумма платежа
+minLength: 1
+maxLength: 25
+pattern: '^(?:0|[1-9]\d*)(?:\.\d{1,2})?$'
+x-examples:
+  example-1: '31.40'

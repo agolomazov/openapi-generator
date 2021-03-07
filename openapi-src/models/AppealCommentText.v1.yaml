@@ -1,0 +1,8 @@
+title: AppealCommentText
+type: string
+minLength: 0
+maxLength: 1000
+description: Текст комментария к обращению
+example: 'Прошу рассмотреть обращение'
+x-examples:
+  example-1: 'Прошу рассмотреть обращение'

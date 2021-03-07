@@ -1,0 +1,12 @@
+title: SaveOffsetToDifferentContractAppealsRequest
+type: object
+properties:
+  appeals:
+    type: array
+    items:
+      $ref: ./OffsetToDifferentContractAppealData.v1.yaml
+description: 'Запрос на сохранение данных по обращениям "Зачет денежных средств на другой договор"'
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './OffsetToDifferentContractAppealData.v1.yaml#/x-examples/example-1'

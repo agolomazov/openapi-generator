@@ -1,0 +1,59 @@
+type: object
+title: AppealState
+description: Состояние обращения
+additionalProperties: false
+properties:
+  code:
+    type: string
+    description: Идентификатор
+    maxLength: 255
+    minLength: 1
+  name:
+    type: string
+    maxLength: 255
+    minLength: 1
+    description: Название
+  finalState:
+    type: boolean
+    description: Признак конечного состояния
+required:
+  - code
+  - name
+  - finalState
+x-examples:
+  example-sent:
+    code: SENT
+    name: Отправлено
+    finalState: false
+  example-delivered:
+    code: DELIVERED
+    name: Доставлено
+    finalState: false
+  example-intermediate-answer:
+    code: INTERIM_ANSWER
+    name: Промежуточный ответ
+    finalState: false
+  example-info-requested:
+    code: ADDITIONAL_INFO_REQUESTED
+    name: Запрошена дополнительная информация
+    finalState: false
+  example-info-provided:
+    code: ADDITIONAL_INFO_PROVIDED
+    name: Предоставлена дополнительная информация
+    finalState: false
+  example-final-answer:
+    code: FINAL_ANSWER
+    name: Итоговый ответ
+    finalState: true
+  example-sign-requested:
+    code: SIGN_REQUESTED
+    name: Запрошена подпись
+    finalState: false
+  example-signed:
+    code: SIGNED
+    name: Подписан
+    finalState: false
+  example-rejected:
+    code: REJECTED
+    name: Отклонен
+    finalState: false

@@ -1,0 +1,44 @@
+title: IncomingDocumentSignatureNotRequiredAppeal
+type: object
+additionalProperties: false
+description: 'Ответ с входящим документом, не требующим подписания, для раздела Сообщения'
+x-examples:
+  example-1:
+    commonData:
+      $ref: ./CommonAppealData.v1.yaml#/x-examples/example-incoming-document-signature-not-required
+    additionalData:
+      attachments:
+        - $ref: ../models/Attachment.v1.yaml#/x-examples/example-1
+      contract:
+        $ref: ../models/ContractIdNumberDate.v1.yaml#/x-examples/example-1
+      outgoingNumber:
+        $ref: ../models/OutgoingNumber.v1.yaml#/x-examples/example-1
+      outgoingDate:
+        $ref: ../models/OutgoingDate.v1.yaml#/x-examples/example-1
+properties:
+  commonData:
+    $ref: ./CommonAppealData.v1.yaml
+  additionalData:
+    type: object
+    additionalProperties: false
+    description: Дополнительные данные
+    required:
+      - contract
+    properties:
+      attachments:
+        type: array
+        minItems: 0
+        maxItems: 255
+        uniqueItems: true
+        description: Список входящих документов
+        items:
+          $ref: '../models/Attachment.v1.yaml'
+      outgoingNumber:
+        $ref: ./OutgoingNumber.v1.yaml
+      outgoingDate:
+        $ref: ./OutgoingDate.v1.yaml
+      contract:
+        $ref: ../models/ContractIdNumberDate.v1.yaml
+required:
+  - commonData
+  - additionalData

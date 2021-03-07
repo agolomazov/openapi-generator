@@ -1,0 +1,28 @@
+title: MissingFacilityData
+type: object
+description: Количество отсутствующей информации по объектам аренды
+additionalProperties: false
+x-examples:
+  example-1:
+    address: 5
+    area: 5
+    cadastralNumber: 5
+properties:
+  address:
+    type: integer
+    example: 123
+    minimum: 0
+    maximum: 2147483647
+    description: 'Количество объектов, в которых не указан адрес'
+  area:
+    type: integer
+    example: 123
+    minimum: 0
+    maximum: 2147483647
+    description: 'Количество объектов, в которых не указана площадь'
+  cadastralNumber:
+    type: integer
+    example: 123
+    minimum: 0
+    maximum: 2147483647
+    description: 'Количество объектов, в которых не указан кадастровый номер'

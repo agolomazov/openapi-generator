@@ -1,0 +1,30 @@
+title: ChangeDirectorAppealData
+type: object
+description: 'Данные обращения "Смена руководителя ЖС "Изменить реквизиты Арендатора"'
+x-examples:
+  example-1:
+    name:
+      $ref: '../PersonName.v1.yaml#/x-examples/example-ri'
+    comment:
+      $ref: '../AppealCommentText.v1.yaml#/x-examples/example-1'
+    commonData:
+      $ref: './CommonAppealRequestData.v1.yaml#/x-examples/example-1'
+    fileIdList:
+      - $ref: ../FileId.v1.yaml#/x-examples/example-1
+properties:
+  comment:
+    $ref: ../AppealCommentText.v1.yaml
+  name:
+    $ref: ../PersonName.v1.yaml
+  commonData:
+    $ref: ./CommonAppealRequestData.v1.yaml
+  fileIdList:
+    type: array
+    description: Идентификаторы вложенных файлов
+    minItems: 1
+    maxItems: 5
+    items:
+      $ref: ../FileId.v1.yaml
+required:
+  - commonData
+  - fileIdList

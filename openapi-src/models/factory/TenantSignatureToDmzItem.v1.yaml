@@ -1,0 +1,48 @@
+type: object
+title: TenantSignatureToDmzItem
+description: Данные подписи арендатора для отправки в ДМЗ
+additionalProperties: false
+properties:
+  id:
+    $ref: ../FileId.v1.yaml
+  documentId:
+    $ref: ../FileId.v1.yaml
+  name:
+    type: string
+    minLength: 0
+    maxLength: 255
+    description: Название файла
+  contentBody:
+    $ref: ../Base64Content.v1.yaml
+  createdDate:
+    title: createdDate
+    description: Дата и время создания
+    type: string
+    format: date-time
+    x-examples:
+      example-1: '2020-10-05T14:19:19.205598Z'
+required:
+  - id
+  - documentId
+  - name
+  - contentBody
+  - createdDate
+example:
+  id:
+    $ref: '../FileId.v1.yaml#/x-examples/example-2'
+  documentId:
+    $ref: '../FileId.v1.yaml#/x-examples/example-3'
+  name: 'signature.p7s'
+  contentBody:
+    $ref: '../Base64Content.v1.yaml#/x-examples/example-1'
+  createdDate: '2020-10-05T14:19:19.205598Z'
+x-examples:
+  example-1:
+    id:
+      $ref: '../FileId.v1.yaml#/x-examples/example-2'
+    documentId:
+      $ref: '../FileId.v1.yaml#/x-examples/example-3'
+    name: 'signature.p7s'
+    contentBody:
+      $ref: '../Base64Content.v1.yaml#/x-examples/example-1'
+    createdDate: '2020-10-05T14:19:19.205598Z'

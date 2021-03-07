@@ -1,0 +1,24 @@
+type: object
+title: FileDownloadInfo
+description: Информация о файле при скачивании
+additionalProperties: false
+example:
+  name: file.pdf
+  content:
+    $ref: '../Base64Content.v1.yaml#/x-examples/example-1'
+x-examples:
+  example-1:
+    name: file.pdf
+    content:
+      $ref: '../Base64Content.v1.yaml#/x-examples/example-1'
+properties:
+  name:
+    type: string
+    minLength: 0
+    maxLength: 255
+    description: Название
+  content:
+    $ref: '../Base64Content.v1.yaml'
+required:
+  - name
+  - content

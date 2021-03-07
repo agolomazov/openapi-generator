@@ -1,0 +1,17 @@
+title: ChangeJuridicalAddressAppeal
+type: object
+description: 'Обращение "Смена юридического адреса/КПП"'
+x-examples:
+  example-1:
+    commonData:
+      $ref: './CommonAppealData.v1.yaml#/x-examples/example-change-juridical-address'
+    additionalData:
+      $ref: './ChangeJuridicalAddressAppealAdditionalData.v1.yaml#/x-examples/example-1'
+properties:
+  commonData:
+    $ref: ./CommonAppealData.v1.yaml
+  additionalData:
+    $ref: ./ChangeJuridicalAddressAppealAdditionalData.v1.yaml
+required:
+  - commonData
+  - additionalData

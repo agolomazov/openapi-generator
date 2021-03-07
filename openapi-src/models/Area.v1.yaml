@@ -1,0 +1,21 @@
+type: object
+title: Area
+description: Площадь
+additionalProperties: false
+x-examples:
+  example-1:
+    value: '5243.5'
+    measurementUnit: кв. м
+properties:
+  value:
+    type: string
+    example: '5243.5'
+    pattern: "^([1-9]\\d{0,9})|0(\\.\\d{1,10})?$"
+    minLength: 1
+    maxLength: 21
+    description: Значение площади
+  measurementUnit:
+    $ref: '../models/AreaMeasurementUnit.v1.yaml'
+required:
+  - value
+  - measurementUnit

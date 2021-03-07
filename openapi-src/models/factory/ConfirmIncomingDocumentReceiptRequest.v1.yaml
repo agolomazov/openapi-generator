@@ -1,0 +1,20 @@
+type: object
+title: ConfirmIncomingDocumentReceiptRequest
+description: 'Запрос на подтверждение получения входящего документа'
+additionalProperties: false
+properties:
+  file:
+    type: string
+    description: Файл по обращению (в base64)
+  fileName:
+    type: string
+    description: Название файла
+    minLength: 1
+    maxLength: 255
+required:
+  - file
+  - fileName
+x-examples:
+  example-1:
+    file: dGVzdA==
+    fileName: 'Подтверждение получения документа от 2020-06-09 №123.pdf'

@@ -1,0 +1,533 @@
+openapi: 3.0.3
+info:
+  title: Спецификация API ЛК Арендатора
+  version: 1.1.7
+  x-basis:
+    - name: Таблица ИТ сервисов ЛК Арендатора
+      version: '9'
+      location: 'https://atlas.swec.sbercloud.ru/wiki/pages/viewpage.action?pageId=18919079'
+  description: Спецификация сервисов ЛК Арендатора
+  contact:
+    name: Федосеев Александр Юрьевич
+    email: fedoseev.ay@esphere.ru
+servers:
+  - url: 'http://localhost:4200'
+    description: Локальный сервер разработки
+  - url: 'http://arlk-dev-rosim.apps.ocp-public.sbercloud.ru'
+    description: DEV стенд
+paths:
+  /api/v1/getHealth:
+    post:
+      summary: Проверка работоспособности сервера
+      description: Распознать текущую работоспособность сервера
+      operationId: ARLK_TechAPI.GetHealth
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthResponse'
+              examples:
+                example-success:
+                  value:
+                    $ref: '#/components/schemas/healthResponse/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/createAppeal:
+    post:
+      summary: Создать обращение
+      description: Создание обращения в ЛК (входящий документ для арендатора)
+      operationId: ARLK_AppealAPI.CreateAppeal
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createAppealRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/createAppealRequest/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/createComment:
+    post:
+      summary: Отправить комментарий к обращению
+      description: Отправить комментарий к обращению
+      operationId: ARLK_AppealAPI.CreateComment
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createCommentRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/createCommentRequest/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+components:
+  schemas:
+    error:
+      type: object
+      title: Error
+      description: Ошибка
+      x-examples:
+        example-1:
+          timestamp: '2020-07-28T14:32:07.916+0000'
+          status: 400
+          error: Bad Request
+          message: JSON parse error
+          path: /api/v1/createComment
+      additionalProperties: false
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          example: '2020-07-28T14:32:07.916+0000'
+          description: Код ошибки
+        status:
+          type: integer
+          format: int64
+          example: 400
+          description: код ошибки
+        error:
+          type: string
+          minLength: 0
+          maxLength: 255
+          description: Сообщение об ошибке
+          example: Bad Request
+        message:
+          type: string
+          minLength: 0
+          maxLength: 255
+          description: Описание ошибки
+          example: "JSON parse error: Unrecognized token 'ty': was expecting 'null', 'true', 'false' or NaN;"
+        path:
+          type: string
+          minLength: 0
+          maxLength: 255
+          description: URL
+          example: /api/v1/createComment
+      required:
+        - timestamp
+        - status
+        - error
+        - message
+        - path
+    landlordId:
+      title: landlordId
+      description: Идентификатор Арендодателя
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      x-examples:
+        rosim: 3ab5270f-6d28-4b9b-b3c4-0187e9c59669
+        rosim-2: 3ab5270f-6d28-4b9b-b3c4-0187e9c59683
+        rosim-3: 3ab5270f-6d28-4b9b-b3c4-0187e9c59671
+        rosim-4: 3ab5270f-6d28-4b9b-b3c4-0187e9c59670
+        rosim-5: 3ab5270f-6d28-4b9b-b3c4-0187e9c59681
+        rosim-6: 3ab5270f-6d28-4b9b-b3c4-0187e9c59685
+        rosim-7: 3ab5270f-6d28-4b9b-b3c4-0187e9c59583
+        rosim-8: 3ab5270f-6d28-4b9b-b3c4-0187e9c59584
+        rosim-9: 3ab5270f-6d28-4b9b-b3c4-0187e9c59691
+        rosim-10: 3ab5270f-6d28-4b9b-b3c4-0187e9c59690
+        rosim-11: 3ab5270f-6d28-4b9b-b3c4-0187e9c59675
+    contractId:
+      title: contractId
+      description: Идентификатор Договора аренды
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      example: 99019ca8-efc4-4882-b4cc-e9777dd0631c
+      x-examples:
+        example-1: 99019ca8-efc4-4882-b4cc-e9777dd0631c
+        example-2: 96177ef0-6680-48c1-b02c-e156d3f0e808
+        example-3: 96177ef0-6680-48c1-b02c-e156d3f0e815
+        example-4: 96177ef0-6680-48c1-b02c-e156d3f0e810
+        example-5: 99019ca8-efc4-4882-b4cc-e9777dd0635c
+        example-6: 96177ef0-6680-48c1-b02c-e156d3f0e814
+        example-7: 96177ef0-6680-48c1-b02c-e156d3f0e816
+        example-8: 96177ef0-6680-48c1-b02c-e156d3f0e820
+        example-9: 96177ef0-6680-48c1-b02c-e156d3f0e821
+    healthResponse:
+      type: object
+      title: healthResponse
+      description: Проверка работоспособности сервера
+      additionalProperties: false
+      properties:
+        status:
+          type: boolean
+          description: Статус работоспособности сервера
+      required:
+        - status
+      x-examples:
+        example-1:
+          status: true
+    tenantId:
+      title: tenantId
+      description: Идентификатор арендатора
+      type: string
+      minLength: 1
+      maxLength: 36
+      x-examples:
+        example-1: '6883039659745280002'
+    messageId:
+      title: messageId
+      description: Идентификатор обращения
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      x-examples:
+        example-1: 0d02ff48-8fd7-479a-8a50-9a10a567810a
+    commentId:
+      title: commentId
+      description: Идентификатор комментария
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      x-examples:
+        example-1: a6c83bbc-ea6c-419e-b2f5-59148e31d720
+    createdDate:
+      title: createdDate
+      description: Дата и время создания
+      type: string
+      format: date-time
+      x-examples:
+        example-1: '2020-10-05T14:19:19.205598Z'
+    messageType:
+      title: messageType
+      description: Тип обращения
+      type: string
+      minLength: 1
+      maxLength: 100
+      x-examples:
+        example-1: LK_APPEAL_TYPE_NOT_REQUIRED_CONFIRMATION_NOT_REQUIRED_SIGN
+    messageStatus:
+      title: messageStatus
+      description: Статус обращения
+      type: string
+      minLength: 1
+      maxLength: 100
+      example: LK_MESSAGE_STATUS_DELIVERED
+      x-examples:
+        example-1: LK_MESSAGE_STATUS_DELIVERED
+        example-2: LK_MESSAGE_STATUS_INTERIM_ANSWER
+        example-3: LK_MESSAGE_STATUS_ADDITIONAL_INFO_REQUESTED
+        example-4: LK_MESSAGE_STATUS_ADDITIONAL_INFO_PROVIDED
+        example-5: LK_MESSAGE_STATUS_FINAL_ANSWER
+        example-6: LK_MESSAGE_STATUS_SIGN_REQUESTED
+        example-7: LK_MESSAGE_STATUS_SIGNED
+        example-9: LK_MESSAGE_STATUS_REJECTED
+    file:
+      type: object
+      title: file
+      description: Прикрепленный файл
+      additionalProperties: false
+      properties:
+        fileId:
+          $ref: '#/components/schemas/fileId'
+        fileSize:
+          $ref: '#/components/schemas/fileSize'
+        fileName:
+          $ref: '#/components/schemas/fileName'
+        base64:
+          $ref: '#/components/schemas/fileBase64'
+        fileType:
+          $ref: '#/components/schemas/fileType'
+        createdDate:
+          $ref: '#/components/schemas/createdDate'
+      required:
+        - fileId
+        - fileSize
+        - fileName
+        - fileType
+        - createdDate
+      x-examples:
+        example-1:
+          fileId:
+            $ref: '#/components/schemas/fileId/x-examples/example-1'
+          fileSize: 123456
+          fileName: Имя файла
+          fileType:
+            $ref: '#/components/schemas/fileType/x-examples/example-1'
+          createdDate:
+            $ref: '#/components/schemas/createdDate/x-examples/example-1'
+    fileType:
+      title: fileType
+      description: Тип файла
+      type: string
+      minLength: 1
+      maxLength: 255
+      example: LK_ORIGINAL_DOC
+      x-examples:
+        example-1: LK_ORIGINAL_DOC
+        example-2: LK_VISUALIZATION
+        example-3: LK_TENANT_SIGN
+        example-4: LK_LANDLORD_SIGN
+    fileId:
+      title: fileId
+      description: Идентификатор файла
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      x-examples:
+        example-1: 0d02ff48-8fd7-479a-8a50-9a10a567810a
+    fileSize:
+      title: fileSize
+      description: Размер файла
+      type: integer
+      maximum: 2147483647
+      minimum: 0
+    fileName:
+      title: fileName
+      description: Имя файла
+      type: string
+      minLength: 1
+      maxLength: 255
+    fileBase64:
+      title: fileBase64
+      description: Файл в base64
+      type: string
+      format: byte
+      minLength: 1
+      maxLength: 20000000
+      x-examples:
+        example-1: dGVzdA==
+    signatureTennantFileId:
+      title: signatureTennantFileId
+      description: Идентификатор файла подписи арендатора
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      x-examples:
+        example-1: 0d02ff48-8fd7-479a-8a50-9a10a567810a
+    signatureLandlordFileId:
+      title: signatureLandlordFileId
+      description: Идентификатор файла подписи арендодателя
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      x-examples:
+        example-1: 0d02ff48-8fd7-479a-8a50-9a10a567810a
+    fileStampId:
+      title: fileStampId
+      description: Идентификатор файла с визуализацией ЭЦП
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      x-examples:
+        example-1: 0d02ff48-8fd7-479a-8a50-9a10a567810a
+    document:
+      type: object
+      title: document
+      description: Вложение
+      additionalProperties: false
+      properties:
+        fileId:
+          $ref: '#/components/schemas/fileId'
+        signatureTennantFileId:
+          $ref: '#/components/schemas/signatureTennantFileId'
+        signatureLandlordFileId:
+          $ref: '#/components/schemas/signatureLandlordFileId'
+        fileStampId:
+          $ref: '#/components/schemas/fileStampId'
+      required:
+        - fileId
+      x-examples:
+        example-1:
+          fileId:
+            $ref: '#/components/schemas/fileId/x-examples/example-1'
+          signatureTennantFileId:
+            $ref: '#/components/schemas/signatureTennantFileId/x-examples/example-1'
+          signatureLandlordFileId:
+            $ref: '#/components/schemas/signatureLandlordFileId/x-examples/example-1'
+          fileStampId:
+            $ref: '#/components/schemas/fileStampId/x-examples/example-1'
+    documentList:
+      title: documentList
+      type: array
+      minItems: 0
+      maxItems: 100
+      description: Список вложений
+      items:
+        $ref: '#/components/schemas/document'
+    fileList:
+      title: fileList
+      type: array
+      minItems: 0
+      maxItems: 100
+      description: Список файлов
+      items:
+        $ref: '#/components/schemas/file'
+    createAppealRequest:
+      type: object
+      title: createAppealRequest
+      description: Запрос на создание обращения
+      additionalProperties: false
+      properties:
+        tenantId:
+          $ref: '#/components/schemas/tenantId'
+        messageId:
+          $ref: '#/components/schemas/messageId'
+        status:
+          $ref: '#/components/schemas/messageStatus'
+        createdDate:
+          $ref: '#/components/schemas/createdDate'
+        name:
+          type: string
+          description: Наименование обращения
+          minLength: 1
+          maxLength: 255
+        messageType:
+          $ref: '#/components/schemas/messageType'
+        contractId:
+          $ref: '#/components/schemas/contractId'
+        landlordId:
+          $ref: '#/components/schemas/landlordId'
+        outgoingNumber:
+          type: string
+          description: Номер исходящего письма
+          minLength: 1
+          maxLength: 50
+        outgoingDate:
+          type: string
+          description: Дата исходящего письма
+          format: date
+        documents:
+          $ref: '#/components/schemas/documentList'
+        files:
+          $ref: '#/components/schemas/fileList'
+      required:
+        - tenantId
+        - messageId
+        - status
+        - createdDate
+        - name
+        - messageType
+        - outgoingNumber
+        - outgoingDate
+      x-examples:
+        example-1:
+          tenantId:
+            $ref: '#/components/schemas/tenantId/x-examples/example-1'
+          messageId:
+            $ref: '#/components/schemas/messageId/x-examples/example-1'
+          status:
+            $ref: '#/components/schemas/messageStatus/x-examples/example-1'
+          createdDate:
+            $ref: '#/components/schemas/createdDate/x-examples/example-1'
+          name: Обращение №1
+          messageType:
+            $ref: '#/components/schemas/messageType/x-examples/example-1'
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-1'
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim'
+          outgoingNumber: ДС-1234
+          outgoingDate: '2020-10-27'
+          documents:
+            - $ref: '#/components/schemas/document/x-examples/example-1'
+          files:
+            - $ref: '#/components/schemas/file/x-examples/example-1'
+    createCommentRequest:
+      type: object
+      title: createCommentRequest
+      description: Запрос на отправку комментария к обращению
+      additionalProperties: false
+      properties:
+        tenantId:
+          $ref: '#/components/schemas/tenantId'
+        commentId:
+          $ref: '#/components/schemas/commentId'
+        messageId:
+          $ref: '#/components/schemas/messageId'
+        status:
+          $ref: '#/components/schemas/messageStatus'
+        createdDate:
+          $ref: '#/components/schemas/createdDate'
+        text:
+          type: string
+          description: Текст комментария
+          minLength: 1
+          maxLength: 4000
+        documents:
+          $ref: '#/components/schemas/documentList'
+        files:
+          $ref: '#/components/schemas/fileList'
+      required:
+        - tenantId
+        - commentId
+        - messageId
+        - createdDate
+        - status
+      x-examples:
+        example-1:
+          tenantId:
+            $ref: '#/components/schemas/tenantId/x-examples/example-1'
+          commentId:
+            $ref: '#/components/schemas/commentId/x-examples/example-1'
+          messageId:
+            $ref: '#/components/schemas/messageId/x-examples/example-1'
+          status:
+            $ref: '#/components/schemas/messageStatus/x-examples/example-1'
+          createdDate:
+            $ref: '#/components/schemas/createdDate/x-examples/example-1'
+          text: 'Спасибо за обращение'
+          documents:
+            - $ref: '#/components/schemas/document/x-examples/example-1'
+          files:
+            - $ref: '#/components/schemas/file/x-examples/example-1'
+  parameters:
+    traceId:
+      description: Идентификатор операции
+      schema:
+        title: traceId
+        description: traceId
+        type: string
+        minLength: 36
+        maxLength: 36
+        example: a344b0ec-c83a-4b3b-9f99-f75899f9b558
+      in: header
+      name: traceId
+      required: true
+  responses:
+    defaultError:
+      description: Ошибка
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+          examples:
+            example-1:
+              value:
+                $ref: '#/components/schemas/error/x-examples/example-1'
+tags:
+  - name: default
+    description: Default

@@ -1,0 +1,10 @@
+type: string
+title: FeedbackSubjectType
+description: Тема отзыва
+minLength: 1
+maxLength: 255
+example: GRATITUDE
+x-examples:
+  example-1: GRATITUDE
+  example-2: SUGGESTION
+  example-3: COMPLAINT

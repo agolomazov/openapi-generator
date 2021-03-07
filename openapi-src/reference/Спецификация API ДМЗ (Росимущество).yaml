@@ -1,0 +1,3842 @@
+openapi: 3.0.3
+info:
+  title: Спецификация API ДМЗ (Росимущество)
+  version: 2.0.6
+  x-basis:
+    - name: Таблица ИТ сервисов Росимущества
+      version: '34'
+      location: 'https://atlas.swec.sbercloud.ru/wiki/pages/viewpage.action?pageId=14100150'
+    - name: Описание сервисов ДМЗ (Базовые)
+      version: '6'
+      location: 'https://atlas.swec.sbercloud.ru/wiki/pages/viewpage.action?pageId=22366557'
+    - name: Описание сервисов ДМЗ (ЖС)
+      version: '5'
+      location: 'https://atlas.swec.sbercloud.ru/wiki/pages/viewpage.action?pageId=22366561'
+  description: Спецификация сервисов ДМЗ (Росимущество)
+  contact:
+    name: Федосеев Александр Юрьевич
+    email: fedoseev.ay@esphere.ru
+servers:
+  - url: 'http://localhost:4100'
+    description: Локальный сервер разработки
+  - url: 'https://rsi-test.rosim.ru'
+    description: Тестовый сервер Росимущества
+paths:
+  /api/v1/sessionCreate:
+    post:
+      summary: Создание сессии работы с ДМЗ
+      description: Создание сессии работы с ДМЗ
+      operationId: RI_DmzSession.Create
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sessionCreateRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/sessionCreateRequest/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sessionCreateResponse'
+              examples:
+                example-1:
+                  value:
+                    $ref: '#/components/schemas/sessionCreateResponse/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/sessionCheck:
+    post:
+      summary: Проверка сессии
+      description: Проверка сессии
+      operationId: RI_DmzSession.Check
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sessionCheckResponse'
+              examples:
+                example-1:
+                  value:
+                    $ref: '#/components/schemas/sessionCheckResponse/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/sessionClose:
+    post:
+      summary: Закрытие cессии
+      description: Закрытие cессии
+      operationId: RI_DmzSession.Close
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sessionCloseResponse'
+              examples:
+                example-1:
+                  value:
+                    $ref: '#/components/schemas/sessionCloseResponse/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/getContracts:
+    post:
+      summary: Поиск договоров аренды по параметрам
+      description: Отбор данных по договорам аренды по параметрам
+      operationId: RI_ContractAPI.GetContractsByParams
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+        - schema:
+            type: integer
+            example: 20
+            minimum: 0
+            maximum: 2147483647
+          in: query
+          name: size
+          description: Размер страницы
+        - schema:
+            type: string
+            minLength: 0
+            maxLength: 255
+            example: 'address,asc'
+          in: query
+          name: sort
+          description: 'Сортировка в формате "поле, направление"'
+        - schema:
+            type: integer
+            example: 1
+            minimum: 0
+            maximum: 2147483647
+          in: query
+          name: page
+          description: Номер страницы
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contractListRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/contractListRequest/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contractListResponse'
+              examples:
+                example-1:
+                  value:
+                    $ref: '#/components/schemas/contractListResponse/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/getFacilityRentals:
+    post:
+      summary: Поиск объектов аренды по параметрам
+      description: Отбор объектов аренды по параметрам
+      operationId: RI_FacilityRentalAPI.GetFacilityRentalsByParams
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+        - schema:
+            type: integer
+            example: 20
+            minimum: 0
+            maximum: 2147483647
+          in: query
+          name: size
+          description: Размер страницы
+        - schema:
+            type: string
+            minLength: 0
+            maxLength: 255
+            example: 'address,asc'
+          in: query
+          name: sort
+          description: 'Сортировка в формате "поле, направление"'
+        - schema:
+            type: integer
+            example: 1
+            minimum: 0
+            maximum: 2147483647
+          in: query
+          name: page
+          description: Номер страницы
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/facilityRentalListRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/facilityRentalListRequest/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/facilityRentalListResponse'
+              examples:
+                example-1:
+                  value:
+                    $ref: '#/components/schemas/facilityRentalListResponse/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/getTenantAttributes:
+    post:
+      summary: Получение атрибутов арендатора
+      description: Получение данных по арендатору
+      operationId: RI_TenantAPI.GetTenantAttributes
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      tags:
+        - default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tenantAttributesResponse'
+              examples:
+                example-1:
+                  value:
+                    $ref: '#/components/schemas/tenantAttributesResponse/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/defaultError'
+    parameters: [ ]
+  /api/v1/getLandlord:
+    post:
+      summary: Получение Арендодателя
+      description: Получение Арендодателя
+      operationId: RI_LandlordAPI.GetLandlord
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/landlordRequest'
+            examples:
+              rosim:
+                value:
+                  $ref: '#/components/schemas/landlordRequest/x-examples/rosim'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/landlordResponse'
+              examples:
+                example-success:
+                  value:
+                    $ref: '#/components/schemas/landlordItem/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/getLandlordList:
+    post:
+      summary: Получение списка Арендодателей
+      description: Получение списка Арендодателей
+      operationId: RI_LandlordAPI.GetLandlordList
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/landlordListResponse'
+              examples:
+                example-success:
+                  value:
+                    - id: 3ab5270f-6d28-4b9b-b3c4-0187e9c59683
+                      name: МТУ Росимущества в Мурманской области и Республике Карелия
+                      legalAddress: 183006, г. Мурманск, ул. Пушкинская, 12
+                      inn: '5190915348'
+                      kpp: '519001001'
+                      account:
+                        - account: '40101810040300017001'
+                          bik: '044705001'
+                          bankName: Отделение Мурманск
+                      oktmo: '47701000001'
+                      email: tu51@rosim.ru
+                      phone: "+7 8142 59-36-27"
+                    - id: 3ab5270f-6d28-4b9b-b3c4-0187e9c59669
+                      name: МТУ Росимущества в Архангельской области и НАО
+                      legalAddress: 163000, г. Архангельск, ул. Карла Либкнехта, д. 2
+                      inn: '2901194203'
+                      kpp: '290101001'
+                      account:
+                        - account: '40101810500000010003'
+                          bik: '041117001'
+                          bankName: Отделение Архангельск
+                      oktmo: '11701000001'
+                      email: tu29@rosim.ru
+                      phone: "+7 8182 65-71-95"
+                    - id: 3ab5270f-6d28-4b9b-b3c4-0187e9c59671
+                      name: МТУ Росимущества в г. Санкт-Петербурге и Ленинградской области
+                      legalAddress: 191186, г. Санкт-Петербург, ул. Гороховая, д. 2/6, лит. А
+                      inn: '7838426520'
+                      kpp: '784001001'
+                      account:
+                        - account: '40302810500001000001'
+                          bik: '044030001'
+                          bankName: ГРКЦ ГУ БАНКА РОССИИ
+                          corAccount: '30101810400000000225'
+                      oktmo: '40909000001'
+                      email: tu78@rosim.ru
+                      phone: "+7 812 643-55-71"
+                    - id: 3ab5270f-6d28-4b9b-b3c4-0187e9c59670
+                      name: МТУ Росимущества в Краснодарском крае и Республике Адыгея
+                      legalAddress: 350063, г. Краснодар, ул. Октябрьская, д.12
+                      inn: '2308171570'
+                      kpp: '230901001'
+                      account:
+                        - account: '40101810300000010013'
+                          bik: '040349001'
+                          bankName: Южное Главное Управление Банка России г. Краснодар
+                      oktmo: '03701000001'
+                      email: tu23@rosim.ru
+                      phone: "+7 861 267-27-97"
+                    - id: 3ab5270f-6d28-4b9b-b3c4-0187e9c59681
+                      name: МТУ Росимущества в Псковской и Новгородской областях
+                      legalAddress: 173004, г. Великий Новгород, ул. Фёдоровский ручей, д. 6
+                      inn: '5321134051'
+                      kpp: '532101001'
+                      account:
+                        - account: '40101810440300018001'
+                          bik: '044959001'
+                          bankName: Отделение НОВГОРОД
+                      oktmo: '49701000001'
+                      email: tu53@rosim.ru
+                      phone: 7 8162 76-51-15
+                    - id: 3ab5270f-6d28-4b9b-b3c4-0187e9c59685
+                      name: МТУ Росимущества в г. Москве
+                      legalAddress: 107139, г. Москва, Орликов пер., д.3, кор. Б
+                      inn: '7708701670'
+                      kpp: '770801001'
+                      account:
+                        - account: '40101810045250010041'
+                          bik: '044525000'
+                          bankName: Отделение 1 Москва
+                      oktmo: '45378000000'
+                      email: tu77@rosim.ru
+                      phone: "+7 495 608-12-59"
+                    - id: 3ab5270f-6d28-4b9b-b3c4-0187e9c59583
+                      name: МТУ Росимущества в Республике Дагестан
+                      legalAddress: 367000, Республика Дагестан, г. Махачкала, ул. Дахадаева 88
+                      inn: '0562076424'
+                      kpp: '057201001'
+                      account:
+                        - account: '40101810600000010021'
+                          bik: '047003001'
+                          bankName: ГРКЦ НБ Республика Дагестан Банка России г. Махачкала
+                      oktmo: '82701370000'
+                      email: tu05@rosim.ru
+                      phone: "+7 8722 68-06-12"
+                    - id: 3ab5270f-6d28-4b9b-b3c4-0187e9c59584
+                      name: МТУ Росимущества в Красноярском крае, Республике Хакасия и Республике Тыва
+                      legalAddress: 660049, город Красноярск, проспект Мира, 63
+                      inn: '2466222186'
+                      kpp: '047010001'
+                      account:
+                        - account: '40101810600000010001'
+                          bik: '040407001'
+                          bankName: в отделении Красноярск
+                      oktmo: '04701000000'
+                      email: tu24@rosim.ru
+                      phone: "+7 391 212-10-11"
+                    - id: 3ab5270f-6d28-4b9b-b3c4-0187e9c59691
+                      name: МТУ Росимущества в Чувашской республике
+                      legalAddress: 430000, г. Саранск, ул.Коммунистическая, д.50
+                      inn: '2130073740'
+                      kpp: '213001001'
+                      account:
+                        - account: '40101810900000010005'
+                          bik: '049706001'
+                          bankName: ГРКЦ НБ ЧУВАШСКОЙ РЕСП.БАНКА РОССИИ г.Чебоксары
+                      oktmo: '97701000000'
+                      email: tu13@rosim.ru
+                      phone: "+7 8342 24-52-12"
+                    - id: 3ab5270f-6d28-4b9b-b3c4-0187e9c59690
+                      name: МТУ Росимущества в Тульской, Рязанской и Орловской областях
+                      legalAddress: 300041, г. Тула, ул. Сойфера, 16
+                      inn: '7106510491'
+                      kpp: '710601001'
+                      account:
+                        - account: '40101810700000010107'
+                          bik: '047003001'
+                          bankName: ГРКЦ ГУ Банка России по Тульской области
+                          corAccount: '30101810400000000225'
+                      oktmo: '70701000001'
+                      email: tu71@rosim.ru
+                      phone: "+7 4872 21-16-30"
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/getAccrual:
+    post:
+      summary: Получение начислений по договору аренды
+      description: Получение начислений по договору аренды
+      operationId: RI_ContractAPI.GetAccrual
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/page'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/accrualRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/accrualRequest/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/accrualResponse'
+              examples:
+                example-success:
+                  value:
+                    $ref: '#/components/schemas/accrualResponse/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/getHealth:
+    post:
+      summary: Проверка работоспособности сервера
+      description: Проверка работоспособности сервера
+      operationId: RI_TechAPI.GetHealth
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthResponse'
+              examples:
+                example-success:
+                  value:
+                    $ref: '#/components/schemas/healthResponse/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+      security: [ ]
+  /api/v1/getPaymentHystoryByContractId:
+    post:
+      summary: Получение истории платежей по договору аренды
+      description: Получение истории платежей по договору аренды
+      operationId: RI_ContractAPI.GetPaymentHistory
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/page'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/paymentHistoryRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/paymentHistoryRequest/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentHistoryResponse'
+              examples:
+                example-success:
+                  value:
+                    $ref: '#/components/schemas/paymentHistoryResponse/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/getDebtInfo:
+    post:
+      summary: Получение информации о задолженности
+      description: Получение информации о задолженности
+      operationId: RI_ContractAPI.GetDebtInfo
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/debtInfoResponse'
+              examples:
+                example-success:
+                  value:
+                    $ref: '#/components/schemas/debtInfoResponse/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/getPaymentInfo:
+    post:
+      summary: Получение данных для оплаты
+      description: Получение данных для оплаты
+      operationId: RI_ContractAPI.GetPaymentInfoByParams
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/page'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/paymentInfoRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/paymentInfoRequest/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentInfoResponse'
+              examples:
+                example-success:
+                  value:
+                    $ref: '#/components/schemas/paymentInfoResponse/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/getPaymentCalendarInfoByParams:
+    post:
+      summary: Получение информации о календаре оплат Арендатора
+      description: Получение информации о календаре оплат Арендатора
+      operationId: RI_PaymentCalendarAPI.GetPaymentCalendarInfoByParams
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/paymentCalendarInfoRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/paymentCalendarInfoRequest/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentCalendarInfoResponse'
+              examples:
+                example-success:
+                  value:
+                    - contractId: 96177ef0-6680-48c1-b02c-e156d3f0e808
+                      typeId: LK_ACCRUAL_TYPE_RENTAL
+                      paymentAmount: '12971.81'
+                      accrualEndDate: '2020-10-01'
+                    - contractId: 96177ef0-6680-48c1-b02c-e156d3f0e815
+                      typeId: LK_ACCRUAL_TYPE_RENTAL
+                      paymentAmount: '125000.00'
+                      accrualEndDate: '2020-10-01'
+                    - contractId: 96177ef0-6680-48c1-b02c-e156d3f0e810
+                      typeId: LK_ACCRUAL_TYPE_RENTAL
+                      paymentAmount: '8500.00'
+                      accrualEndDate: '2020-10-01'
+                    - contractId: 96177ef0-6680-48c1-b02c-e156d3f0e810
+                      typeId: LK_ACCRUAL_TYPE_RENTAL_PENALTY
+                      paymentAmount: '1.25'
+                      accrualEndDate: '2020-10-01'
+                    - contractId: 96177ef0-6680-48c1-b02c-e156d3f0e809
+                      typeId: LK_ACCRUAL_TYPE_RENTAL
+                      paymentAmount: '20000.00'
+                      accrualEndDate: '2020-10-10'
+                    - contractId: 96177ef0-6680-48c1-b02c-e156d3f0e814
+                      typeId: LK_ACCRUAL_TYPE_RENTAL
+                      paymentAmount: '5000.00'
+                      accrualEndDate: '2020-10-10'
+                    - contractId: 96177ef0-6680-48c1-b02c-e156d3f0e814
+                      typeId: LK_ACCRUAL_TYPE_RENTAL_PENALTY
+                      paymentAmount: '20.05'
+                      accrualEndDate: '2020-10-10'
+                    - contractId: 96177ef0-6680-48c1-b02c-e156d3f0e816
+                      typeId: LK_ACCRUAL_TYPE_RENTAL
+                      paymentAmount: '12000.00'
+                      accrualEndDate: '2020-10-15'
+                    - contractId: 96177ef0-6680-48c1-b02c-e156d3f0e820
+                      typeId: LK_ACCRUAL_TYPE_RENTAL
+                      paymentAmount: '5000.00'
+                      accrualEndDate: '2020-10-09'
+                    - contractId: 96177ef0-6680-48c1-b02c-e156d3f0e821
+                      typeId: LK_ACCRUAL_TYPE_RENTAL
+                      paymentAmount: '1500.00'
+                      accrualEndDate: '2020-10-08'
+                    - contractId: 96177ef0-6680-48c1-b02c-e156d3f0e821
+                      typeId: LK_ACCRUAL_TYPE_RENTAL_PENALTY
+                      paymentAmount: '150.11'
+                      accrualEndDate: '2020-10-08'
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/createAppeal:
+    post:
+      summary: Создать обращение
+      description: Создать обращение
+      operationId: RI_AppealAPI.CreateAppeal
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createAppealRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/createAppealRequest/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/createComment:
+    post:
+      summary: Отправить комментарий к обращению
+      description: Отправить комментарий к обращению
+      operationId: RI_AppealAPI.CreateComment
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createCommentRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/createCommentRequest/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/createFeedback:
+    post:
+      summary: Отправить оценку удовлетворенности ответом на обращение
+      description: Отправить оценку удовлетворенности ответом на обращение
+      operationId: RI_AppealAPI.CreateFeedback
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createFeedbackRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/createFeedbackRequest/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/getFileById:
+    post:
+      summary: Скачать файл
+      description: Скачать файл
+      operationId: RI_FileAPI.GetFile
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/getFileByIdRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/getFileByIdRequest/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFileByIdResponse'
+              examples:
+                example-success:
+                  value:
+                    $ref: '#/components/schemas/getFileByIdResponse/x-examples/example-1'
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/sendMessage:
+    post:
+      summary: Отправить сообщение в техническую поддержку
+      description: Отправить сообщение в техническую поддержку
+      operationId: RI_TechSupportAPI.SendMessage
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sendMessageRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/sendMessageRequest/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+  /api/v1/sendConsentOfEdm:
+    post:
+      summary: Отправить согласие на ЭДО
+      description: Отправить согласие на ЭДО
+      operationId: RI_TenantAPI.SendConsentOfEdm
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sendConsentOfEdmRequest'
+            examples:
+              example-1:
+                value:
+                  $ref: '#/components/schemas/sendConsentOfEdmRequest/x-examples/example-1'
+      responses:
+        '200':
+          description: OK
+        default:
+          $ref: '#/components/responses/defaultError'
+      tags:
+        - default
+components:
+  schemas:
+    emptyListFlag:
+      type: boolean
+      description: 'Флаг пустого массива, если true - в ответе не пришло ни одного элемента'
+    pageFirst:
+      type: boolean
+      description: Флаг первого результата (первая страница)
+    pageLast:
+      type: boolean
+      description: Флаг последнего результата (последняя страница)
+    pageNumber:
+      type: integer
+      description: Номер страницы
+      maximum: 2147483647
+      minimum: 0
+    pageNumberOfElements:
+      type: integer
+      description: Количество элементов на странице
+      maximum: 2147483647
+      minimum: 0
+    pageSize:
+      type: integer
+      description: Количество элементов на странице
+      maximum: 2147483647
+      minimum: 0
+    totalElements:
+      type: integer
+      description: Общее количество элементов
+      maximum: 2147483647
+      minimum: 0
+    totalPages:
+      type: integer
+      description: Общее количество страниц
+      maximum: 2147483647
+      minimum: 0
+    error:
+      type: object
+      title: Error
+      description: Ошибка
+      x-examples:
+        example-1:
+          timestamp: '2020-07-28T14:32:07.916+0000'
+          status: 400
+          error: Bad Request
+          message: "JSON parse error: Unrecognized token 'ty': was expecting 'null', 'true', 'false' or NaN;"
+          path: /api/v1/sessionCreate
+      additionalProperties: false
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          example: '2020-07-28T14:32:07.916+0000'
+          description: Код ошибки
+        status:
+          type: integer
+          format: int64
+          example: 400
+          description: код ошибки
+        error:
+          type: string
+          minLength: 0
+          maxLength: 255
+          description: Сообщение об ошибке
+          example: Bad Request
+        message:
+          type: string
+          minLength: 0
+          maxLength: 255
+          description: Описание ошибки
+          example: "JSON parse error: Unrecognized token 'ty': was expecting 'null', 'true', 'false' or NaN;"
+        path:
+          type: string
+          minLength: 0
+          maxLength: 255
+          description: URL
+          example: /api/v1/sessionCreate
+      required:
+        - timestamp
+        - status
+        - error
+        - message
+        - path
+    contractListRequest:
+      type: object
+      title: contractListRequest
+      description: Запрос на получение списка договоров аренды по параметрам
+      additionalProperties: false
+      x-examples:
+        example-1:
+          contractIds:
+            - 99019ca8-efc4-4882-b4cc-e9777dd0631c
+          contractNumber:
+            searchType: CONTAIN
+            value: '248'
+          contractDate:
+            searchType: BETWEEN
+            value: '2015-01-01'
+            valueTo: '2020-01-01'
+          expirationDate:
+            searchType: BETWEEN
+            value: '2015-01-01'
+            valueTo: '2066-01-01'
+          address:
+            searchType: CONTAIN
+            value: 'Приморский, МО Ка'
+          typeId:
+            $ref: '#/components/schemas/contractType/x-examples/example-1'
+          statusId:
+            $ref: '#/components/schemas/contractStatusType/x-examples/example-1'
+      properties:
+        contractIds:
+          type: array
+          minItems: 0
+          maxItems: 255
+          description: Список идентификаторов договоров аренды
+          items:
+            $ref: '#/components/schemas/contractId'
+        contractNumber:
+          type: object
+          additionalProperties: false
+          description: Номер
+          properties:
+            searchType:
+              $ref: '#/components/schemas/searchType'
+            value:
+              type: string
+              minLength: 0
+              maxLength: 255
+              example: '248'
+              description: Значение
+        contractDate:
+          type: object
+          additionalProperties: false
+          description: Дата
+          properties:
+            searchType:
+              $ref: '#/components/schemas/searchType'
+            value:
+              type: string
+              format: date
+              example: '2015-01-01'
+              description: 'Значение, с'
+            valueTo:
+              type: string
+              format: date
+              example: '2020-01-01'
+              description: 'Значение, по'
+        expirationDate:
+          type: object
+          additionalProperties: false
+          description: Дата окончания действия
+          properties:
+            searchType:
+              $ref: '#/components/schemas/searchType'
+            value:
+              type: string
+              format: date
+              example: '2015-01-01'
+              description: 'Значение, с'
+            valueTo:
+              type: string
+              format: date
+              example: '2066-01-01'
+              description: 'Значение, по'
+        address:
+          type: object
+          additionalProperties: false
+          description: Адрес объекта аренды
+          properties:
+            searchType:
+              $ref: '#/components/schemas/searchType'
+            value:
+              type: string
+              minLength: 0
+              maxLength: 1000
+              example: ' Приморский, МО Ка'
+              description: Значение
+        typeId:
+          $ref: '#/components/schemas/contractType'
+        statusId:
+          $ref: '#/components/schemas/contractStatusType'
+    contractListResponse:
+      type: object
+      title: ContractListResponse
+      description: Список Договоров аренды
+      additionalProperties: false
+      x-examples:
+        example-1:
+          content:
+            - $ref: '#/components/schemas/contract/x-examples/example-1'
+            - $ref: '#/components/schemas/contract/x-examples/example-2'
+            - $ref: '#/components/schemas/contract/x-examples/example-3'
+            - $ref: '#/components/schemas/contract/x-examples/example-4'
+            - $ref: '#/components/schemas/contract/x-examples/example-5'
+            - $ref: '#/components/schemas/contract/x-examples/example-6'
+            - $ref: '#/components/schemas/contract/x-examples/example-7'
+            - $ref: '#/components/schemas/contract/x-examples/example-8'
+            - $ref: '#/components/schemas/contract/x-examples/example-9'
+            - $ref: '#/components/schemas/contract/x-examples/example-10'
+          empty: false
+          first: true
+          last: true
+          number: 0
+          numberOfElements: 20
+          pageable:
+            $ref: '#/components/schemas/pageable/x-examples/example-1'
+          size: 1
+          totalElements: 1
+          totalPages: 1
+          sort:
+            $ref: '#/components/schemas/sort/x-examples/example-1'
+      properties:
+        content:
+          type: array
+          minItems: 0
+          maxItems: 255
+          uniqueItems: true
+          description: Список Договоров аренды
+          items:
+            $ref: '#/components/schemas/contract'
+        empty:
+          type: boolean
+          description: 'Флаг пустого массива, если true - в ответе не пришло ни одного элемента'
+        first:
+          type: boolean
+          description: Флаг первого результата (первая страница)
+        last:
+          type: boolean
+          description: Флаг последнего результата (последняя страница)
+        number:
+          type: integer
+          format: int64
+          description: Номер страницы
+          maximum: 2147483647
+          minimum: 0
+        numberOfElements:
+          type: integer
+          format: int64
+          description: Количество элементов на странице
+          maximum: 2147483647
+          minimum: 0
+        pageable:
+          $ref: '#/components/schemas/pageable'
+        size:
+          type: integer
+          format: int64
+          description: Количество элементов на странице
+          maximum: 2147483647
+          minimum: 0
+        totalElements:
+          type: integer
+          format: int64
+          description: Общее количество элементов
+          maximum: 2147483647
+          minimum: 0
+        totalPages:
+          type: integer
+          format: int64
+          description: Общее количество страниц
+          maximum: 2147483647
+          minimum: 0
+        sort:
+          $ref: '#/components/schemas/sort'
+      required:
+        - content
+    pageable:
+      type: object
+      title: Pageable
+      description: Pageable
+      additionalProperties: false
+      x-examples:
+        example-1:
+          offset: 0
+          pageNumber: 0
+          pageSize: 20
+          paged: true
+          sort:
+            $ref: '#/components/schemas/sort/x-examples/example-1'
+          unpaged: false
+      properties:
+        offset:
+          type: integer
+          description: смещение относительно первой страницы (от какой позиции отображаются данные)
+          maximum: 2147483647
+          minimum: 0
+        pageNumber:
+          type: integer
+          description: номер страницы
+          maximum: 2147483647
+          minimum: 0
+        pageSize:
+          type: integer
+          description: максимальное количество элементов на странице
+          maximum: 2147483647
+          minimum: 0
+        paged:
+          type: boolean
+          description: признак отображения с учетом пагинации
+        sort:
+          $ref: '#/components/schemas/sort'
+        unpaged:
+          type: boolean
+          description: Признак отображения без учета пагинации
+      required:
+        - offset
+        - pageNumber
+        - pageSize
+        - paged
+        - sort
+        - unpaged
+    sort:
+      type: object
+      title: sort
+      description: Сортировка
+      properties:
+        empty:
+          type: boolean
+          description: Пустой ответ
+        sorted:
+          type: boolean
+          description: Применяется сортировка
+        unsorted:
+          type: boolean
+          description: Не применяется сортировка
+      required:
+        - empty
+        - sorted
+        - unsorted
+      x-examples:
+        example-1:
+          empty: true
+          sorted: false
+          unsorted: true
+    contractDate:
+      type: string
+      title: ContractDate
+      description: Дата договора
+      format: date
+    contract:
+      type: object
+      title: Contract
+      description: Договор аренды
+      x-examples:
+        example-1:
+          id: 96177ef0-6680-48c1-b02c-e156d3f0e808
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim'
+          number: 248/22
+          date: '2016-09-01'
+          startDate: '2016-09-01'
+          expirationDate: '2065-07-31'
+          typeId:
+            $ref: '#/components/schemas/contractType/x-examples/example-1'
+          statusId:
+            $ref: '#/components/schemas/contractStatusType/x-examples/example-1'
+          bcc:
+            - '16711105021016000120'
+            - '16711610121010001140'
+          annualRentalRate: '12971.81'
+          rentalCalculationPeriodId:
+            $ref: '#/components/schemas/accrualPeriodType/x-examples/example-2'
+          penaltyRate: '0.01'
+          penaltyRateOnDate: '0.01'
+          penaltyRateDate: '2020-06-20'
+          nextPaymentDate: '2020-11-01'
+          currentPeriodAmountForPayment: '4323.94'
+          debtAmount: '8647.87'
+          penaltyAmount: '0'
+          overpaymentAmount: '0'
+          facilityRentalAddress:
+            - 'обл. Архангельская, р-н. Приморский, МО Катунинское, дер. Лахта'
+        example-2:
+          id: 96177ef0-6680-48c1-b02c-e156d3f0e815
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-2'
+          number: 178/15
+          date: '2018-10-01'
+          startDate: '2018-10-15'
+          expirationDate: '2023-10-15'
+          typeId:
+            $ref: '#/components/schemas/contractType/x-examples/example-1'
+          statusId:
+            $ref: '#/components/schemas/contractStatusType/x-examples/example-1'
+          bcc:
+            - '16711105021016000120'
+            - '16711610121010001140'
+          rentalCalculationPeriodId:
+            $ref: '#/components/schemas/accrualPeriodType/x-examples/example-3'
+          currentPeriodAmountForPayment: '125000.00'
+          debtAmount: '0'
+          penaltyAmount: '0'
+          overpaymentAmount: '0'
+          facilityRentalAddress:
+            - 'Архангельская область, Приморский район, дер. Лахта, муниципальное образование "Катунинское"'
+        example-3:
+          id: 96177ef0-6680-48c1-b02c-e156d3f0e810
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-3'
+          number: 345/25
+          date: '2020-02-16'
+          startDate: '2020-03-01'
+          expirationDate: '2020-08-31'
+          typeId:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          statusId:
+            $ref: '#/components/schemas/contractStatusType/x-examples/example-2'
+          bcc:
+            - '16711105071016000120'
+            - '16711610121010001140'
+          rentalCalculationPeriodId:
+            $ref: '#/components/schemas/accrualPeriodType/x-examples/example-3'
+          currentPeriodAmountForPayment: '0'
+          debtAmount: '8500.00'
+          penaltyAmount: '1.25'
+          overpaymentAmount: '0'
+          facilityRentalAddress:
+            - 'обл Псковская, г Псков, ул Некрасова, дом 15А, кв 1, обл Псковская, г Псков, ул Некрасова, дом 14'
+        example-4:
+          id: 96177ef0-6680-48c1-b02c-e156d3f0e809
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-4'
+          number: 250/10
+          date: '2019-01-15'
+          startDate: '2019-02-01'
+          expirationDate: '2065-01-31'
+          typeId:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          statusId:
+            $ref: '#/components/schemas/contractStatusType/x-examples/example-1'
+          bcc:
+            - '16711105071016000120'
+          rentalCalculationPeriodId:
+            $ref: '#/components/schemas/accrualPeriodType/x-examples/example-4'
+          currentPeriodAmountForPayment: '10000.00'
+          debtAmount: '10000.00'
+          penaltyAmount: '0'
+          overpaymentAmount: '23860.01'
+          facilityRentalAddress: [ ]
+        example-5:
+          id: 96177ef0-6680-48c1-b02c-e156d3f0e813
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-5'
+          number: 125/11
+          date: '2019-02-20'
+          startDate: '2019-03-01'
+          expirationDate: '2022-02-28'
+          typeId:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          statusId:
+            $ref: '#/components/schemas/contractStatusType/x-examples/example-1'
+          bcc:
+            - '16711105071016000120'
+          rentalCalculationPeriodId:
+            $ref: '#/components/schemas/accrualPeriodType/x-examples/example-1'
+          currentPeriodAmountForPayment: '0'
+          debtAmount: '0'
+          penaltyAmount: '0'
+          overpaymentAmount: '0'
+          facilityRentalAddress:
+            - 'обл Псковская, г Псков, ул Некрасова, дом 15А, кв 1, обл Псковская, г Псков, ул Некрасова, дом 15А, кв 5'
+        example-6:
+          id: 96177ef0-6680-48c1-b02c-e156d3f0e814
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-6'
+          number: 130/12
+          date: '2019-01-01'
+          startDate: '2019-01-01'
+          expirationDate: '2065-06-15'
+          typeId:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          statusId:
+            $ref: '#/components/schemas/contractStatusType/x-examples/example-2'
+          bcc:
+            - '16711105071016000120'
+          rentalCalculationPeriodId:
+            $ref: '#/components/schemas/accrualPeriodType/x-examples/example-5'
+          currentPeriodAmountForPayment: '0'
+          debtAmount: '5000.0'
+          penaltyAmount: '20.05'
+          overpaymentAmount: '0'
+          facilityRentalAddress: [ ]
+        example-7:
+          id: 96177ef0-6680-48c1-b02c-e156d3f0e816
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-7'
+          number: 170/45
+          date: '2020-06-01'
+          startDate: '2020-06-01'
+          expirationDate: '2025-12-31'
+          typeId:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          statusId:
+            $ref: '#/components/schemas/contractStatusType/x-examples/example-1'
+          bcc:
+            - '16711105021016000120'
+          rentalCalculationPeriodId:
+            $ref: '#/components/schemas/accrualPeriodType/x-examples/example-4'
+          currentPeriodAmountForPayment: '12000.00'
+          debtAmount: '0'
+          penaltyAmount: '0'
+          overpaymentAmount: '0'
+          facilityRentalAddress: [ ]
+        example-8:
+          id: 96177ef0-6680-48c1-b02c-e156d3f0e820
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-8'
+          number: 290/30
+          date: '2020-08-01'
+          startDate: '2020-08-01'
+          expirationDate: '2021-08-01'
+          typeId:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          statusId:
+            $ref: '#/components/schemas/contractStatusType/x-examples/example-1'
+          bcc:
+            - '16711105021016000120'
+          rentalCalculationPeriodId:
+            $ref: '#/components/schemas/accrualPeriodType/x-examples/example-2'
+          currentPeriodAmountForPayment: '5000.00'
+          debtAmount: '0'
+          penaltyAmount: '0'
+          overpaymentAmount: '0'
+          facilityRentalAddress: [ ]
+        example-9:
+          id: 96177ef0-6680-48c1-b02c-e156d3f0e821
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-9'
+          number: 380/01
+          date: '2018-11-10'
+          startDate: '2018-11-10'
+          expirationDate: '2018-12-10'
+          typeId:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          statusId:
+            $ref: '#/components/schemas/contractStatusType/x-examples/example-2'
+          bcc:
+            - '16711105021016000120'
+          rentalCalculationPeriodId:
+            $ref: '#/components/schemas/accrualPeriodType/x-examples/example-3'
+          currentPeriodAmountForPayment: '0'
+          debtAmount: '1500.00'
+          penaltyAmount: '150.11'
+          overpaymentAmount: '0'
+          facilityRentalAddress: [ ]
+        example-10:
+          id: 96177ef0-6680-48c1-b02c-e156d3f0e822
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-10'
+          number: 310/02
+          date: '2019-05-20'
+          startDate: '2019-05-20'
+          expirationDate: '2019-06-20'
+          typeId:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          statusId:
+            $ref: '#/components/schemas/contractStatusType/x-examples/example-2'
+          bcc:
+            - '16711105021016000120'
+          rentalCalculationPeriodId:
+            $ref: '#/components/schemas/accrualPeriodType/x-examples/example-3'
+          currentPeriodAmountForPayment: '0'
+          debtAmount: '0'
+          penaltyAmount: '0'
+          overpaymentAmount: '2500.00'
+          facilityRentalAddress: [ ]
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/contractId'
+        landlordId:
+          $ref: '#/components/schemas/landlordId'
+        number:
+          $ref: '#/components/schemas/contractNumber'
+        date:
+          $ref: '#/components/schemas/contractDate'
+        startDate:
+          type: string
+          description: Дата начала действия договора
+          format: date
+        expirationDate:
+          type: string
+          description: Дата окончания действия договора
+          format: date
+        typeId:
+          $ref: '#/components/schemas/contractType'
+        statusId:
+          $ref: '#/components/schemas/contractStatusType'
+        bcc:
+          type: array
+          minItems: 0
+          maxItems: 255
+          items:
+            $ref: '#/components/schemas/bcc'
+        annualRentalRate:
+          type: string
+          description: Ставка годовой арендной платы
+          example: '9.4'
+          pattern: "^([1-9]\\d*)|0(\\.\\d{1,2})?$"
+          minLength: 1
+          maxLength: 20
+        rentalCalculationPeriodId:
+          $ref: '#/components/schemas/accrualPeriodType'
+        penaltyRate:
+          type: string
+          description: Ставка по пени
+          example: '1.12'
+          pattern: "^([1-9]\\d*)|0(\\.\\d{1,2})?$"
+          minLength: 1
+          maxLength: 20
+        penaltyRateOnDate:
+          type: string
+          description: Ставка по пени на дату
+          example: '1.12'
+          pattern: "^([1-9]\\d*)|0(\\.\\d{1,2})?$"
+          minLength: 1
+          maxLength: 20
+        penaltyRateDate:
+          type: string
+          description: Дата последнего расчета пеней
+          format: date
+        nextPaymentDate:
+          type: string
+          description: Дата следующей оплаты
+          format: date
+        currentPeriodAmountForPayment:
+          type: string
+          description: 'Сумма, начисленная к оплате за текущий период'
+          example: '52.40'
+          pattern: "^([1-9]\\d*)|0(\\.\\d{1,2})?$"
+          minLength: 1
+          maxLength: 20
+        debtAmount:
+          type: string
+          description: Сумма задолженности
+          example: '52.40'
+          pattern: "^([1-9]\\d*)|0(\\.\\d{1,2})?$"
+          minLength: 1
+          maxLength: 20
+        penaltyAmount:
+          type: string
+          description: Сумма пени
+          example: '52.40'
+          pattern: "^([1-9]\\d*)|0(\\.\\d{1,2})?$"
+          minLength: 1
+          maxLength: 20
+        overpaymentAmount:
+          type: string
+          description: Сумма переплаты
+          example: '52.40'
+          pattern: "^([1-9]\\d*)|0(\\.\\d{1,2})?$"
+          minLength: 1
+          maxLength: 20
+        facilityRentalAddress:
+          type: array
+          minItems: 0
+          maxItems: 255
+          items:
+            $ref: '#/components/schemas/facilityRentalAddress'
+      required:
+        - id
+        - landlordId
+        - number
+        - date
+        - startDate
+        - expirationDate
+        - typeId
+        - statusId
+        - bcc
+        - rentalCalculationPeriodId
+        - currentPeriodAmountForPayment
+        - debtAmount
+        - overpaymentAmount
+        - facilityRentalAddress
+    contractNumber:
+      type: string
+      title: contractNumber
+      minLength: 0
+      maxLength: 255
+      description: Номер Договора аренды
+      example: 33/16-К
+    facilityRentalAddress:
+      type: string
+      title: facilityRentalAddress
+      description: Адрес объекта аренды
+      minLength: 3
+      maxLength: 1000
+    bcc:
+      type: string
+      title: bcc
+      description: 'Код бюджетной классификации, КБК'
+      minLength: 17
+      maxLength: 20
+      example: '11105071016000120'
+      pattern: "^\\d{17}(\\d{3})?$"
+    landlordId:
+      title: landlordId
+      description: Идентификатор Арендодателя
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      x-examples:
+        rosim: 40201eb9-d3a5-484d-a63c-239dc856938e
+        rosim-2: 3ab5270f-6d28-4b9b-b3c4-0187e9c59683
+        rosim-3: 3ab5270f-6d28-4b9b-b3c4-0187e9c59671
+        rosim-4: 3ab5270f-6d28-4b9b-b3c4-0187e9c59670
+        rosim-5: 3ab5270f-6d28-4b9b-b3c4-0187e9c59681
+        rosim-6: 3ab5270f-6d28-4b9b-b3c4-0187e9c59685
+        rosim-7: 3ab5270f-6d28-4b9b-b3c4-0187e9c59583
+        rosim-8: 3ab5270f-6d28-4b9b-b3c4-0187e9c59584
+        rosim-9: 3ab5270f-6d28-4b9b-b3c4-0187e9c59691
+        rosim-10: 3ab5270f-6d28-4b9b-b3c4-0187e9c59690
+        rosim-11: 3ab5270f-6d28-4b9b-b3c4-0187e9c59675
+    tenantId:
+      title: tenantId
+      description: Идентификатор Арендатора
+      type: string
+      minLength: 1
+      maxLength: 36
+      x-examples:
+        example-1: 1q12aa945bb72cc98dd9
+    contractId:
+      title: contractId
+      description: Идентификатор Договора аренды
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      example: 99019ca8-efc4-4882-b4cc-e9777dd0631c
+      x-examples:
+        example-1: 99019ca8-efc4-4882-b4cc-e9777dd0631c
+        example-2: 96177ef0-6680-48c1-b02c-e156d3f0e808
+        example-3: 96177ef0-6680-48c1-b02c-e156d3f0e815
+        example-4: 96177ef0-6680-48c1-b02c-e156d3f0e810
+        example-5: 99019ca8-efc4-4882-b4cc-e9777dd0635c
+        example-6: 96177ef0-6680-48c1-b02c-e156d3f0e814
+        example-7: 96177ef0-6680-48c1-b02c-e156d3f0e816
+        example-8: 96177ef0-6680-48c1-b02c-e156d3f0e820
+        example-9: 96177ef0-6680-48c1-b02c-e156d3f0e821
+    facilityRentalId:
+      title: facilityRentalId
+      description: Идентификатор Объекта аренды
+      type: string
+      minLength: 0
+      maxLength: 36
+      x-examples:
+        example-1: 7203f9d9-d7c0-4324-a75f-9ff738aa8c8c
+    cadastralNumber:
+      type: string
+      title: cadastralNumber
+      description: Кадастровый номер
+      minLength: 15
+      maxLength: 24
+      pattern: "^\\d{2}:\\d{2}:\\d{6,7}:\\d{1,10}$"
+      example: '47:14:1203001:814'
+    areaMeasurementUnit:
+      type: string
+      title: areaMeasurementUnit
+      description: Единица измерения площади
+      pattern: "^кв\\. м$"
+      example: кв. м
+      minLength: 1
+      maxLength: 20
+    contractIdNumberDate:
+      type: object
+      additionalProperties: false
+      properties:
+        contractId:
+          $ref: '#/components/schemas/contractId'
+        contractNumber:
+          $ref: '#/components/schemas/contractNumber'
+        contractDate:
+          $ref: '#/components/schemas/contractDate'
+      required:
+        - contractId
+        - contractNumber
+        - contractDate
+    area:
+      type: object
+      title: Area
+      description: Площадь
+      additionalProperties: false
+      x-examples:
+        example-1:
+          value: '1421'
+          measurementUnit: кв. м
+        example-2:
+          value: '900'
+          measurementUnit: кв. м
+        example-3:
+          value: '734'
+          measurementUnit: кв. м
+      properties:
+        value:
+          type: string
+          example: '5243.5'
+          pattern: "^([1-9]\\d{0,9})|0(\\.\\d{1,10})?$"
+          minLength: 1
+          maxLength: 21
+          description: Значение площади
+        measurementUnit:
+          $ref: '#/components/schemas/areaMeasurementUnit'
+      required:
+        - value
+        - measurementUnit
+    facilityRental:
+      type: object
+      title: facilityRental
+      description: Объект аренды
+      additionalProperties: false
+      x-examples:
+        example-1:
+          id: 0d02ff48-8fd7-479a-8a50-9a10a567810a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e808
+            contractNumber: 248/22
+            contractDate: '2016-09-01'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-9'
+          address: 'обл. Архангельская, р-н. Приморский, МО Катунинское, дер.  Лахта, ул. Геологов, д. 12, к. 2'
+          cadastralNumber: '29:16:240401:1072'
+          area:
+            $ref: '#/components/schemas/area/x-examples/example-1'
+          count: 1
+        example-2:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567811a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e815
+            contractNumber: 178/15
+            contractDate: '2018-10-01'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-1'
+          address: 'Архангельская область, Приморский район, дер. Лахта, муниципальное образование "Катунинское"'
+          cadastralNumber: '29:16:240401:1126'
+          area:
+            $ref: '#/components/schemas/area/x-examples/example-2'
+          count: 2
+        example-3:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567812a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e815
+            contractNumber: 178/15
+            contractDate: '2018-10-01'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-4'
+          address: 'Архангельская область, Приморский район, дер. Лахта, муниципальное образование "Катунинское"'
+          cadastralNumber: '29:16:240401:218'
+          area:
+            $ref: '#/components/schemas/area/x-examples/example-3'
+          count: 1
+        example-4:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567813a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e815
+            contractNumber: 178/15
+            contractDate: '2018-10-01'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-5'
+          address: 'Архангельская область, Приморский район, дер. Лахта, муниципальное образование "Катунинское"'
+          area:
+            value: '0'
+            measurementUnit: кв. м
+        example-5:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567814a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e815
+            contractNumber: 178/15
+            contractDate: '2018-10-01'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-2'
+          area:
+            value: '70'
+            measurementUnit: кв. м
+        example-6:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567824a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e815
+            contractNumber: 178/15
+            contractDate: '2018-10-01'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-6'
+          area:
+            value: '130.0'
+            measurementUnit: кв. м
+        example-7:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567825a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e815
+            contractNumber: 178/15
+            contractDate: '2018-10-01'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-7'
+        example-8:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567826a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e815
+            contractNumber: 178/15
+            contractDate: '2018-10-01'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-3'
+          area:
+            value: '5'
+            measurementUnit: кв. м
+          count: 1
+        example-9:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567827a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e815
+            contractNumber: 178/15
+            contractDate: '2018-10-01'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-8'
+          count: 2
+        example-10:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567828a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e815
+            contractNumber: 178/15
+            contractDate: '2018-10-01'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-9'
+        example-11:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567815a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e810
+            contractNumber: 345/25
+            contractDate: '2020-02-16'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-9'
+          address: 'обл Псковская, г Псков, ул Некрасова, дом 15А, кв 1, обл Псковская, г Псков, ул Некрасова, дом 14'
+        example-12:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567816a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e809
+            contractNumber: 250/10
+            contractDate: '2019-01-15'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-3'
+          area:
+            value: '21.55555'
+            measurementUnit: кв. м
+        example-13:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567817a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e813
+            contractNumber: 125/11
+            contractDate: '2019-02-20'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-9'
+          area:
+            value: '35.1'
+            measurementUnit: кв. м
+          address: 'обл Псковская, г Псков, ул Некрасова, дом 15А, кв 5'
+          count: 0
+        example-14:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567818a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e813
+            contractNumber: 125/11
+            contractDate: '2019-02-20'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-9'
+          area:
+            value: '20'
+            measurementUnit: кв. м
+          address: 'обл Псковская, г Псков, ул Некрасова, дом 15А, кв 6'
+          count: 1
+        example-15:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567819a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e814
+            contractNumber: 130/12
+            contractDate: '2019-01-01'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-1'
+          area:
+            value: '500'
+            measurementUnit: кв. м
+        example-16:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567820a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e816
+            contractNumber: 170/45
+            contractDate: '2020-06-01'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-4'
+          count: 2
+        example-17:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567821a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e820
+            contractNumber: 290/30
+            contractDate: '2020-08-01'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-6'
+          count: 3
+        example-18:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567822a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e821
+            contractNumber: 380/01
+            contractDate: '2018-11-10'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-7'
+        example-19:
+          id: 0d02ff78-8fd7-479a-8a50-9a10a567823a
+          contract:
+            contractId: 96177ef0-6680-48c1-b02c-e156d3f0e822
+            contractNumber: 310/02
+            contractDate: '2019-05-20'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-5'
+      properties:
+        id:
+          $ref: '#/components/schemas/facilityRentalId'
+        contract:
+          $ref: '#/components/schemas/contractIdNumberDate'
+        typeId:
+          $ref: '#/components/schemas/facilityRentalType'
+        address:
+          type: string
+          description: Адрес
+          minLength: 3
+          maxLength: 1000
+        cadastralNumber:
+          $ref: '#/components/schemas/cadastralNumber'
+        area:
+          $ref: '#/components/schemas/area'
+        count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          example: 1
+          description: Количество
+      required:
+        - id
+        - contract
+        - typeId
+    facilityRentalListRequest:
+      type: object
+      title: FacilityRentalListRequest
+      description: Список Объектов аренды
+      additionalProperties: false
+      x-examples:
+        example-1:
+          contractIds:
+            - 99019ca8-efc4-4882-b4cc-e9777dd0631c
+          contractNumber:
+            searchType: CONTAIN
+            value: '248'
+          contractDate:
+            searchType: BETWEEN
+            value: '2015-01-01'
+            valueTo: '2020-01-01'
+          address:
+            searchType: CONTAIN
+            value: 'Приморский, МО Ка'
+          typeId:
+            $ref: '#/components/schemas/facilityRentalType/x-examples/example-1'
+          cadastralNumber:
+            searchType: CONTAIN
+            value: '16:240401'
+      properties:
+        contractIds:
+          type: array
+          minItems: 0
+          maxItems: 255
+          description: Список идентификаторов договоров аренды
+          items:
+            $ref: '#/components/schemas/contractId'
+        contractNumber:
+          type: object
+          additionalProperties: false
+          description: Номер договора
+          properties:
+            searchType:
+              $ref: '#/components/schemas/searchType'
+            value:
+              type: string
+              minLength: 0
+              maxLength: 255
+              example: '248'
+              description: Значение
+        contractDate:
+          type: object
+          additionalProperties: false
+          description: Дата договора
+          properties:
+            searchType:
+              $ref: '#/components/schemas/searchType'
+            value:
+              type: string
+              format: date
+              example: '2015-01-01'
+              description: 'Значение, с'
+            valueTo:
+              type: string
+              format: date
+              example: '2020-01-01'
+              description: 'Значение, по'
+        address:
+          type: object
+          additionalProperties: false
+          description: Адрес
+          properties:
+            searchType:
+              $ref: '#/components/schemas/searchType'
+            value:
+              type: string
+              minLength: 0
+              maxLength: 1000
+              example: ' Приморский, МО Ка'
+              description: Значение
+        typeId:
+          $ref: '#/components/schemas/facilityRentalType'
+        cadastralNumber:
+          type: object
+          additionalProperties: false
+          description: Кадастровый номер
+          properties:
+            searchType:
+              $ref: '#/components/schemas/searchType'
+            value:
+              type: string
+              minLength: 0
+              maxLength: 1000
+              example: '16:240401'
+              description: Значение
+    facilityRentalListResponse:
+      type: object
+      title: FacilityRentalListResponse
+      description: Список Объектов аренды
+      additionalProperties: false
+      x-examples:
+        example-1:
+          content:
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-1'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-2'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-3'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-4'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-5'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-6'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-7'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-8'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-9'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-10'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-11'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-12'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-13'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-14'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-15'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-16'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-17'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-18'
+            - $ref: '#/components/schemas/facilityRental/x-examples/example-19'
+          empty: false
+          first: true
+          last: true
+          number: 0
+          numberOfElements: 20
+          pageable:
+            $ref: '#/components/schemas/pageable/x-examples/example-1'
+          size: 1
+          totalElements: 1
+          totalPages: 1
+          sort:
+            $ref: '#/components/schemas/sort/x-examples/example-1'
+      properties:
+        content:
+          type: array
+          minItems: 0
+          maxItems: 255
+          uniqueItems: true
+          description: Список Объектов аренды
+          items:
+            $ref: '#/components/schemas/facilityRental'
+        empty:
+          type: boolean
+          description: 'Флаг пустого массива, если true - в ответе не пришло ни одного элемента'
+        first:
+          type: boolean
+          description: Флаг первого результата (первая страница)
+        last:
+          type: boolean
+          description: Флаг последнего результата (последняя страница)
+        number:
+          type: integer
+          format: int64
+          description: Номер страницы
+          maximum: 2147483647
+          minimum: 0
+        numberOfElements:
+          type: integer
+          format: int64
+          description: Количество элементов на странице
+          maximum: 2147483647
+          minimum: 0
+        pageable:
+          $ref: '#/components/schemas/pageable'
+        size:
+          type: integer
+          format: int64
+          description: количество элементов на странице
+          maximum: 2147483647
+          minimum: 0
+        totalElements:
+          type: integer
+          format: int64
+          description: общее количество элементов
+          maximum: 2147483647
+          minimum: 0
+        totalPages:
+          type: integer
+          format: int64
+          maximum: 2147483647
+          minimum: 0
+          description: общее количество страниц
+        sort:
+          $ref: '#/components/schemas/sort'
+      required:
+        - content
+        - sort
+    searchType:
+      type: string
+      example: CONTAIN
+      enum:
+        - EQUAL
+        - NOT_EQUAL
+        - START_WITH
+        - CONTAIN
+        - END_WITH
+        - EMPTY
+        - NOT_EMPTY
+        - NOT_START_WITH
+        - NOT_CONTAIN
+        - NOT_END_WITH
+        - GREATER
+        - GREATER_OR_EQUAL
+        - LESS
+        - LESS_OR_EQUAL
+        - BETWEEN
+      minLength: 0
+      maxLength: 255
+    accrualType:
+      type: string
+      title: accrualType
+      description: Тип начисления
+      example: LK_ACCRUAL_TYPE_RENTAL
+      minLength: 0
+      maxLength: 255
+      x-examples:
+        example-1: LK_ACCRUAL_TYPE_RENTAL
+        example-2: LK_ACCRUAL_TYPE_RENTAL_PENALTY
+    accrualPeriodType:
+      type: string
+      title: accrualPeriodType
+      description: Период начисления арендной платы
+      example: LK_PERIOD_MONTH
+      minLength: 0
+      maxLength: 255
+      x-examples:
+        example-1: LK_PERIOD_YEAR
+        example-2: LK_PERIOD_QUARTER
+        example-3: LK_PERIOD_MONTH
+        example-4: LK_PERIOD_HALF_YEAR
+        example-5: LK_PERIOD_ARBITRARY
+    identificationType:
+      type: string
+      title: identificationType
+      description: Тип идентификации
+      example: LK_IDENTIFICATION_PLATFORM
+      minLength: 0
+      maxLength: 255
+      x-examples:
+        example-1: LK_IDENTIFICATION_PLATFORM
+    contractType:
+      type: string
+      title: contractType
+      description: Тип договора
+      example: LK_DOC_TYPE_LAND_RENTAL
+      minLength: 0
+      maxLength: 255
+      x-examples:
+        example-1: LK_DOC_TYPE_LAND_RENTAL
+        example-2: LK_DOC_TYPE_PROPRIETARY_RENTAL
+    contractStatusType:
+      type: string
+      title: contractStatusType
+      description: Статус договора
+      example: LK_DOC_STATUS_ACTIVE
+      minLength: 0
+      maxLength: 255
+      x-examples:
+        example-1: LK_DOC_STATUS_ACTIVE
+        example-2: LK_DOC_STATUS_TERMINATED
+    facilityRentalType:
+      type: string
+      title: facilityRentalType
+      description: Тип объекта аренды
+      example: LK_OBJECT_TYPE_LAND_PLOT
+      minLength: 0
+      maxLength: 255
+      x-examples:
+        example-1: LK_OBJECT_TYPE_LAND_PLOT
+        example-2: LK_OBJECT_TYPE_BUILDING
+        example-3: LK_OBJECT_TYPE_SHARES_IN_RIGHT
+        example-4: LK_OBJECT_TYPE_MOVABLE_PROPERTY
+        example-5: LK_OBJECT_TYPE_AIRCRAFTS_AND_SHIPS
+        example-6: LK_OBJECT_TYPE_PROPERTY_COMPLEX
+        example-7: LK_OBJECT_TYPE_OTHER_MOVABLE_PROPERTY
+        example-8: LK_OBJECT_TYPE_LAND_PLOT_COMPLEX
+        example-9: LK_OBJECT_TYPE_ROOM
+    tenantAttributesResponse:
+      type: object
+      title: tenantAttributesResponse
+      description: Ответ с атрибутами арендатора
+      additionalProperties: false
+      properties:
+        phone:
+          $ref: '#/components/schemas/phone'
+        email:
+          $ref: '#/components/schemas/email'
+        consentOfEdm:
+          type: string
+          minLength: 0
+          maxLength: 100
+          description: Согласие на ЭДО
+          x-examples:
+            example-1: 'LK_CONSENT_OF_EDM_RECEIVED'
+            example-2: 'LK_CONSENT_OF_EDM_NOT_RECEIVED'
+      required:
+        - consentOfEdm
+      x-examples:
+        example-1:
+          phone:
+            $ref: '#/components/schemas/phone/x-examples/example-1'
+          email:
+            $ref: '#/components/schemas/email/x-examples/example-1'
+          consentOfEdm: 'LK_CONSENT_OF_EDM_RECEIVED'
+    phone:
+      type: string
+      minLength: 0
+      maxLength: 100
+      title: phone
+      description: Телефон
+      x-examples:
+        example-1: '+785(495)2345678, доб. 23 доб. 12343'
+        rosim: +7 495 608-12-59
+    email:
+      type: string
+      format: email
+      minLength: 0
+      maxLength: 255
+      title: email
+      description: Электронная почта
+      x-examples:
+        example-1: 12332435@mail.ru
+        rosim: tu77@rosim.ru
+    landlordRequest:
+      type: object
+      title: landlord
+      description: Запрос на получение аренодателя
+      additionalProperties: false
+      properties:
+        landlordId:
+          $ref: '#/components/schemas/landlordId'
+      required:
+        - landlordId
+      x-examples:
+        rosim:
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim'
+    innJuridicalPerson:
+      type: string
+      title: innJuridicalPerson
+      description: ИНН ЮЛ
+      pattern: "^\\d{10}$"
+      minLength: 10
+      maxLength: 10
+      x-examples:
+        example-1: '5644531088'
+        rosim: '7708701670'
+    innIndividualPerson:
+      type: string
+      title: innIndividualPerson
+      description: ИНН ИП
+      pattern: "^\\d{12}$"
+      minLength: 12
+      maxLength: 12
+      x-examples:
+        example-1: '770708389345'
+    ogrn:
+      type: string
+      title: ogrn
+      description: ОГРН
+      pattern: "^\\d{13}$"
+      minLength: 13
+      maxLength: 13
+      x-examples:
+        example-1: '5143783411020'
+    ogrnIp:
+      type: string
+      title: ogrnIp
+      description: ОГРНИП
+      pattern: "^\\d{15}$"
+      minLength: 15
+      maxLength: 15
+      x-examples:
+        example-1: '105360059112123'
+    kpp:
+      type: string
+      title: kpp
+      description: КПП
+      pattern: "^\\d{9}$"
+      minLength: 9
+      maxLength: 9
+      x-examples:
+        example-1: '381145159'
+        rosim: '770801001'
+    address:
+      type: string
+      title: address
+      description: Адрес
+      minLength: 3
+      maxLength: 1000
+      x-examples:
+        example-1: 'Санкт-Петербург, Литейный пр'
+        rosim: '107139, г. Москва, пер. Орликов, д. 3, Корпус Б'
+    accountNumber:
+      type: string
+      title: accountNumber
+      description: Номер счета
+      pattern: "^\\d{20}$"
+      minLength: 20
+      maxLength: 20
+      x-examples:
+        example-1: '40817810099910004312'
+        rosim: '40101810045250010041'
+    corAccount:
+      type: string
+      title: corAccountNumber
+      description: Корсчет
+      pattern: "^\\d{20}$"
+      minLength: 20
+      maxLength: 20
+      x-examples:
+        example-1: '30101810400000000225'
+    bic:
+      type: string
+      title: bic
+      description: БИК
+      pattern: "^\\d{9}$"
+      minLength: 9
+      maxLength: 9
+      x-examples:
+        example-1: '044525225'
+        rosim: '044525000'
+    oktmo:
+      type: string
+      title: oktmo
+      description: ОКТМО
+      pattern: "^\\d{8}(\\d{3})?$"
+      minLength: 8
+      maxLength: 11
+      x-examples:
+        rosim: '45378000'
+    landlordItem:
+      type: object
+      title: landlordItem
+      description: Арендодатель
+      x-examples:
+        example-1:
+          id:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-2'
+          name: ТУ Росимущества по г.Москве
+          legalAddress:
+            $ref: '#/components/schemas/address/x-examples/rosim'
+          inn:
+            $ref: '#/components/schemas/innJuridicalPerson/x-examples/rosim'
+          kpp:
+            $ref: '#/components/schemas/kpp/x-examples/rosim'
+          account:
+            - $ref: '#/components/schemas/account/x-examples/rosim'
+          oktmo:
+            $ref: '#/components/schemas/oktmo/x-examples/rosim'
+          email:
+            $ref: '#/components/schemas/email/x-examples/rosim'
+          phone:
+            $ref: '#/components/schemas/phone/x-examples/rosim'
+        example-2:
+          id: 3ab5270f-6d28-4b9b-b3c4-0187e9c59669
+          name: МТУ Росимущества в Мурманской области и Республике Карелия
+          legalAddress: '183006, г. Мурманск, ул. Пушкинская, 12'
+          inn: '5190915348'
+          kpp: '519001001'
+          account:
+            - account: '40101810040300017001'
+              bik: '044705001'
+              bankName: Отделение Мурманск
+          oktmo: '47701000001'
+          email: tu51@rosim.ru
+          phone: +7 8142 59-36-27
+        example-3:
+          id: 3ab5270f-6d28-4b9b-b3c4-0187e9c59671
+          name: МТУ Росимущества в г. Санкт-Петербурге и Ленинградской области
+          legalAddress: '191186, г. Санкт-Петербург, ул. Гороховая, д. 2/6, лит. А'
+          inn: '7838426520'
+          kpp: '784001001'
+          account:
+            - account: '40302810500001000001'
+              bik: '044030001'
+              bankName: ГРКЦ ГУ БАНКА РОССИИ
+              corAccount: '30101810400000000225'
+          oktmo: '40909000001'
+          email: tu78@rosim.ru
+          phone: +7 812 643-55-71
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/landlordId'
+        name:
+          type: string
+          description: наименование
+          minLength: 3
+          maxLength: 255
+        legalAddress:
+          $ref: '#/components/schemas/address'
+        inn:
+          $ref: '#/components/schemas/innJuridicalPerson'
+        kpp:
+          $ref: '#/components/schemas/kpp'
+        account:
+          type: array
+          description: Список расчетных счетов
+          minItems: 1
+          maxItems: 1
+          items:
+            $ref: '#/components/schemas/account'
+        oktmo:
+          $ref: '#/components/schemas/oktmo'
+        email:
+          $ref: '#/components/schemas/email'
+        phone:
+          $ref: '#/components/schemas/phone'
+      required:
+        - id
+        - name
+        - legalAddress
+        - inn
+        - kpp
+        - account
+        - oktmo
+        - email
+        - phone
+    landlordResponse:
+      $ref: '#/components/schemas/landlordItem'
+    landlordListResponse:
+      type: array
+      minItems: 0
+      maxItems: 255
+      title: landlordListResponse
+      description: Список Арендодателей
+      items:
+        $ref: '#/components/schemas/landlordItem'
+      properties:
+        content:
+          type: array
+          minItems: 0
+          maxItems: 255
+          uniqueItems: true
+          description: Список Арендодателей
+          items:
+            $ref: '#/components/schemas/landlordItem'
+      required:
+        - content
+    account:
+      type: object
+      title: account
+      description: Банковский счёт
+      additionalProperties: false
+      properties:
+        account:
+          $ref: '#/components/schemas/accountNumber'
+        bik:
+          $ref: '#/components/schemas/bic'
+        bankName:
+          type: string
+          description: Наименование банка
+          minLength: 3
+          maxLength: 255
+        corAccount:
+          $ref: '#/components/schemas/corAccount'
+      x-examples:
+        rosim:
+          account:
+            $ref: '#/components/schemas/accountNumber/x-examples/rosim'
+          bik:
+            $ref: '#/components/schemas/bic/x-examples/rosim'
+          bankName: ГУ БАНКА РОССИИ ПО ЦФО
+      required:
+        - account
+        - bik
+        - bankName
+    accrual:
+      type: object
+      title: accrual
+      description: Начисление по договору аренды
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/accrualId'
+        date:
+          type: string
+          description: Дата начисления
+          format: date
+        startDate:
+          type: string
+          description: 'Дата начала периода, за который сформировано начисление'
+          format: date
+        endDate:
+          type: string
+          description: 'Дата окончания периода, за который сформировано начисление'
+          format: date
+        sum:
+          type: string
+          description: Сумма начисления
+          minLength: 1
+          maxLength: 25
+          pattern: "^(?:0|[1-9]\\d*)(?:\\.\\d{1,2})?$"
+        typeId:
+          $ref: '#/components/schemas/accrualType'
+      required:
+        - id
+        - date
+        - sum
+        - typeId
+      x-examples:
+        example-1:
+          id:
+            $ref: '#/components/schemas/accrualId/x-examples/example-1'
+          date: '2020-09-01'
+          startDate: '2020-08-01'
+          endDate: '2020-08-31'
+          sum: '125000.00'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-1'
+        example-2:
+          id:
+            $ref: '#/components/schemas/accrualId/x-examples/example-2'
+          date: '2020-09-01'
+          startDate: '2020-08-01'
+          endDate: '2020-08-31'
+          sum: '100.00'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-2'
+        example-3:
+          id:
+            $ref: '#/components/schemas/accrualId/x-examples/example-3'
+          date: '2020-10-01'
+          endDate: '2020-09-30'
+          sum: '125000.00'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-1'
+        example-4:
+          id:
+            $ref: '#/components/schemas/accrualId/x-examples/example-4'
+          date: '2020-10-01'
+          startDate: '2020-09-01'
+          sum: '150.45'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-2'
+        example-5:
+          id:
+            $ref: '#/components/schemas/accrualId/x-examples/example-5'
+          date: '2020-11-01'
+          sum: '125000.00'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-1'
+        example-6:
+          id:
+            $ref: '#/components/schemas/accrualId/x-examples/example-6'
+          date: '2020-11-01'
+          sum: '250.55'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-2'
+    accrualId:
+      title: accrualId
+      description: Уникальный индентификатор начисления
+      type: string
+      minLength: 36
+      maxLength: 36
+      format: uuid
+      example: 99019ca8-efc4-4882-b4cc-e9777dd0631c
+      x-examples:
+        example-1: 99019ca8-efc4-4882-b4cc-e9777dd0637c
+        example-2: 99019ca8-efc4-4882-b4cc-e9777dd0638c
+        example-3: 99019ca8-efc4-4882-b4cc-e9777dd0639c
+        example-4: 99019ca8-efc4-4882-b4cc-e9777dd0640c
+        example-5: 99019ca8-efc4-4882-b4cc-e9777dd0641c
+        example-6: 99019ca8-efc4-4882-b4cc-e9777dd0642c
+    accrualRequest:
+      type: object
+      title: accrualRequest
+      description: Запрос на получение начислений по договору аренды
+      additionalProperties: false
+      properties:
+        contractId:
+          $ref: '#/components/schemas/contractId'
+      required:
+        - contractId
+      x-examples:
+        example-1:
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-1'
+    accrualResponse:
+      type: object
+      title: accrualResponse
+      description: Список начислений по договору аренды
+      additionalProperties: false
+      properties:
+        content:
+          type: array
+          minItems: 0
+          maxItems: 100
+          description: Список начислений
+          items:
+            $ref: '#/components/schemas/accrual'
+        empty:
+          $ref: '#/components/schemas/emptyListFlag'
+        first:
+          $ref: '#/components/schemas/pageFirst'
+        last:
+          $ref: '#/components/schemas/pageLast'
+        number:
+          $ref: '#/components/schemas/pageNumber'
+        numberOfElements:
+          $ref: '#/components/schemas/pageNumberOfElements'
+        pageable:
+          $ref: '#/components/schemas/pageable'
+        size:
+          $ref: '#/components/schemas/pageSize'
+        totalElements:
+          $ref: '#/components/schemas/totalElements'
+        totalPages:
+          $ref: '#/components/schemas/totalPages'
+        sort:
+          $ref: '#/components/schemas/sort'
+      required:
+        - content
+        - empty
+        - first
+        - last
+        - number
+        - numberOfElements
+        - pageable
+        - size
+        - totalElements
+        - totalPages
+        - sort
+      x-examples:
+        example-1:
+          content:
+            - $ref: '#/components/schemas/accrual/x-examples/example-1'
+            - $ref: '#/components/schemas/accrual/x-examples/example-2'
+            - $ref: '#/components/schemas/accrual/x-examples/example-3'
+            - $ref: '#/components/schemas/accrual/x-examples/example-4'
+            - $ref: '#/components/schemas/accrual/x-examples/example-5'
+            - $ref: '#/components/schemas/accrual/x-examples/example-6'
+          empty: false
+          first: true
+          last: true
+          number: 0
+          numberOfElements: 20
+          pageable:
+            $ref: '#/components/schemas/pageable/x-examples/example-1'
+          size: 1
+          totalElements: 1
+          totalPages: 1
+          sort:
+            $ref: '#/components/schemas/sort/x-examples/example-1'
+    healthResponse:
+      type: object
+      title: healthResponse
+      description: Проверка работоспособности сервера
+      additionalProperties: false
+      properties:
+        status:
+          type: boolean
+          description: Статус работоспособности сервера
+      required:
+        - status
+      x-examples:
+        example-1:
+          status: true
+    snils:
+      type: string
+      title: snils
+      description: СНИЛС
+      pattern: "^\\d{11}$"
+      minLength: 11
+      maxLength: 11
+      x-examples:
+        example-1: '11697338589'
+    sessionId:
+      title: sessionId
+      description: Идентификатор сессии
+      type: string
+      minLength: 1
+      maxLength: 6000
+      x-examples:
+        example-1: >-
+          eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ1aXVveTJROTBGT0YxUG1vYXlUMll6aUthaFlZQzNwMm5ZSk8wZ0xLOUprIn0.eyJqdGkiOiJlNDYzNTM1NC00M
+          DBjLTRlNjgtYTIxYy1kNzZkNGQ5YzUzMTgiLCJleHAiOjE2MTEyNDM2NzcsIm5iZiI6MCwiaWF0IjoxNjExMjQwMDc3LCJpc3MiOiJodHRwczovLzM3LjE4LjEwMS4yMTY6ODQ0My
+          9hdXRoL3JlYWxtcy9yb3NpbSIsInN1YiI6ImM4ZGZkYTMyLTc0ZTYtNDJjMS05ZTI0LTQ2ZWRmYzZiOGIzOSIsInR5cCI6IkJlYXJlciIsImF6cCI6IlJvc2ltLVByb3h5Iiwibm9
+          uY2UiOiJmMDZkZjc5ZGY0NDYyMTY0NzNlODJjMWFhMzFmMDY2OSIsImF1dGhfdGltZSI6MTYxMTI0MDA3Nywic2Vzc2lvbl9zdGF0ZSI6ImEwOGZhYTBkLTZkZjAtNGM0OC1hZDM3
+          LTIyOWY2Mzc1NjdlMyIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIlRFTkFOVFJPTEUiXX0sI
+          nNjb3BlIjoib3BlbmlkIGxvZ2luIGVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImdlbmRlciI6Ik0iLCJwcm9maWxlIjoiRVNJQSIsIm9yZ190eXBlIjoiTE
+          VHQUwiLCJpbm4iOiI3Mjk1ODQ5NzUzNTAiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiIwMDAtNjA2LTAwMCAzMyIsIm1pZGRsZV9uYW1lIjoi0JXQstCz0LXQvdGM0LXQstC40YciLCJ
+          naXZlbl9uYW1lIjoi0JjQs9C-0YDRjCIsImlzX29yZ2FuaXphdGlvbiI6InRydWUiLCJhY3RpdmVPcmdhbml6YXRpb24iOnsib2lkIjoiMTAwMDQ2NjU4MCIsInBybk9pZCI6IjEw
+          MDA0NjYxMzciLCJmdWxsTmFtZSI6ItCe0KDQk9CQ0J3QmNCX0JDQptCY0K8gMjEwNzUxNjEyMyIsInNob3J0TmFtZSI6ItCe0KDQk9CQ0J3QmNCX0JDQptCY0K8gMjEwNzUxNjEyM
+          yIsInR5cGUiOiJMRUdBTCIsImVtYWlsIjoic3VjaG9rLm52QGVzcGhlcmUucnUiLCJhY3RpdmUiOnRydWUsImNoaWVmIjpmYWxzZSwiYWRtaW4iOmZhbHNlLCJoYXNSaWdodE9mU3
+          Vic3RpdHV0aW9uIjpmYWxzZSwiaGFzQXBwcm92YWxUYWJBY2Nlc3MiOmZhbHNlLCJuYW1lIjoi0J7QoNCT0JDQndCY0JfQkNCm0JjQryAyMTA3NTE2MTIzIiwib2dybiI6IjExOTY
+          2NTgwMTc1MDAiLCJpbm4iOiIzNzAyMTEzNjM1IiwiYWRkcnMiOnsiMCI6eyJ0eXBlIjoiT0xHIiwiemlwQ29kZSI6IjEyNzQzNCIsImNvdW50cnlJZCI6IlJVUyIsImFkZHJlc3NT
+          dHIiOiLQk9C-0YDQvtC0INCc0L7RgdC60LLQsCzQo9C70LjRhtCwINCU0YPQsdC60LgiLCJyZWdpb24iOiLQk9C-0YDQvtC0INCc0L7RgdC60LLQsCIsInN0cmVldCI6ItCj0LvQu
+          NGG0LAg0JTRg9Cx0LrQuCJ9fSwibGlxdWlkYXRlZCI6ZmFsc2V9LCJlc2lhX2lkIjoiMTAwMDQ2NjEzNyIsInRydXN0ZWQiOiJ0cnVlIiwib3JnYW5pemF0aW9uIjoiMTAwMDQ2Nj
+          U4MCIsIm5hbWUiOiLQmNCz0L7RgNGMINCk0LXQtNGP0LXQsiIsInNuaWxzIjoiMDAwLTYwNi0wMDAgMzMiLCJmYW1pbHlfbmFtZSI6ItCk0LXQtNGP0LXQsiIsImVtYWlsIjoiIn0
+          .BsA7I8XXQ6pRgWsXecv-ZqOROaU7XSzDHJwG1mJIImxuSmtyzyUbPXwv2-ZDh5Hk41coY9CAPXNE1DJJ4WspHeI5aRoyVZHXyGJ9V-GE8bJ6mxzl_aaTCxPGURXFgl9aMFd54nWB
+          auuci2BJhdGCyluYyFWoB5wAptoBHpav2anGKbRTQDsWsR8O3ACINmXpEz-uAsXlJaPiq0pRSCLvOYHkhAjrrYVGzKg3xiWKqpSF311_qa_m1ovctPDjUfqeo-ga-3rmEfTD4knsg
+          LaAJbpftXE-IdHfXshPTSH7eL47fo_T6sj6Xdj8mvbZ6ZUkGpgGT2hIbMfiLw4cB9kO8w
+    sessionCreateRequest:
+      type: object
+      title: sessionCreateRequest
+      description: Запрос на создание сессии работы с ДМЗ
+      additionalProperties: false
+      properties:
+        accessToken:
+          $ref: '#/components/schemas/sessionId'
+        tenantId:
+          $ref: '#/components/schemas/tenantId'
+        oid:
+          type: integer
+          description: oid пользователя ЕСИА
+          maximum: 2147483647
+          minimum: 0
+        oidOrganization:
+          type: integer
+          description: oid организации ЕСИА
+          maximum: 2147483647
+          minimum: 0
+        snils:
+          $ref: '#/components/schemas/snils'
+        inn:
+          $ref: '#/components/schemas/innJuridicalPerson'
+        innip:
+          $ref: '#/components/schemas/innIndividualPerson'
+        ogrn:
+          $ref: '#/components/schemas/ogrn'
+        ogrnip:
+          $ref: '#/components/schemas/ogrnIp'
+        identificationType:
+          $ref: '#/components/schemas/identificationType'
+      required:
+        - tenantId
+        - identificationType
+      x-examples:
+        example-1:
+          accessToken:
+            $ref: '#/components/schemas/sessionId/x-examples/example-1'
+          tenantId:
+            $ref: '#/components/schemas/tenantId/x-examples/example-1'
+          identificationType:
+            $ref: '#/components/schemas/identificationType/x-examples/example-1'
+    sessionCreateResponse:
+      type: object
+      title: sessionCreateResponse
+      description: Ответ на создание сессии работы с ДМЗ
+      additionalProperties: false
+      properties:
+        sessionId:
+          $ref: '#/components/schemas/sessionId'
+      required:
+        - sessionId
+      x-examples:
+        example-1:
+          sessionId:
+            $ref: '#/components/schemas/sessionId/x-examples/example-1'
+    sessionCheckResponse:
+      type: object
+      title: sessionCheckResponse
+      description: Статус активности сессии
+      additionalProperties: false
+      properties:
+        status:
+          type: boolean
+          description: статус сессии (true – сессия активна / false – активной сессии не обнаружено)
+      required:
+        - status
+      x-examples:
+        example-1:
+          status: true
+    sessionCloseResponse:
+      type: object
+      title: sessionCloseResponse
+      description: Статус удачного закрытия сессии
+      additionalProperties: false
+      properties:
+        status:
+          type: boolean
+          description: статус закрытия сессии (true – сессия закрыта / false – не удалось закрыть сессию)
+      required:
+        - status
+      x-examples:
+        example-1:
+          status: true
+    paymentId:
+      title: paymentId
+      description: Уникальный идентификатор начисления
+      type: string
+      minLength: 36
+      maxLength: 36
+      format: uuid
+      example: 96177ef0-6680-48c1-b02c-e156d3f0e808
+      x-examples:
+        example-1: 96177ef0-6680-48c1-a02c-e156d3f0e801
+        example-2: 96177ef0-6680-48c1-a03c-e156d3f0e802
+        example-3: 96177ef0-6680-48c1-a04c-e156d3f0e803
+        example-4: 96177ef0-6680-48c1-a05c-e156d3f0e804
+        example-5: 96177ef0-6680-48c1-a06c-e156d3f0e805
+        example-6: 96177ef0-6680-48c1-a07c-e156d3f0e806
+        example-7: 96177ef0-6680-48c1-a08c-e156d3f0e807
+    paymentDate:
+      type: string
+      title: paymentDate
+      description: Дата поступления платежа
+      format: date
+    paymentDocDate:
+      type: string
+      title: paymentDocDate
+      description: Дата платежного поручения
+      format: date
+    paymentDocNumber:
+      type: string
+      title: paymentDocNumber
+      description: Номер платежного поручения
+      minLength: 0
+      maxLength: 255
+      x-examples:
+        example-1: П000-000117
+        example-2: П000-000118
+        example-3: П000-000119
+        example-4: П000-000120
+        example-5: П000-000121
+        example-6: П000-000122
+    paymentAmount:
+      type: string
+      title: paymentAmount
+      description: Сумма платежа
+      minLength: 1
+      maxLength: 25
+      pattern: "^(?:0|[1-9]\\d*)(?:\\.\\d{1,2})?$"
+    paymentHistoryItem:
+      type: object
+      title: paymentHistoryItem
+      description: Платеж по договору аренды
+      properties:
+        id:
+          $ref: '#/components/schemas/paymentId'
+        paymentDate:
+          $ref: '#/components/schemas/paymentDate'
+        paymentDocNumber:
+          $ref: '#/components/schemas/paymentDocNumber'
+        paymentDocDate:
+          $ref: '#/components/schemas/paymentDocDate'
+        paymentAmount:
+          $ref: '#/components/schemas/paymentAmount'
+      required:
+        - id
+        - paymentDate
+        - paymentAmount
+      x-examples:
+        example-1:
+          id:
+            $ref: '#/components/schemas/paymentId/x-examples/example-1'
+          paymentDate: '2020-10-02'
+          paymentDocNumber:
+            $ref: '#/components/schemas/paymentDocNumber/x-examples/example-1'
+          paymentDocDate: '2020-09-30'
+          paymentAmount: '125000.00'
+        example-2:
+          id:
+            $ref: '#/components/schemas/paymentId/x-examples/example-2'
+          paymentDate: '2020-08-21'
+          paymentDocNumber:
+            $ref: '#/components/schemas/paymentDocNumber/x-examples/example-2'
+          paymentDocDate: '2020-08-21'
+          paymentAmount: '160000.00'
+        example-3:
+          id:
+            $ref: '#/components/schemas/paymentId/x-examples/example-3'
+          paymentDate: '2020-07-16'
+          paymentDocNumber:
+            $ref: '#/components/schemas/paymentDocNumber/x-examples/example-3'
+          paymentDocDate: '2020-07-15'
+          paymentAmount: '90000.00'
+        example-4:
+          id:
+            $ref: '#/components/schemas/paymentId/x-examples/example-4'
+          paymentDate: '2020-06-14'
+          paymentDocNumber:
+            $ref: '#/components/schemas/paymentDocNumber/x-examples/example-4'
+          paymentDocDate: '2020-06-14'
+          paymentAmount: '150000.00'
+        example-5:
+          id:
+            $ref: '#/components/schemas/paymentId/x-examples/example-5'
+          paymentDate: '2020-05-12'
+          paymentDocDate: '2020-05-10'
+          paymentAmount: '100000.00'
+        example-6:
+          id:
+            $ref: '#/components/schemas/paymentId/x-examples/example-6'
+          paymentDate: '2020-04-16'
+          paymentDocNumber:
+            $ref: '#/components/schemas/paymentDocNumber/x-examples/example-6'
+          paymentAmount: '131000.00'
+        example-7:
+          id:
+            $ref: '#/components/schemas/paymentId/x-examples/example-7'
+          paymentDate: '2020-03-16'
+          paymentAmount: '94000.00'
+    paymentHistoryRequest:
+      type: object
+      title: paymentHistoryRequest
+      description: Запрос на получение истории платежей по договору аренды
+      properties:
+        contractId:
+          $ref: '#/components/schemas/contractId'
+      required:
+        - contractId
+      x-examples:
+        example-1:
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-1'
+    paymentHistoryResponse:
+      type: object
+      title: paymentHistoryResponse
+      description: История платежей по договору аренды
+      properties:
+        content:
+          type: array
+          minItems: 0
+          maxItems: 100
+          uniqueItems: true
+          description: список начислений
+          items:
+            $ref: '#/components/schemas/paymentHistoryItem'
+        empty:
+          $ref: '#/components/schemas/emptyListFlag'
+        first:
+          $ref: '#/components/schemas/pageFirst'
+        last:
+          $ref: '#/components/schemas/pageLast'
+        number:
+          $ref: '#/components/schemas/pageNumber'
+        numberOfElements:
+          $ref: '#/components/schemas/pageNumberOfElements'
+        pageable:
+          $ref: '#/components/schemas/pageable'
+        size:
+          $ref: '#/components/schemas/pageSize'
+        totalElements:
+          $ref: '#/components/schemas/totalElements'
+        totalPages:
+          $ref: '#/components/schemas/totalPages'
+        sort:
+          $ref: '#/components/schemas/sort'
+      required:
+        - content
+        - empty
+        - first
+        - last
+        - number
+        - numberOfElements
+        - pageable
+        - size
+        - totalElements
+        - totalPages
+        - sort
+      x-examples:
+        example-1:
+          content:
+            - $ref: '#/components/schemas/paymentHistoryItem/x-examples/example-1'
+            - $ref: '#/components/schemas/paymentHistoryItem/x-examples/example-2'
+            - $ref: '#/components/schemas/paymentHistoryItem/x-examples/example-3'
+            - $ref: '#/components/schemas/paymentHistoryItem/x-examples/example-4'
+            - $ref: '#/components/schemas/paymentHistoryItem/x-examples/example-5'
+            - $ref: '#/components/schemas/paymentHistoryItem/x-examples/example-6'
+            - $ref: '#/components/schemas/paymentHistoryItem/x-examples/example-7'
+          empty: false
+          first: true
+          last: true
+          number: 0
+          numberOfElements: 20
+          pageable:
+            $ref: '#/components/schemas/pageable/x-examples/example-1'
+          size: 1
+          totalElements: 1
+          totalPages: 1
+          sort:
+            $ref: '#/components/schemas/sort/x-examples/example-1'
+    debtInfoResponse:
+      type: object
+      title: debtInfoResponse
+      description: Информации о задолженности
+      additionalProperties: false
+      properties:
+        contractNumber:
+          type: integer
+          description: количество договоров аренды
+          maximum: 2147483647
+          minimum: 0
+        facilityRentalNumber:
+          type: integer
+          description: количество объектов аренды
+          maximum: 2147483647
+          minimum: 0
+        contractAccrualNumber:
+          type: integer
+          description: количество договоров аренды с начислениями
+          maximum: 2147483647
+          minimum: 0
+        allDebt:
+          type: string
+          description: задолженность по всем договорам аренды (сумма с учетом пени)
+          minLength: 1
+          maxLength: 25
+          pattern: "^(?:0|[1-9]\\d*)(?:\\.\\d{1,2})?$"
+        allPeni:
+          type: string
+          description: пени по всем договорам аренды (сумма)
+          minLength: 1
+          maxLength: 25
+          pattern: "^(?:0|[1-9]\\d*)(?:\\.\\d{1,2})?$"
+        allSum:
+          type: string
+          description: всего сумма к оплате
+          minLength: 1
+          maxLength: 25
+          pattern: "^(?:0|[1-9]\\d*)(?:\\.\\d{1,2})?$"
+        periodSum:
+          type: string
+          description: сумма к оплате в этом периоде
+          minLength: 1
+          maxLength: 25
+          pattern: "^(?:0|[1-9]\\d*)(?:\\.\\d{1,2})?$"
+      required:
+        - contractNumber
+        - facilityRentalNumber
+        - contractAccrualNumber
+        - allDebt
+        - allPeni
+        - allSum
+        - periodSum
+      x-examples:
+        example-1:
+          contractNumber: 10
+          facilityRentalNumber: 19
+          contractAccrualNumber: 5
+          allDebt: '33819.28'
+          allPeni: '171.41'
+          allSum: '190143.22'
+          periodSum: '156323.94'
+    uin:
+      type: string
+      title: uin
+      description: УИН
+      minLength: 20
+      maxLength: 25
+      x-examples:
+        example-1: '1233455673534534534534545'
+        example-2: '0000016100015085013506341'
+        example-3: '0000016100015085013506342'
+        example-4: '0000017800015085013506365'
+        example-5: '0000019500015085013506854'
+    paymentInfoItem:
+      type: object
+      title: paymentInfoItem
+      description: Данные для оплаты
+      additionalProperties: false
+      properties:
+        contractId:
+          $ref: '#/components/schemas/contractId'
+        landlordId:
+          $ref: '#/components/schemas/landlordId'
+        typeId:
+          $ref: '#/components/schemas/accrualType'
+        uin:
+          $ref: '#/components/schemas/uin'
+        paymentAmount:
+          $ref: '#/components/schemas/paymentAmount'
+        bcc:
+          $ref: '#/components/schemas/bcc'
+        contractType:
+          $ref: '#/components/schemas/contractType'
+        contractNumber:
+          $ref: '#/components/schemas/contractNumber'
+        contractDate:
+          $ref: '#/components/schemas/contractDate'
+        accrualStartDate:
+          type: string
+          description: Дата начала периода
+          format: date
+        accrualEndDate:
+          type: string
+          description: Дата окончания периода
+          format: date
+      required:
+        - contractId
+        - landlordId
+        - typeId
+        - paymentAmount
+        - bcc
+        - contractType
+        - contractNumber
+        - contractDate
+      x-examples:
+        example-1:
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-2'
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-1'
+          uin:
+            $ref: '#/components/schemas/uin/x-examples/example-2'
+          paymentAmount: '12971.81'
+          bcc: '16711105021016000120'
+          contractType:
+            $ref: '#/components/schemas/contractType/x-examples/example-1'
+          contractNumber: 248/22
+          contractDate: '2016-09-01'
+          accrualStartDate: '2016-07-01'
+          accrualEndDate: '2020-10-01'
+        example-2:
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-3'
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-2'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-1'
+          uin:
+            $ref: '#/components/schemas/uin/x-examples/example-3'
+          paymentAmount: '125000.00'
+          bcc: '16711105021016000120'
+          contractType:
+            $ref: '#/components/schemas/contractType/x-examples/example-1'
+          contractNumber: 178/15
+          contractDate: '2018-10-01'
+          accrualStartDate: '2016-09-01'
+          accrualEndDate: '2020-10-01'
+        example-3:
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-4'
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-3'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-1'
+          uin:
+            $ref: '#/components/schemas/uin/x-examples/example-4'
+          paymentAmount: '8500.00'
+          bcc: '16711610121010001140'
+          contractType:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          contractNumber: 345/25
+          contractDate: '2020-02-16'
+          accrualStartDate: '2020-09-01'
+          accrualEndDate: '2020-10-01'
+        example-4:
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-4'
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-3'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-2'
+          uin:
+            $ref: '#/components/schemas/uin/x-examples/example-5'
+          paymentAmount: '1.25'
+          bcc: '16711610121010001140'
+          contractType:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          contractNumber: 345/25
+          contractDate: '2020-02-16'
+          accrualStartDate: '2020-09-01'
+          accrualEndDate: '2020-10-01'
+        example-5:
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-5'
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-11'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-1'
+          paymentAmount: '20000.00'
+          bcc: '16711105071016000120'
+          contractType:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          contractNumber: 250/10
+          contractDate: '2019-01-15'
+          accrualEndDate: '2020-10-10'
+        example-6:
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-6'
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-6'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-1'
+          paymentAmount: '5000.00'
+          bcc: '16711105071016000120'
+          contractType:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          contractNumber: 130/12
+          contractDate: '2019-01-15'
+        example-7:
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-6'
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-6'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-2'
+          paymentAmount: '20.05'
+          bcc: '16711105071016000120'
+          contractType:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          contractNumber: 130/12
+          contractDate: '2019-01-15'
+        example-8:
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-5'
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-11'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-2'
+          paymentAmount: '25.33'
+          bcc: '16711607090019000140'
+          contractType:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          contractNumber: 250/35
+          contractDate: '2020-03-15'
+          accrualEndDate: '2020-10-10'
+        example-9:
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-7'
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-7'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-1'
+          paymentAmount: '12000.00'
+          bcc: '16711105071016000120'
+          contractType:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          contractNumber: 170/45
+          contractDate: '2020-06-01'
+        example-10:
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-8'
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-8'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-1'
+          paymentAmount: '5000.00'
+          bcc: '16711105071016000120'
+          contractType:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          contractNumber: 290/30
+          contractDate: '2020-08-01'
+        example-11:
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-9'
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-9'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-1'
+          paymentAmount: '1500.00'
+          bcc: '16711105071016000120'
+          contractType:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          contractNumber: 380/01
+          contractDate: '2018-11-10'
+        example-12:
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-9'
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim-9'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-2'
+          paymentAmount: '150.11'
+          bcc: '16711607090019000140'
+          contractType:
+            $ref: '#/components/schemas/contractType/x-examples/example-2'
+          contractNumber: 380/01
+          contractDate: '2018-11-10'
+    paymentInfoRequest:
+      type: object
+      title: paymentInfoRequest
+      description: Запрос на получение данных для оплаты
+      additionalProperties: false
+      properties:
+        contractIds:
+          type: array
+          minItems: 0
+          maxItems: 100
+          uniqueItems: true
+          description: список id договоров аренды
+          items:
+            $ref: '#/components/schemas/contractId'
+      required:
+        - contractIds
+      x-examples:
+        example-1:
+          contractIds:
+            - $ref: '#/components/schemas/contractId/x-examples/example-1'
+    paymentInfoResponse:
+      type: object
+      title: paymentInfoResponse
+      description: Ответ на получение данных для оплаты
+      additionalProperties: false
+      properties:
+        content:
+          type: array
+          minItems: 0
+          maxItems: 100
+          uniqueItems: true
+          description: список начислений
+          items:
+            $ref: '#/components/schemas/paymentInfoItem'
+        empty:
+          $ref: '#/components/schemas/emptyListFlag'
+        first:
+          $ref: '#/components/schemas/pageFirst'
+        last:
+          $ref: '#/components/schemas/pageLast'
+        number:
+          $ref: '#/components/schemas/pageNumber'
+        numberOfElements:
+          $ref: '#/components/schemas/pageNumberOfElements'
+        pageable:
+          $ref: '#/components/schemas/pageable'
+        size:
+          $ref: '#/components/schemas/pageSize'
+        totalElements:
+          $ref: '#/components/schemas/totalElements'
+        totalPages:
+          $ref: '#/components/schemas/totalPages'
+        sort:
+          $ref: '#/components/schemas/sort'
+      required:
+        - content
+        - empty
+        - first
+        - last
+        - number
+        - numberOfElements
+        - pageable
+        - size
+        - totalElements
+        - totalPages
+        - sort
+      x-examples:
+        example-1:
+          content:
+            - $ref: '#/components/schemas/paymentInfoItem/x-examples/example-1'
+            - $ref: '#/components/schemas/paymentInfoItem/x-examples/example-2'
+            - $ref: '#/components/schemas/paymentInfoItem/x-examples/example-3'
+            - $ref: '#/components/schemas/paymentInfoItem/x-examples/example-4'
+            - $ref: '#/components/schemas/paymentInfoItem/x-examples/example-5'
+            - $ref: '#/components/schemas/paymentInfoItem/x-examples/example-6'
+            - $ref: '#/components/schemas/paymentInfoItem/x-examples/example-7'
+            - $ref: '#/components/schemas/paymentInfoItem/x-examples/example-8'
+            - $ref: '#/components/schemas/paymentInfoItem/x-examples/example-9'
+            - $ref: '#/components/schemas/paymentInfoItem/x-examples/example-10'
+            - $ref: '#/components/schemas/paymentInfoItem/x-examples/example-11'
+            - $ref: '#/components/schemas/paymentInfoItem/x-examples/example-12'
+          empty: false
+          first: true
+          last: true
+          number: 0
+          numberOfElements: 20
+          pageable:
+            $ref: '#/components/schemas/pageable/x-examples/example-1'
+          size: 1
+          totalElements: 1
+          totalPages: 1
+          sort:
+            $ref: '#/components/schemas/sort/x-examples/example-1'
+    paymentCalendarInfoRequest:
+      type: object
+      title: paymentCalendarInfoRequest
+      description: Запрос на получение информации о календаре оплат арендатора
+      additionalProperties: false
+      properties:
+        accrualEndDate:
+          type: object
+          description: 'Дата, до которой должен быть произведен платеж'
+          additionalProperties: false
+          properties:
+            searchType:
+              $ref: '#/components/schemas/searchType'
+            value:
+              type: string
+              format: date
+              example: '2015-01-01'
+              description: 'Значение, с'
+            valueTo:
+              type: string
+              format: date
+              example: '2020-01-01'
+              description: 'Значение, по'
+      required:
+        - accrualEndDate
+      x-examples:
+        example-1:
+          accrualEndDate:
+            searchType: BETWEEN
+            value: '2015-01-01'
+            valueTo: '2020-01-01'
+    paymentCalendarInfoItem:
+      type: object
+      title: paymentCalendarInfoItem
+      description: Договор по которому необходимо произвести оплату
+      additionalProperties: false
+      properties:
+        contractId:
+          $ref: '#/components/schemas/contractId'
+        typeId:
+          $ref: '#/components/schemas/accrualType'
+        paymentAmount:
+          $ref: '#/components/schemas/paymentAmount'
+        accrualEndDate:
+          type: string
+          description: 'Дата, до которой должен быть произведен платеж'
+          format: date
+      required:
+        - contractId
+        - typeId
+        - paymentAmount
+        - accrualEndDate
+      x-examples:
+        example-1:
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-1'
+          typeId:
+            $ref: '#/components/schemas/accrualType/x-examples/example-1'
+          paymentAmount: '52.4'
+          accrualEndDate: '2020-10-10'
+    paymentCalendarInfoResponse:
+      type: array
+      minItems: 0
+      maxItems: 255
+      title: paymentCalendarInfoResponse
+      description: Информация о календаре оплат Арендатора
+      items:
+        $ref: '#/components/schemas/paymentCalendarInfoItem'
+    messageId:
+      title: messageId
+      description: Идентификатор обращения
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      x-examples:
+        example-1: 0d02ff48-8fd7-479a-8a50-9a10a567810a
+    commentId:
+      title: commentId
+      description: Идентификатор комментария
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      x-examples:
+        example-1: 0d02ff48-8fd7-479a-8a50-9a10a567810a
+    createdDate:
+      title: createdDate
+      description: Дата и время создания
+      type: string
+      format: date-time
+      x-examples:
+        example-1: '2020-10-05T14:19:19.205598Z'
+    messageType:
+      title: messageType
+      description: Тип обращения
+      type: string
+      minLength: 1
+      maxLength: 100
+      x-examples:
+        example-1: LK_MESSAGE_TYPE_1
+    messageStatus:
+      title: messageStatus
+      description: Статус обращения
+      type: string
+      minLength: 1
+      maxLength: 100
+      example: LK_MESSAGE_STATUS_DELIVERED
+      x-examples:
+        example-1: LK_MESSAGE_STATUS_DELIVERED
+        example-2: LK_MESSAGE_STATUS_INTERIM_ANSWER
+        example-3: LK_MESSAGE_STATUS_ADDITIONAL_INFO_REQUESTED
+        example-4: LK_MESSAGE_STATUS_ADDITIONAL_INFO_PROVIDED
+        example-5: LK_MESSAGE_STATUS_FINAL_ANSWER
+        example-6: LK_MESSAGE_STATUS_SIGN_REQUESTED
+        example-7: LK_MESSAGE_STATUS_SIGNED
+        example-9: LK_MESSAGE_STATUS_REJECTED
+    markType:
+      title: markType
+      type: string
+      description: Оценка качества оказания услуги
+      minLength: 1
+      maxLength: 100
+      example: LK_MARK_ONE_POINT
+      x-examples:
+        example-1: LK_MARK_ONE_POINT
+        example-2: LK_MARK_TWO_POINTS
+        example-3: LK_MARK_THREE_POINTS
+        example-4: LK_MARK_FOUR_POINTS
+        example-5: LK_MARK_FIVE_POINTS
+    fileType:
+      title: fileType
+      description: Тип файла
+      type: string
+      minLength: 1
+      maxLength: 255
+      example: LK_ORIGINAL_DOC
+      x-examples:
+        example-1: LK_ORIGINAL_DOC
+        example-2: LK_VISUALIZATION
+        example-3: LK_TENANT_SIGN
+        example-4: LK_LANDLORD_SIGN
+    fileId:
+      title: fileId
+      description: Идентификатор файла
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      x-examples:
+        example-1: 0d02ff48-8fd7-479a-8a50-9a10a567810a
+    fileSize:
+      title: fileSize
+      description: Размер файла
+      type: integer
+      maximum: 2147483647
+      minimum: 0
+    fileName:
+      title: fileName
+      description: Имя файла
+      type: string
+      minLength: 1
+      maxLength: 255
+    fileBase64:
+      title: fileBase64
+      description: Файл в base64
+      type: string
+      format: byte
+      minLength: 1
+      maxLength: 20000000
+      x-examples:
+        example-1: dGVzdA==
+    signatureTennantFileId:
+      title: signatureTennantFileId
+      description: Идентификатор файла подписи арендатора
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      x-examples:
+        example-1: 0d02ff48-8fd7-479a-8a50-9a10a567810a
+    signatureLandlordFileId:
+      title: signatureLandlordFileId
+      description: Идентификатор файла подписи арендодателя
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      x-examples:
+        example-1: 0d02ff48-8fd7-479a-8a50-9a10a567810a
+    fileStampId:
+      title: fileStampId
+      description: Идентификатор файла с визуализацией ЭЦП
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      x-examples:
+        example-1: 0d02ff48-8fd7-479a-8a50-9a10a567810a
+    document:
+      type: object
+      title: document
+      description: Вложение
+      additionalProperties: false
+      properties:
+        fileId:
+          $ref: '#/components/schemas/fileId'
+        signatureTennantFileId:
+          $ref: '#/components/schemas/signatureTennantFileId'
+        signatureLandlordFileId:
+          $ref: '#/components/schemas/signatureLandlordFileId'
+        fileStampId:
+          $ref: '#/components/schemas/fileStampId'
+      required:
+        - fileId
+      x-examples:
+        example-1:
+          fileId:
+            $ref: '#/components/schemas/fileId/x-examples/example-1'
+          signatureTennantFileId:
+            $ref: '#/components/schemas/signatureTennantFileId/x-examples/example-1'
+          signatureLandlordFileId:
+            $ref: '#/components/schemas/signatureLandlordFileId/x-examples/example-1'
+          fileStampId:
+            $ref: '#/components/schemas/fileStampId/x-examples/example-1'
+    file:
+      type: object
+      title: file
+      description: Прикрепленный файл
+      additionalProperties: false
+      properties:
+        fileId:
+          $ref: '#/components/schemas/fileId'
+        fileSize:
+          $ref: '#/components/schemas/fileSize'
+        fileName:
+          $ref: '#/components/schemas/fileName'
+        base64:
+          $ref: '#/components/schemas/fileBase64'
+        fileType:
+          $ref: '#/components/schemas/fileType'
+        createdDate:
+          $ref: '#/components/schemas/createdDate'
+      required:
+        - fileId
+        - fileSize
+        - fileName
+        - base64
+        - fileType
+        - createdDate
+      x-examples:
+        example-1:
+          fileId:
+            $ref: '#/components/schemas/fileId/x-examples/example-1'
+          fileSize: 123456
+          fileName: Имя файла
+          base64:
+            $ref: '#/components/schemas/fileBase64/x-examples/example-1'
+          fileType:
+            $ref: '#/components/schemas/fileType/x-examples/example-1'
+          createdDate:
+            $ref: '#/components/schemas/createdDate/x-examples/example-1'
+    documentList:
+      title: documentList
+      type: array
+      minItems: 0
+      maxItems: 100
+      description: Список вложений
+      items:
+        $ref: '#/components/schemas/document'
+    fileList:
+      title: fileList
+      type: array
+      minItems: 0
+      maxItems: 100
+      description: Список файлов
+      items:
+        $ref: '#/components/schemas/file'
+    createAppealRequest:
+      type: object
+      title: createAppealRequest
+      description: Запрос на создание обращения
+      additionalProperties: false
+      properties:
+        messageId:
+          $ref: '#/components/schemas/messageId'
+        createdDate:
+          $ref: '#/components/schemas/createdDate'
+        name:
+          type: string
+          description: Наименование обращения
+          minLength: 1
+          maxLength: 255
+        messageType:
+          $ref: '#/components/schemas/messageType'
+        status:
+          $ref: '#/components/schemas/messageStatus'
+        contractId:
+          $ref: '#/components/schemas/contractId'
+        landlordId:
+          $ref: '#/components/schemas/landlordId'
+        documents:
+          $ref: '#/components/schemas/documentList'
+        files:
+          $ref: '#/components/schemas/fileList'
+      required:
+        - messageId
+        - createdDate
+        - name
+        - messageType
+        - status
+      x-examples:
+        example-1:
+          messageId:
+            $ref: '#/components/schemas/messageId/x-examples/example-1'
+          createdDate:
+            $ref: '#/components/schemas/createdDate/x-examples/example-1'
+          name: Обращение №1
+          messageType:
+            $ref: '#/components/schemas/messageType/x-examples/example-1'
+          status:
+            $ref: '#/components/schemas/messageStatus/x-examples/example-1'
+          contractId:
+            $ref: '#/components/schemas/contractId/x-examples/example-1'
+          landlordId:
+            $ref: '#/components/schemas/landlordId/x-examples/rosim'
+          documents:
+            - $ref: '#/components/schemas/document/x-examples/example-1'
+          files:
+            - $ref: '#/components/schemas/file/x-examples/example-1'
+    createCommentRequest:
+      type: object
+      title: createCommentRequest
+      description: Запрос на отправку комментария к обращению
+      additionalProperties: false
+      properties:
+        messageId:
+          $ref: '#/components/schemas/messageId'
+        commentId:
+          $ref: '#/components/schemas/commentId'
+        createdDate:
+          $ref: '#/components/schemas/createdDate'
+        name:
+          type: string
+          description: Наименование обращения
+          minLength: 1
+          maxLength: 100
+        text:
+          type: string
+          description: Текст комментария
+          minLength: 1
+          maxLength: 4000
+        status:
+          $ref: '#/components/schemas/messageStatus'
+        documents:
+          $ref: '#/components/schemas/documentList'
+        files:
+          $ref: '#/components/schemas/fileList'
+      required:
+        - messageId
+        - commentId
+        - createdDate
+        - status
+      x-examples:
+        example-1:
+          messageId:
+            $ref: '#/components/schemas/messageId/x-examples/example-1'
+          commentId:
+            $ref: '#/components/schemas/commentId/x-examples/example-1'
+          createdDate:
+            $ref: '#/components/schemas/createdDate/x-examples/example-1'
+          status:
+            $ref: '#/components/schemas/messageStatus/x-examples/example-1'
+          documents:
+            - $ref: '#/components/schemas/document/x-examples/example-1'
+          files:
+            - $ref: '#/components/schemas/file/x-examples/example-1'
+    createFeedbackRequest:
+      type: object
+      title: createFeedbackRequest
+      description: Запрос на отправку оценки удовлетворенности ответом на обращение
+      additionalProperties: false
+      properties:
+        messageId:
+          $ref: '#/components/schemas/messageId'
+        mark:
+          $ref: '#/components/schemas/markType'
+        markDate:
+          type: string
+          description: Дата и время добавления оценки
+          format: date-time
+          example: '2020-10-05T14:19:19.205598Z'
+        markComment:
+          type: string
+          description: Текст комментария
+          minLength: 1
+          maxLength: 4000
+      required:
+        - messageId
+        - mark
+        - markDate
+      x-examples:
+        example-1:
+          messageId:
+            $ref: '#/components/schemas/messageId/x-examples/example-1'
+          mark:
+            $ref: '#/components/schemas/markType/x-examples/example-1'
+          markDate: '2020-10-05T14:19:19.205598Z'
+          markComment: Комментарий
+    getFileByIdRequest:
+      type: object
+      title: getFileByIdRequest
+      description: Запрос на получения файла
+      additionalProperties: false
+      properties:
+        fileId:
+          $ref: '#/components/schemas/fileId'
+      required:
+        - fileId
+      x-examples:
+        example-1:
+          fileId:
+            $ref: '#/components/schemas/fileId/x-examples/example-1'
+    getFileByIdResponse:
+      type: object
+      title: getFileByIdResponse
+      description: Файл для скачивания
+      additionalProperties: false
+      properties:
+        fileName:
+          $ref: '#/components/schemas/fileName'
+        fileSize:
+          $ref: '#/components/schemas/fileSize'
+        fileType:
+          $ref: '#/components/schemas/fileType'
+        createdDate:
+          $ref: '#/components/schemas/createdDate'
+        base64:
+          $ref: '#/components/schemas/fileBase64'
+      required:
+        - fileName
+        - fileSize
+        - fileType
+        - createdDate
+        - base64
+      x-examples:
+        example-1:
+          fileName: Имя файла
+          fileSize: 123456
+          fileType:
+            $ref: '#/components/schemas/fileType/x-examples/example-1'
+          createdDate:
+            $ref: '#/components/schemas/createdDate/x-examples/example-1'
+          base64:
+            $ref: '#/components/schemas/fileBase64/x-examples/example-1'
+    supportMessageType:
+      title: supportMessageType
+      description: Тип письма в техническую поддержку
+      type: string
+      minLength: 1
+      maxLength: 100
+      x-examples:
+        example-1: LK_MESSAGE_TYPE_TECH_SUPPORT_REQUEST
+        example-2: LK_MESSAGE_TYPE_FEEDBACK
+    sendMessageRequest:
+      type: object
+      title: sendMessageRequest
+      description: Запрос на отправку письма в техническую поддержку Росимущества
+      additionalProperties: false
+      properties:
+        emailForAnswer:
+          $ref: '#/components/schemas/email'
+        type:
+          $ref: '#/components/schemas/supportMessageType'
+        title:
+          type: string
+          description: Тема
+          minLength: 1
+          maxLength: 255
+        bodyHTML:
+          type: string
+          description: Тело письма
+          minLength: 1
+          maxLength: 4000
+        files:
+          $ref: '#/components/schemas/fileList'
+      required:
+        - emailForAnswer
+        - type
+        - title
+        - bodyHTML
+      x-examples:
+        example-1:
+          emailForAnswer:
+            $ref: '#/components/schemas/email/x-examples/example-1'
+          type:
+            $ref: '#/components/schemas/supportMessageType/x-examples/example-1'
+          title: Тема письма в РИ
+          bodyHTML: '<b>Текст письма в РИ</b><br/><br/>'
+          files:
+            - $ref: '#/components/schemas/file/x-examples/example-1'
+    sendConsentOfEdmRequest:
+      type: object
+      title: sendConsentOfEdmRequest
+      description: Запрос на отправку согласия на ЭДО
+      additionalProperties: false
+      properties:
+        consentFile:
+          $ref: '#/components/schemas/file'
+      required:
+        - consentFile
+      x-examples:
+        example-1:
+          consentFile:
+            $ref: '#/components/schemas/file/x-examples/example-1'
+  parameters:
+    traceId:
+      description: Идентификатор операции
+      schema:
+        title: traceId
+        description: traceId
+        type: string
+        minLength: 36
+        maxLength: 36
+        example: a344b0ec-c83a-4b3b-9f99-f75899f9b558
+      in: header
+      name: traceId
+      required: true
+    size:
+      description: Кол-во объектов на странице
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 2147483647
+        example: 20
+      in: query
+      name: size
+    sort:
+      description: 'Сортировка в формате "поле, направление"'
+      schema:
+        type: string
+        minLength: 0
+        maxLength: 255
+        example: 'address,asc'
+      in: query
+      name: sort
+    page:
+      description: Номер страницы
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 2147483647
+        example: 1
+      in: query
+      name: page
+  responses:
+    defaultError:
+      description: Ошибка
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+          example:
+            $ref: '#/components/schemas/error/x-examples/example-1'
+  securitySchemes:
+    platformAuth:
+      name: sessionId
+      type: apiKey
+      in: header
+      description: JWT
+tags:
+  - name: default
+    description: Default
+security:
+  - platformAuth: [ ]

@@ -1,0 +1,41 @@
+title: IncomingDocumentReceiveConfirmationDataResponse
+type: object
+description: 'Данные для формирования подтверждения получения входящего документа'
+additionalProperties: false
+x-examples:
+  example-1:
+    appealName:
+      $ref: '../AppealTitle.v1.yaml#/x-examples/incoming-document-signature-required'
+    outgoingNumber:
+      $ref: '../OutgoingNumber.v1.yaml#/x-examples/example-1'
+    outgoingDate:
+      $ref: '../OutgoingDate.v1.yaml#/x-examples/example-1'
+    contractNumber:
+      $ref: '../ContractNumber.v1.yaml#/x-examples/example-1'
+    contractDate: '2020-10-10'
+    attachments:
+      - $ref: './AttachmentWithHashAndSignature.v1.yaml#/x-examples/example-1'
+properties:
+  appealName:
+    $ref: ../AppealTitle.v1.yaml
+  outgoingNumber:
+    $ref: ../OutgoingNumber.v1.yaml
+  outgoingDate:
+    $ref: ../OutgoingDate.v1.yaml
+  contractNumber:
+    $ref: ../ContractNumber.v1.yaml
+  contractDate:
+    type: string
+    format: date
+    description: 'Дата договора'
+  attachments:
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./AttachmentWithHashAndSignature.v1.yaml
+required:
+  - appealName
+  - contractNumber
+  - contractDate
+  - attachments

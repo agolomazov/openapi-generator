@@ -1,0 +1,7 @@
+type: string
+title: AreaMeasurementUnit
+description: Единица измерения площади
+pattern: "^кв\\. м$"
+example: кв. м
+minLength: 1
+maxLength: 20

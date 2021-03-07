@@ -1,0 +1,17 @@
+type: object
+title: SaveChangeOrganizationalLegalFormAppealsRequest
+description: 'Запрос на сохранение данных обращений "Смена организационно-правовой формы/ИНН" ЖС "Изменить реквизиты Арендатора"'
+x-examples:
+  example-1:
+    appeals:
+      - $ref: './ChangeOrganizationalLegalFormAppealData.v1.yaml#/x-examples/example-1'
+additionalProperties: false
+properties:
+  appeals:
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./ChangeOrganizationalLegalFormAppealData.v1.yaml
+required:
+  - appeals

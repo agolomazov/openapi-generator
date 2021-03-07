@@ -1,0 +1,39 @@
+title: Accrual
+type: object
+description: Начисление
+additionalProperties: false
+properties:
+  id:
+    type: string
+  date:
+    type: string
+    format: date
+    description: Дата выставления
+  type:
+    $ref: ./AccrualType.v1.yaml
+  startDate:
+    type: string
+    format: date
+    description: 'Дата начала периода, за который сформировано начисление'
+  endDate:
+    type: string
+    format: date
+    description: 'Дата окончания периода, за который сформировано начисление'
+  amount:
+    type: string
+    description: Сумма
+required:
+  - id
+  - date
+  - type
+  - startDate
+  - endDate
+  - amount
+x-examples:
+  example-ri:
+    id: '1'
+    date: '2020-05-20'
+    type: RENTAL_PENALTY
+    startDate: '2020-05-20'
+    endDate: '2020-06-19'
+    amount: '155.57'

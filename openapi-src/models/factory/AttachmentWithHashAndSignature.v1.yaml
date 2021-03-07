@@ -1,0 +1,36 @@
+type: object
+title: AttachmentWithHashAndSignature
+additionalProperties: false
+description: 'Данные по файлу оригинала документа и файлу подписи РИ'
+x-examples:
+  example-1:
+    fileName: file.pdf
+    fileHash: 1ecc9dab546ea7f28fd6cdef4f1ef64856d2f295423ea94525fa9e63b51feb6d
+    signatureFileName: signatureFile.pdf
+    signatureFileHash: 1ecc9dab546ea7f28fd6cdef4f1ef64856d2f295423ea94525fa9e63b51feb6d
+properties:
+  fileName:
+    type: string
+    minLength: 0
+    maxLength: 255
+    description: Имя файла
+  fileHash:
+    type: string
+    minLength: 0
+    maxLength: 1000
+    description: Хэш файла
+  signatureFileName:
+    type: string
+    minLength: 0
+    maxLength: 255
+    description: Имя файла подписи РИ
+  signatureFileHash:
+    type: string
+    minLength: 0
+    maxLength: 1000
+    description: Хэш файла подписи РИ
+required:
+  - fileName
+  - fileHash
+  - signatureFileName
+  - signatureFileHash

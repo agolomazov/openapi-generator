@@ -1,0 +1,6 @@
+type: string
+title: ContractType
+description: Тип Договора
+x-examples:
+  example-1: LAND_RENTAL
+  example-2: PROPRIETARY_RENTAL

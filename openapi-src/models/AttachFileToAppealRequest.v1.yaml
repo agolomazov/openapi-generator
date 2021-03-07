@@ -1,0 +1,21 @@
+title: AttachFileToAppealRequest
+deprecated: true
+type: object
+description: Запрос на сохранение файла по обращению
+x-examples:
+  example-1:
+    file: dGVzdA==
+    fileName: file.pdf
+additionalProperties: false
+properties:
+  file:
+    type: string
+    description: Файл по обращению (в base64)
+  fileName:
+    type: string
+    description: Название файла
+    minLength: 1
+    maxLength: 255
+required:
+  - file
+  - fileName

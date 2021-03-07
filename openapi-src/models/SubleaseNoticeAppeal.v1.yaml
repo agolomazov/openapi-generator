@@ -1,0 +1,63 @@
+type: object
+title: SubleaseNoticeAppeal
+description: 'Обращение "Уведомление о субаренде"'
+additionalProperties: false
+x-examples:
+  example-1:
+    commonData:
+      $ref: './CommonAppealData.v1.yaml#/x-examples/example-sublease-notice'
+    additionalData:
+      subtenant: ИП Субарендатор
+      subtenantInn:
+        $ref: './InnCommon.v1.yaml#/x-examples/example-1'
+      subleaseContract:
+        $ref: './ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+      subleaseContractDateFrom: '2020-01-01'
+      subleaseContractDateTo: '2020-12-12'
+      comment:
+        $ref: './AppealCommentText.v1.yaml#/x-examples/example-1'
+      contract:
+        $ref: './ContractIdNumberDate.v1.yaml#/x-examples/example-1'
+      attachment:
+        $ref: './Attachment.v1.yaml#/x-examples/example-1'
+properties:
+  commonData:
+    $ref: ./CommonAppealData.v1.yaml
+  additionalData:
+    type: object
+    additionalProperties: false
+    required:
+      - subtenant
+      - subtenantInn
+      - subleaseContract
+      - subleaseContractDateFrom
+      - subleaseContractDateTo
+      - contract
+      - attachment
+    properties:
+      subtenant:
+        type: string
+        minLength: 1
+        description: Субарендатор
+        maxLength: 255
+      subtenantInn:
+        $ref: ./InnCommon.v1.yaml
+      subleaseContract:
+        $ref: ./ContractIdNumberDate.v1.yaml
+      subleaseContractDateFrom:
+        type: string
+        format: date
+        description: 'Период действия договора субаренды, с'
+      subleaseContractDateTo:
+        type: string
+        format: date
+        description: 'Период действия договора субаренды, по'
+      comment:
+        $ref: ./AppealCommentText.v1.yaml
+      contract:
+        $ref: ./ContractIdNumberDate.v1.yaml
+      attachment:
+        $ref: ./Attachment.v1.yaml
+required:
+  - commonData
+  - additionalData

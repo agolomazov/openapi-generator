@@ -1,0 +1,6 @@
+type: string
+title: MaskedSnils
+pattern: "^.{3}-.{3}-.{3} .{2}$"
+minLength: 14
+maxLength: 14
+description: Маскированный СНИЛС
